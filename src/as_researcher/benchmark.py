@@ -352,7 +352,9 @@ def assess_saved_batch(batch: Path) -> dict:
     context = load_bound_batch(batch)
     for row in context["rows"]:
         if row["status"] != "saved":
-            row["assessment"] = {"passed": None if row["status"] == "not_run" else False}
+            row["assessment"] = {
+                "passed": None if row["status"] in {"not_run", "running", "interrupted"} else False
+            }
             continue
         folder = batch / row["run_file"]
         packet_file = folder / "task-review.json"

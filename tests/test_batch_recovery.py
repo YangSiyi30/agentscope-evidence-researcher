@@ -14,7 +14,12 @@ from unittest.mock import patch
 
 from as_researcher import batch_runtime as runtime
 from as_researcher import evaluation_terminal as ui
-from as_researcher.benchmark import load_suite, prepare_task_review, source_digest
+from as_researcher.benchmark import (
+    assess_saved_batch,
+    load_suite,
+    prepare_task_review,
+    source_digest,
+)
 from as_researcher.review import fingerprint
 from scripts import benchmark_research as command
 from tests.test_benchmark import ROOT, example_run
@@ -80,6 +85,18 @@ def receipt_fixture(batch, plan, row, status="running", reserve=True):
 
 
 class RecoveryTests(unittest.TestCase):
+    def test_running_and_interrupted_are_unassessed_not_premature_failures(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            batch = Path(tmp) / "batch"
+            plan, rows = batch_fixture(batch, 2)
+            rows[0]["status"] = "running"
+            rows[1]["status"] = "interrupted"
+            command.write_json(batch / "index.json", rows)
+            report = assess_saved_batch(batch)
+            self.assertTrue(all(row["assessment"]["passed"] is None for row in report["rows"]))
+            self.assertEqual(report["summary"]["strategies"]["segments"]["unassessed"], 2)
+            self.assertEqual(report["summary"]["strategies"]["segments"]["failed"], 0)
+
     def test_graceful_chunk_returns_four_and_never_reserves_next_trial(self):
         with tempfile.TemporaryDirectory() as tmp:
             batch = Path(tmp) / "batch"
