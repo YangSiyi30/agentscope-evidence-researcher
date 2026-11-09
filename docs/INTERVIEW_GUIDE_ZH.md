@@ -1370,7 +1370,7 @@ reports/evaluations/时间-随机后缀/
 
 本节把主页、单次研究、历史查看和评测中心全部放在一起。下面的菜单文字已按0.40当前代码的实际调用重新核对；数字清单来自本机当时的保存材料，所以历史顺序、题号行及路径可能与你稍后看到的不同。`Pxx`只是说明文件内部的页面样本编号，不是终端里要输入的指令。
 
-本轮共采集64组菜单/输入状态，覆盖terminal.py与evaluation_terminal.py中全部55个业务输入调用位置。采集只进入设置、读取原件及取消路径；真实模式的确认是页面样本，没有调用真实模型、下载网页、SAVE复核或打开外部编辑器。输入错误、无数据等提示在本节末尾另列。当前采集原件在reports/completion-20261109-evening/menus.json；11-03原件保留为历史，维护者可据此对照源码。
+本轮共采集64组菜单/输入状态，覆盖terminal.py与evaluation_terminal.py中全部55个业务输入调用位置。采集只进入设置、读取原件及取消路径；真实模式的确认是页面样本，没有调用真实模型、下载网页、SAVE复核或打开外部编辑器。输入错误、无数据等提示在本节末尾另列。当前采集原件在reports/completion-20261109-evening/menus-final.json；11-03原件保留为历史，维护者可据此对照源码。
 
 **先认清页面层级。** 主页1/2属于“一次研究”，主页3看单份run；主页4进入“评测中心”，它按一题多配置/多次尝试组织批次。一次研究的查看页和一次评测试验的查看页不是同一页，相同数字可能做不同的事。需要复核、A/B与成绩单时进入评测中心。
 
@@ -1740,26 +1740,26 @@ P02来自单次研究；P40来自评测环境web/search，标签略有不同，�
 
 ```text
 最近20次以内的记录（按文件修改时间；只读查看）
-  1. offline_scripted_snapshot | 根据MCP 2025-11-25规范，stdio中客户端、服务端、stdin和stdout分别怎样配合？ 请仅依据本次取 | completion-20261109-evening\ui-resume-batch\mcp_stdio__1__segments\20261109T113153-08422f05
-  2. live | 根据MCP 2025-11-25规范，stdio中客户端、服务端、stdin和stdout分别怎样配合？ 请仅依据本次取 | completion-20261109-evening\tavily-mcp-batch\mcp_stdio__1__segments\20261109T111502-bc4c282d
-  3. live | 根据MCP 2025-11-25规范，stdio中客户端、服务端、stdin和stdout分别怎样配合？ 请仅依据本次取 | completion-20261109-evening\tavily-local-batch\mcp_stdio__1__segments\20261109T111439-a6bdcfb5
-  4. live_model_snapshot | 根据MCP 2025-11-25规范，stdio中客户端、服务端、stdin和stdout分别怎样配合？ 请仅依据本次取 | completion-20261109-evening\live-batch\mcp_stdio__1__segments\20261109T110918-402c6415
-  5. live_model_snapshot | 根据Python 3.13文档，When does wait_for actually return after tim | completion-20261109-evening\live-batch\python_wait_for__1__segments\20261109T110640-26a4ac62
-  6. offline_scripted_snapshot | 根据MCP 2025-11-25规范，stdio中客户端、服务端、stdin和stdout分别怎样配合？ 请仅依据本次取 | completion-20261109-evening\source-smoke\batch\mcp_stdio__2__segments\20261109T110612-4ec82c4f
-  7. offline_scripted_snapshot | 根据MCP 2025-11-25规范，stdio中客户端、服务端、stdin和stdout分别怎样配合？ 请仅依据本次取 | completion-20261109-evening\source-smoke\batch\mcp_stdio__1__segments\20261109T110609-3a9f30aa
-  8. offline_fixture | 离线验证搜索后按来源ID读页 | completion-20261109-evening\source-smoke\mcp
-  9. offline_fixture | 离线搜索后读页 | completion-20261109-evening\source-smoke\local\20261109T110604-b5302f1d
-  10. offline_scripted_snapshot | 根据MCP 2025-11-25规范，stdio中客户端、服务端、stdin和stdout分别怎样配合？ 请仅依据本次取 | completion-20261109-evening\resume-live-path\mcp_stdio__2__segments\20261109T105006-7263b5c6
-  11. offline_scripted_snapshot | 根据MCP 2025-11-25规范，stdio中客户端、服务端、stdin和stdout分别怎样配合？ 请仅依据本次取 | completion-20261109-evening\resume-live-path\mcp_stdio__1__segments\20261109T104859-8a82f28c
-  12. offline_fixture | 离线验证搜索后按来源ID读页 | completion-20261109\offline-summary-final-mcp-fixture
-  13. offline_fixture | 离线验证搜索后按来源ID读页 | completion-20261109\offline-summary-mcp-fixture
-  14. offline_scripted_snapshot | 根据MCP 2025-11-25规范，stdio中客户端、服务端、stdin和stdout分别怎样配合？ 请仅依据本次取 | completion-20261109\source-smoke\batch\mcp_stdio__1__segments\20261109T074640-79594360
-  15. offline_fixture | 离线验证搜索后按来源ID读页 | completion-20261109\source-smoke\mcp
-  16. offline_fixture | 离线搜索后读页 | completion-20261109\source-smoke\local\20261109T074636-f8757874
-  17. live | MCP stdio 中 stdout 的规则是什么？ | tavily-probe\20261105T112445-ef90d751
-  18. live | 根据给定文档，说明 asyncio.wait 设置 timeout 后如何处理未完成的任务，以及 done/pendin | 20261105T111816-53099b7d
-  19. live_model_snapshot | MCP stdio禁止stdout混入日志，是否可以推出禁止服务端写任何日志文件？请解释规范实际限制的范围。 请仅依据本 | evaluations\20261103T124723-f40211\batch\mcp_logfiles__1__segments__compact\20261103T124745-be8d7fc6
-  20. live_model_snapshot | MCP stdio禁止stdout混入日志，是否可以推出禁止服务端写任何日志文件？请解释规范实际限制的范围。 请仅依据本 | evaluations\20261103T124723-f40211\batch\mcp_logfiles__1__segments__standard\20261103T124736-0702b676
+  1. offline_scripted_snapshot | 根据MCP 2025-11-25规范，stdio中客户端、服务端、stdin和stdout分别怎样配合？ 请仅依据本次取 | completion-20261109-evening\ui-final-capture-batch\mcp_stdio__1__segments\20261109T115354-1f1e4fe5
+  2. offline_fixture | 离线验证搜索后按来源ID读页 | completion-20261109-evening\offline-summary-mcp-fixture
+  3. offline_scripted_snapshot | 根据MCP 2025-11-25规范，stdio中客户端、服务端、stdin和stdout分别怎样配合？ 请仅依据本次取 | completion-20261109-evening\ui-resume-batch\mcp_stdio__2__segments\20261109T113555-c507251f
+  4. offline_scripted_snapshot | 根据MCP 2025-11-25规范，stdio中客户端、服务端、stdin和stdout分别怎样配合？ 请仅依据本次取 | completion-20261109-evening\ui-resume-batch\mcp_stdio__1__segments\20261109T113153-08422f05
+  5. live | 根据MCP 2025-11-25规范，stdio中客户端、服务端、stdin和stdout分别怎样配合？ 请仅依据本次取 | completion-20261109-evening\tavily-mcp-batch\mcp_stdio__1__segments\20261109T111502-bc4c282d
+  6. live | 根据MCP 2025-11-25规范，stdio中客户端、服务端、stdin和stdout分别怎样配合？ 请仅依据本次取 | completion-20261109-evening\tavily-local-batch\mcp_stdio__1__segments\20261109T111439-a6bdcfb5
+  7. live_model_snapshot | 根据MCP 2025-11-25规范，stdio中客户端、服务端、stdin和stdout分别怎样配合？ 请仅依据本次取 | completion-20261109-evening\live-batch\mcp_stdio__1__segments\20261109T110918-402c6415
+  8. live_model_snapshot | 根据Python 3.13文档，When does wait_for actually return after tim | completion-20261109-evening\live-batch\python_wait_for__1__segments\20261109T110640-26a4ac62
+  9. offline_scripted_snapshot | 根据MCP 2025-11-25规范，stdio中客户端、服务端、stdin和stdout分别怎样配合？ 请仅依据本次取 | completion-20261109-evening\source-smoke\batch\mcp_stdio__2__segments\20261109T110612-4ec82c4f
+  10. offline_scripted_snapshot | 根据MCP 2025-11-25规范，stdio中客户端、服务端、stdin和stdout分别怎样配合？ 请仅依据本次取 | completion-20261109-evening\source-smoke\batch\mcp_stdio__1__segments\20261109T110609-3a9f30aa
+  11. offline_fixture | 离线验证搜索后按来源ID读页 | completion-20261109-evening\source-smoke\mcp
+  12. offline_fixture | 离线搜索后读页 | completion-20261109-evening\source-smoke\local\20261109T110604-b5302f1d
+  13. offline_scripted_snapshot | 根据MCP 2025-11-25规范，stdio中客户端、服务端、stdin和stdout分别怎样配合？ 请仅依据本次取 | completion-20261109-evening\resume-live-path\mcp_stdio__2__segments\20261109T105006-7263b5c6
+  14. offline_scripted_snapshot | 根据MCP 2025-11-25规范，stdio中客户端、服务端、stdin和stdout分别怎样配合？ 请仅依据本次取 | completion-20261109-evening\resume-live-path\mcp_stdio__1__segments\20261109T104859-8a82f28c
+  15. offline_fixture | 离线验证搜索后按来源ID读页 | completion-20261109\offline-summary-final-mcp-fixture
+  16. offline_fixture | 离线验证搜索后按来源ID读页 | completion-20261109\offline-summary-mcp-fixture
+  17. offline_scripted_snapshot | 根据MCP 2025-11-25规范，stdio中客户端、服务端、stdin和stdout分别怎样配合？ 请仅依据本次取 | completion-20261109\source-smoke\batch\mcp_stdio__1__segments\20261109T074640-79594360
+  18. offline_fixture | 离线验证搜索后按来源ID读页 | completion-20261109\source-smoke\mcp
+  19. offline_fixture | 离线搜索后读页 | completion-20261109\source-smoke\local\20261109T074636-f8757874
+  20. live | MCP stdio 中 stdout 的规则是什么？ | tavily-probe\20261105T112445-ef90d751
   0. 返回主页
 选择 [0]：
 ```
@@ -2060,33 +2060,34 @@ URL 10～2000字符，允许的地址会规范化；不接受登录凭据/私网
 
 ```text
 最近30组以内的问答评测（查看不请求模型）
-  1. completion-20261109-evening\ui-resume-batch
-  2. completion-20261109-evening\tavily-mcp-batch
-  3. completion-20261109-evening\tavily-local-batch
-  4. completion-20261109-evening\live-batch
-  5. completion-20261109-evening\source-smoke\batch
-  6. completion-20261109-evening\resume-live-path
-  7. completion-20261109-evening\resume-demo
-  8. completion-20261109\source-smoke\batch
-  9. evaluations\20261103T124723-f40211\batch
-  10. evaluations\20261103T074056-0aee90\batch
-  11. evaluations\20261103T072303-d67069\batch
-  12. evaluations\20261103T071308-486da2\batch
-  13. evaluation-ux-20261102\custom\batch
-  14. evaluation-ux-20261102\fixed\batch
-  15. improvement-20261102\tool-focus-pair
-  16. improvement-20261102\prefix-v2-pair
-  17. improvement-20261102\web
-  18. improvement-20261102\revision
-  19. improvement-20261102\selector-pair
-  20. improvement-20261102\style-pair
-  21. evaluation-20261101\live-web-clean
-  22. evaluation-20261101\paired-clean
-  23. evaluation-20261101\live-search
-  24. evaluation-20261101\live-web
-  25. evaluation-20261101\injection-exposed
-  26. evaluation-20261101\paired
-  27. evaluation-20261101\frozen-baseline
+  1. completion-20261109-evening\ui-final-capture-batch
+  2. completion-20261109-evening\ui-resume-batch
+  3. completion-20261109-evening\tavily-mcp-batch
+  4. completion-20261109-evening\tavily-local-batch
+  5. completion-20261109-evening\live-batch
+  6. completion-20261109-evening\source-smoke\batch
+  7. completion-20261109-evening\resume-live-path
+  8. completion-20261109-evening\resume-demo
+  9. completion-20261109\source-smoke\batch
+  10. evaluations\20261103T124723-f40211\batch
+  11. evaluations\20261103T074056-0aee90\batch
+  12. evaluations\20261103T072303-d67069\batch
+  13. evaluations\20261103T071308-486da2\batch
+  14. evaluation-ux-20261102\custom\batch
+  15. evaluation-ux-20261102\fixed\batch
+  16. improvement-20261102\tool-focus-pair
+  17. improvement-20261102\prefix-v2-pair
+  18. improvement-20261102\web
+  19. improvement-20261102\revision
+  20. improvement-20261102\selector-pair
+  21. improvement-20261102\style-pair
+  22. evaluation-20261101\live-web-clean
+  23. evaluation-20261101\paired-clean
+  24. evaluation-20261101\live-search
+  25. evaluation-20261101\live-web
+  26. evaluation-20261101\injection-exposed
+  27. evaluation-20261101\paired
+  28. evaluation-20261101\frozen-baseline
   e. 查看已有抽取对照
   0. 返回
 选择 [0]：
@@ -2911,3 +2912,15 @@ uv run --no-sync python scripts/benchmark_research.py ablate --corpus reports/ev
 本轮另准备了实际四个烟测答案的人工校准材料：reports/completion-20261109-evening/human-calibration/reviewer内有template、reviewer-A、reviewer-B三份初始空表，private-map在外层。请让两位真实参与者分别只拿reviewer目录与既有填写说明，不看private-map或助手既有结论，各自署名并填写true/false/null与理由；冻结后再用blind-check作一致性核对。现在12条标准全部未判，jointly_judged=0、κ=null，没有完成任何人工校准。
 
 为续跑补了一项真实进程反例：worker已保存run/草稿/receipt后，测试让父进程在写saved前立即os._exit(23)。新进程实际resume后两行saved、第一run hash不变且只有一份；测试不是仅改index模拟崩溃，也没有生产环境的“制造崩溃”开关。它证明这个提交窗口的恢复，不保证任意断电或外部计费exactly-once。
+
+
+最终状态审查还修正了一处新状态展示：running/interrupted没有完成结果，应显示待判定；旧实现会在读取批次时过早算失败。新增回归验证这两行不进入失败数，也不当成功。worker_failed/process_deadline仍保留基础设施失败语义。四个真实烟测都使用segments，不能据它们宣称balanced-v3的问答收益。
+
+
+两位实际参与者填完后，在本机执行（仅核对原件与标签，不请求模型）：
+
+```powershell
+uv run --no-sync python scripts/benchmark_research.py blind-check --bundle reports/completion-20261109-evening/human-calibration --review reports/completion-20261109-evening/human-calibration/reviewer/reviewer-A.json --review reports/completion-20261109-evening/human-calibration/reviewer/reviewer-B.json
+```
+
+先看valid和complete，再看jointly_judged、unpaired、agreement、cohen_kappa及disagreements。空模板没有可比较标签，null不是0分；即使一致率高也不能单凭两份署名认证独立身份或证明答案正确。这个四样本包用于练习校准，不是新holdout。

@@ -55,7 +55,7 @@ uv run --no-sync python -m unittest discover -s tests -t .
 uv run --no-sync python scripts/verify_source.py
 ```
 
-本轮481项离线测试通过，应用源码本进程语句覆盖90.3%、分支83.7%（不含SDK/子进程）；源码烟测含分段→续跑→原run不变。CI配置可供GitHub执行，远程尚未发布，不能提前称CI绿。
+本轮482项离线测试通过，应用源码本进程语句覆盖90.3%、分支83.7%（不含SDK/子进程）；源码烟测含分段→续跑→原run不变。CI配置可供GitHub执行，远程尚未发布，不能提前称CI绿。
 
 | 用途 | 现有指南 |
 |---|---|

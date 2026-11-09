@@ -5,10 +5,10 @@
   "provenance": {
     "tool_observation_version": 3,
     "prompt_sha256": "17875f75a2c6e702c3381501411986bdb56b54999263cdd485457013a91a3716",
-    "source_sha256": "6fab7197ec1bd151c9d074607f708162a3ed507e765f997332e63bd36108fc94"
+    "source_sha256": "b769b33c5d60c91b4b35a749a1b7323d1eb6454994ae2ecfce924c43a14e9031"
   },
   "mode": "offline_fixture",
-  "started_at": "2026-11-09T11:43:02.182229+00:00",
+  "started_at": "2026-11-09T11:56:15.130570+00:00",
   "topic": "如何评测 Agent 的记忆能力？",
   "framework": "agentscope==2.0.8",
   "model": "offline-scripted-fixture",
@@ -54,7 +54,7 @@
     "queries": [
       "agent memory design"
     ],
-    "duration_ms": 1.28,
+    "duration_ms": 1.54,
     "citations": {
       "used_ids": [],
       "valid_ids": [],
@@ -96,7 +96,7 @@
       "result_count": 0,
       "new_sources": 0,
       "status": "ok",
-      "duration_ms": 0.03,
+      "duration_ms": 0.04,
       "budget_after": {
         "tool_observation_version": 3,
         "search_attempts": 1,
