@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "kind": "research_task_review",
+  "run_sha256": "8fa2e0bc9f311f69f568459b18ff172b026443482282169a8d841ad0769339c6",
+  "task_sha256": "08db97d177162bef345179f2a270ca95c5d310fe7b6379efbc9feb57198491eb",
+  "task_id": "python_compare",
+  "reviewer": {
+    "kind": "assistant",
+    "name": "Codex saved-answer review 2026-11-02"
+  },
+  "coverage_checked": true,
+  "note": "Judge ONLY saved answer/evidence. Quotes are locators, not automatic entailment. Assistant is not independent human gold. Atomic claim precision requires the separate atomic review.",
+  "criteria": [
+    {
+      "id": "point_1",
+      "met": false,
+      "answer_quote": "**asyncio.timeout**：它返回一个异步上下文管理器，用来限制等待时间；delay 为 None 时不限时，之后可用 `Timeout.reschedule()` 改期。超时会取消**当前任务**，并在内部处理 `CancelledError`，把它转成可捕获的 `TimeoutError` [SRC-4385BCC3@page]。它能以 `async with` 包裹任意代码块，并可通过 `Timeout` 对象检查和调整截止时间。\n\n**wait_for**：3.11 起超时抛出 `TimeoutError`（不再是 `asyncio.TimeoutError`）；3.12 起文档称其用 asyncio 实现（该句被截断）[SRC-4385BCC3@page]。其取消对象与异常传播的细节因正文片段被截断，**未核验**。\n\n**总等待时间**：证据只说明 timeout 限“等待所花时间”，未给出 wait_for 的计时或取消后等待行为，**未知**。本文仅读取了一个有限片段，不足以涵盖两者完整差异。",
+      "evidence": [
+        {
+          "source_id": "SRC-4385BCC3",
+          "kind": "page",
+          "quote": "[SEG-d262522a138a] Coroutines and tasks / Timeouts / asyncio.timeout(delay): Return an asynchronous context manager that can be used to limit the amount of time spent waiting on something.\n\ndelay can either be None, or a float/int number of seconds to wait. If delay is None, no time limit will be applied; this can be useful if the delay is unknown when the context manager is created.\n\nIn either case, the context manager can be rescheduled after creation using Timeout.reschedule().\n\n[SEG-51d28c1979e9] Coroutines and tasks / Timeouts / asyncio.timeout(delay): [code + adjacent explanation] Example:\n\nasync def main():\n    async with asyncio.timeout(10):\n        await long_running_task()\n\nIf long_running_task takes more than 10 seconds to complete, the context manager will cancel the current task and handle the resulting asyncio.CancelledError internally, transforming it into a TimeoutError which can be caught and handled.\n\n[SEG-76c6f6e983df] Coroutines and tasks / Timeouts / asyncio.timeout(delay): [code + adjacent explanation] Example of catching TimeoutError:\n\nasync def main():\n    try:\n        async with asyncio.timeout(10):\n            await long_running_task()\n    except TimeoutError:\n        print(\"The long operation timed out, but we've handled it.\")\n\n    print(\"This statement will run regardless.\")\n\nThe context manager produced by asyncio.timeout() can be rescheduled to a different deadline and inspected.\n\n[SEG-0f07905b3ba8] Coroutines and tasks / Timeouts / asyncio.timeout(delay) / class asyncio.Timeout(when): An asynchronous context manager for cancelling overdue coroutines.\n\nPrefer using asyncio.timeout() or asyncio.timeout_at() rather than instantiating Timeout directly.\n\nwhen should be an absolute time at which the context should time out, as measured by the event loop’s clock:\n\nIf when is None, the timeout will never trigger.\n\nIf when < loop.time(), the timeout will trigger on the next iteration of the event loop.\n\n[SEG-4ebe94c0a2d9] Coroutines and tasks / Timeouts / asyncio.timeout_at(when): Similar to asyncio.timeout(), except when is the absolute time to stop waiting, or None.\n\n[SEG-d3538e3c9c9d] Coroutines and tasks / Timeouts / async asyncio.wait_for(aw, timeout): Changed in version 3.10: Removed the loop parameter.\n\nChanged in version 3.11: Raises TimeoutError instead of asyncio.TimeoutError.\n\nChanged in version 3.12: Implemented using asynci"
+        }
+      ],
+      "reason": "没有完成取消当前任务vs取消被等待对象的双侧比较；诚实标未知仍不能满足必答覆盖。"
+    },
+    {
+      "id": "point_2",
+      "met": true,
+      "answer_quote": "**asyncio.timeout**：它返回一个异步上下文管理器，用来限制等待时间；delay 为 None 时不限时，之后可用 `Timeout.reschedule()` 改期。超时会取消**当前任务**，并在内部处理 `CancelledError`，把它转成可捕获的 `TimeoutError` [SRC-4385BCC3@page]。它能以 `async with` 包裹任意代码块，并可通过 `Timeout` 对象检查和调整截止时间。\n\n**wait_for**：3.11 起超时抛出 `TimeoutError`（不再是 `asyncio.TimeoutError`）；3.12 起文档称其用 asyncio 实现（该句被截断）[SRC-4385BCC3@page]。其取消对象与异常传播的细节因正文片段被截断，**未核验**。\n\n**总等待时间**：证据只说明 timeout 限“等待所花时间”，未给出 wait_for 的计时或取消后等待行为，**未知**。本文仅读取了一个有限片段，不足以涵盖两者完整差异。",
+      "evidence": [
+        {
+          "source_id": "SRC-4385BCC3",
+          "kind": "page",
+          "quote": "[SEG-d262522a138a] Coroutines and tasks / Timeouts / asyncio.timeout(delay): Return an asynchronous context manager that can be used to limit the amount of time spent waiting on something.\n\ndelay can either be None, or a float/int number of seconds to wait. If delay is None, no time limit will be applied; this can be useful if the delay is unknown when the context manager is created.\n\nIn either case, the context manager can be rescheduled after creation using Timeout.reschedule().\n\n[SEG-51d28c1979e9] Coroutines and tasks / Timeouts / asyncio.timeout(delay): [code + adjacent explanation] Example:\n\nasync def main():\n    async with asyncio.timeout(10):\n        await long_running_task()\n\nIf long_running_task takes more than 10 seconds to complete, the context manager will cancel the current task and handle the resulting asyncio.CancelledError internally, transforming it into a TimeoutError which can be caught and handled.\n\n[SEG-76c6f6e983df] Coroutines and tasks / Timeouts / asyncio.timeout(delay): [code + adjacent explanation] Example of catching TimeoutError:\n\nasync def main():\n    try:\n        async with asyncio.timeout(10):\n            await long_running_task()\n    except TimeoutError:\n        print(\"The long operation timed out, but we've handled it.\")\n\n    print(\"This statement will run regardless.\")\n\nThe context manager produced by asyncio.timeout() can be rescheduled to a different deadline and inspected.\n\n[SEG-0f07905b3ba8] Coroutines and tasks / Timeouts / asyncio.timeout(delay) / class asyncio.Timeout(when): An asynchronous context manager for cancelling overdue coroutines.\n\nPrefer using asyncio.timeout() or asyncio.timeout_at() rather than instantiating Timeout directly.\n\nwhen should be an absolute time at which the context should time out, as measured by the event loop’s clock:\n\nIf when is None, the timeout will never trigger.\n\nIf when < loop.time(), the timeout will trigger on the next iteration of the event loop.\n\n[SEG-4ebe94c0a2d9] Coroutines and tasks / Timeouts / asyncio.timeout_at(when): Similar to asyncio.timeout(), except when is the absolute time to stop waiting, or None.\n\n[SEG-d3538e3c9c9d] Coroutines and tasks / Timeouts / async asyncio.wait_for(aw, timeout): Changed in version 3.10: Removed the loop parameter.\n\nChanged in version 3.11: Raises TimeoutError instead of asyncio.TimeoutError.\n\nChanged in version 3.12: Implemented using asynci"
+        }
+      ],
+      "reason": "对缺失的一侧/时间范围明确标未知，没有称完全等价。"
+    },
+    {
+      "id": "point_3",
+      "met": true,
+      "answer_quote": "**asyncio.timeout**：它返回一个异步上下文管理器，用来限制等待时间；delay 为 None 时不限时，之后可用 `Timeout.reschedule()` 改期。超时会取消**当前任务**，并在内部处理 `CancelledError`，把它转成可捕获的 `TimeoutError` [SRC-4385BCC3@page]。它能以 `async with` 包裹任意代码块，并可通过 `Timeout` 对象检查和调整截止时间。\n\n**wait_for**：3.11 起超时抛出 `TimeoutError`（不再是 `asyncio.TimeoutError`）；3.12 起文档称其用 asyncio 实现（该句被截断）[SRC-4385BCC3@page]。其取消对象与异常传播的细节因正文片段被截断，**未核验**。\n\n**总等待时间**：证据只说明 timeout 限“等待所花时间”，未给出 wait_for 的计时或取消后等待行为，**未知**。本文仅读取了一个有限片段，不足以涵盖两者完整差异。",
+      "evidence": [
+        {
+          "source_id": "SRC-4385BCC3",
+          "kind": "page",
+          "quote": "[SEG-d262522a138a] Coroutines and tasks / Timeouts / asyncio.timeout(delay): Return an asynchronous context manager that can be used to limit the amount of time spent waiting on something.\n\ndelay can either be None, or a float/int number of seconds to wait. If delay is None, no time limit will be applied; this can be useful if the delay is unknown when the context manager is created.\n\nIn either case, the context manager can be rescheduled after creation using Timeout.reschedule().\n\n[SEG-51d28c1979e9] Coroutines and tasks / Timeouts / asyncio.timeout(delay): [code + adjacent explanation] Example:\n\nasync def main():\n    async with asyncio.timeout(10):\n        await long_running_task()\n\nIf long_running_task takes more than 10 seconds to complete, the context manager will cancel the current task and handle the resulting asyncio.CancelledError internally, transforming it into a TimeoutError which can be caught and handled.\n\n[SEG-76c6f6e983df] Coroutines and tasks / Timeouts / asyncio.timeout(delay): [code + adjacent explanation] Example of catching TimeoutError:\n\nasync def main():\n    try:\n        async with asyncio.timeout(10):\n            await long_running_task()\n    except TimeoutError:\n        print(\"The long operation timed out, but we've handled it.\")\n\n    print(\"This statement will run regardless.\")\n\nThe context manager produced by asyncio.timeout() can be rescheduled to a different deadline and inspected.\n\n[SEG-0f07905b3ba8] Coroutines and tasks / Timeouts / asyncio.timeout(delay) / class asyncio.Timeout(when): An asynchronous context manager for cancelling overdue coroutines.\n\nPrefer using asyncio.timeout() or asyncio.timeout_at() rather than instantiating Timeout directly.\n\nwhen should be an absolute time at which the context should time out, as measured by the event loop’s clock:\n\nIf when is None, the timeout will never trigger.\n\nIf when < loop.time(), the timeout will trigger on the next iteration of the event loop.\n\n[SEG-4ebe94c0a2d9] Coroutines and tasks / Timeouts / asyncio.timeout_at(when): Similar to asyncio.timeout(), except when is the absolute time to stop waiting, or None.\n\n[SEG-d3538e3c9c9d] Coroutines and tasks / Timeouts / async asyncio.wait_for(aw, timeout): Changed in version 3.10: Removed the loop parameter.\n\nChanged in version 3.11: Raises TimeoutError instead of asyncio.TimeoutError.\n\nChanged in version 3.12: Implemented using asynci"
+        }
+      ],
+      "reason": "主要受限描述与保存片段对应；未将未取得正文说成规范没有定义。"
+    },
+    {
+      "id": "readability",
+      "met": true,
+      "answer_quote": "**asyncio.timeout**：它返回一个异步上下文管理器，用来限制等待时间；delay 为 None 时不限时，之后可用 `Timeout.reschedule()` 改期。超时会取消**当前任务**，并在内部处理 `CancelledError`，把它转成可捕获的 `TimeoutError` [SRC-4385BCC3@page]。它能以 `async with` 包裹任意代码块，并可通过 `Timeout` 对象检查和调整截止时间。\n\n**wait_for**：3.11 起超时抛出 `TimeoutError`（不再是 `asyncio.TimeoutError`）；3.12 起文档称其用 asyncio 实现（该句被截断）[SRC-4385BCC3@page]。其取消对象与异常传播的细节因正文片段被截断，**未核验**。\n\n**总等待时间**：证据只说明 timeout 限“等待所花时间”，未给出 wait_for 的计时或取消后等待行为，**未知**。本文仅读取了一个有限片段，不足以涵盖两者完整差异。",
+      "evidence": [
+        {
+          "source_id": "SRC-4385BCC3",
+          "kind": "page",
+          "quote": "[SEG-d262522a138a] Coroutines and tasks / Timeouts / asyncio.timeout(delay): Return an asynchronous context manager that can be used to limit the amount of time spent waiting on something.\n\ndelay can either be None, or a float/int number of seconds to wait. If delay is None, no time limit will be applied; this can be useful if the delay is unknown when the context manager is created.\n\nIn either case, the context manager can be rescheduled after creation using Timeout.reschedule().\n\n[SEG-51d28c1979e9] Coroutines and tasks / Timeouts / asyncio.timeout(delay): [code + adjacent explanation] Example:\n\nasync def main():\n    async with asyncio.timeout(10):\n        await long_running_task()\n\nIf long_running_task takes more than 10 seconds to complete, the context manager will cancel the current task and handle the resulting asyncio.CancelledError internally, transforming it into a TimeoutError which can be caught and handled.\n\n[SEG-76c6f6e983df] Coroutines and tasks / Timeouts / asyncio.timeout(delay): [code + adjacent explanation] Example of catching TimeoutError:\n\nasync def main():\n    try:\n        async with asyncio.timeout(10):\n            await long_running_task()\n    except TimeoutError:\n        print(\"The long operation timed out, but we've handled it.\")\n\n    print(\"This statement will run regardless.\")\n\nThe context manager produced by asyncio.timeout() can be rescheduled to a different deadline and inspected.\n\n[SEG-0f07905b3ba8] Coroutines and tasks / Timeouts / asyncio.timeout(delay) / class asyncio.Timeout(when): An asynchronous context manager for cancelling overdue coroutines.\n\nPrefer using asyncio.timeout() or asyncio.timeout_at() rather than instantiating Timeout directly.\n\nwhen should be an absolute time at which the context should time out, as measured by the event loop’s clock:\n\nIf when is None, the timeout will never trigger.\n\nIf when < loop.time(), the timeout will trigger on the next iteration of the event loop.\n\n[SEG-4ebe94c0a2d9] Coroutines and tasks / Timeouts / asyncio.timeout_at(when): Similar to asyncio.timeout(), except when is the absolute time to stop waiting, or None.\n\n[SEG-d3538e3c9c9d] Coroutines and tasks / Timeouts / async asyncio.wait_for(aw, timeout): Changed in version 3.10: Removed the loop parameter.\n\nChanged in version 3.11: Raises TimeoutError instead of asyncio.TimeoutError.\n\nChanged in version 3.12: Implemented using asynci"
+        }
+      ],
+      "reason": "结构可读，但常有冗余；长度由独立门槛检查。"
+    }
+  ]
+}

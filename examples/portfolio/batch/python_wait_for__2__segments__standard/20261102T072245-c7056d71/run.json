@@ -1,0 +1,392 @@
+{
+  "schema_version": 8,
+  "report_renderer_version": 6,
+  "execution_trace_version": 1,
+  "provenance": {
+    "tool_observation_version": 3,
+    "prompt_sha256": "887c2ebbdcb615910e0bdb881436cc97dbd7e1b7eddb2f0c056e948fb102b2c9",
+    "source_sha256": "9d38711b453afc00205454a281e803364f1603fcb75b3f5f4ad5e94b3f5a5e21"
+  },
+  "mode": "live_model_snapshot",
+  "started_at": "2026-11-02T07:22:41.497042+00:00",
+  "topic": "根据Python 3.13文档，When does wait_for actually return after timeout and cancellation？设置1秒是否保证总等待不超过1秒？ 请仅依据本次取得的证据作答，500字以内；不足之处明确说明。",
+  "framework": "agentscope==2.0.8",
+  "model": "deepseek-flash",
+  "config": {
+    "max_searches": 0,
+    "results_per_search": 3,
+    "chars_per_source": 1500,
+    "max_agent_iters": 6,
+    "search_timeout": 20,
+    "total_timeout": 100.0,
+    "early_stop_duplicates": true,
+    "max_page_reads": 1,
+    "chars_per_page": 2400,
+    "page_timeout": 30,
+    "max_answer_chars": 500,
+    "answer_style": "standard",
+    "revise_answer": false,
+    "revision_timeout": 30,
+    "revision_max_tokens": 1200,
+    "revision_thinking": "provider-default"
+  },
+  "answer": "**返回值时机**：超时发生时，`wait_for` 会取消 `aw`，并抛出 `TimeoutError`。不过，它并不是一超时就立即返回，而是会等到该 future 真正被取消之后才返回；因此总等待时间可能超过 `timeout`。如果取消过程中发生异常，该异常会被向外传播。另外，如果等待本身被取消，`aw` 也会被取消。[SRC-4385BCC3@page]\n\n**设置1秒并不保证总等待不超过1秒**：文档已经明确说明总等待可能超出设定的超时值。自 3.7 起，`wait_for` 会等待被取消的 awaitable 完成取消；而更早的版本会立刻抛出 `TimeoutError`。本次查看的 3.13 文档中，该条目注明，3.12 起改用 `asyncio.timeout()` 实现，并且当 timeout 为正数时，协程不再被包装为 Task。文档中“等待至多1秒”的示例预期输出为 `timeout!`；但这只是示例，不能据此推断总时长严格有界。[SRC-4385BCC3@page]\n\n**局限**：只读取了有限正文片段，未查看 `shield()`、`asyncio.timeout()` 的完整说明；对于超时后取消拖长的具体上限、以及被取消协程吞掉 `CancelledError` 时的行为，本次证据不足。",
+  "revision": {
+    "status": "disabled",
+    "attempts": 0,
+    "applied": false
+  },
+  "metrics": {
+    "status": "completed",
+    "answer_chars": 537,
+    "answer_within_limit": false,
+    "stop_reason": "search_budget",
+    "search_stop_reason": "search_budget",
+    "agent_finished_reason": "completed",
+    "provider_finish_reasons": [
+      "tool_calls",
+      "stop"
+    ],
+    "completion_check": "provider_stopped_quality_unverified",
+    "error_type": null,
+    "search_attempts": 0,
+    "page_read_attempts": 1,
+    "pages_read": 1,
+    "tool_invocations": 1,
+    "unique_sources": 1,
+    "queries": [],
+    "duration_ms": 4460.57,
+    "citations": {
+      "used_ids": [
+        "SRC-4385BCC3"
+      ],
+      "valid_ids": [
+        "SRC-4385BCC3"
+      ],
+      "invalid_ids": [],
+      "id_validity_rate": 1.0,
+      "has_citations": true,
+      "note": "ID existence only; not factual accuracy or claim support."
+    },
+    "evidence_levels": {
+      "contract_version": 1,
+      "references": [
+        "SRC-4385BCC3@page"
+      ],
+      "untyped_references": [],
+      "invalid_references": [],
+      "unavailable_references": [],
+      "contract_valid": true,
+      "note": "Evidence-level availability only. Does not check claim support, conflicts, freshness, or uncited facts."
+    },
+    "token_usage": {
+      "input": 4209,
+      "output": 380
+    },
+    "warnings": [
+      "回答超过非空白字符预算；未自动截断，以免破坏事实与引用。"
+    ],
+    "research_token_usage": {
+      "input": 4209,
+      "output": 380
+    },
+    "model_request_attempts": 2,
+    "model_request_failures": 0,
+    "model_errors": [],
+    "revision_status": "disabled",
+    "revision_request_attempts": 0
+  },
+  "sources": [
+    {
+      "id": "SRC-4385BCC3",
+      "title": "",
+      "url": "https://docs.python.org/3.13/library/asyncio-task.html",
+      "content": "",
+      "evidence_kind": "source_url",
+      "citation": null,
+      "source_origin": "user_provided_url"
+    }
+  ],
+  "provided_source_urls": [
+    "https://docs.python.org/3.13/library/asyncio-task.html"
+  ],
+  "page_evidence": [
+    {
+      "content": "[SEG-3e87e28a33d7] Coroutines and tasks / Timeouts / async asyncio.wait_for(aw, timeout): Wait for the aw awaitable to complete with a timeout.\n\ntimeout can either be None or a float or int number of seconds to wait for. If timeout is None, block until the future completes.\n\nIf a timeout occurs, it cancels aw and raises TimeoutError.\n\nTo prevent aw from being cancelled, wrap it in shield().\n\nThe function will wait until the future is actually cancelled, so the total wait time may exceed the timeout. If an exception happens during cancellation, it is propagated.\n\nIf the wait is cancelled, the future aw is also cancelled.\n\n[SEG-8149b5926c6e] Coroutines and tasks / Timeouts / async asyncio.wait_for(aw, timeout): [code + adjacent explanation] Example:\n\nasync def eternity():\n    # Sleep for one hour\n    await asyncio.sleep(3600)\n    print('yay!')\n\nasync def main():\n    # Wait for at most 1 second\n    try:\n        await asyncio.wait_for(eternity(), timeout=1.0)\n    except TimeoutError:\n        print('timeout!')\n\nasyncio.run(main())\n\n# Expected output:\n#\n#     timeout!\n\nChanged in version 3.7: When aw is cancelled due to a timeout, wait_for waits for aw to be cancelled. Previously, it raised TimeoutError immediately.\n\n[SEG-d3538e3c9c9d] Coroutines and tasks / Timeouts / async asyncio.wait_for(aw, timeout): Changed in version 3.10: Removed the loop parameter.\n\nChanged in version 3.11: Raises TimeoutError instead of asyncio.TimeoutError.\n\nChanged in version 3.12: Implemented using asyncio.timeout(), a coroutine passed as aw is no longer wrapped in a Task when timeout is positive.\n\n[SEG-44626d65daa5] and tasks / Waiting primitives / async asyncio.wait(aws, *, timeout=None, return_when=ALL_COMPLETED): Unlike wait_for(), wait() does not cancel the futures when a timeout occurs.\n\nIf wait() is cancelled, the futures in aws are not cancelled and continue to run.\n\nChanged in version 3.10: Removed the loop parameter.\n\nChanged in version 3.11: Passing coroutine objects to wait() directly is forbidden.\n\nChanged in version 3.12: Added support for generators yielding tasks.\n\n[SEG-28a6bf8f9755] Coroutines and tasks / Waiting primitives / asyncio.as_completed(aws, *, timeout=None): A TimeoutError is raised if the timeout occurs before all awaitables are done. This is raised by the async for loop during asynchronous iteration or by the coroutines yielded during plain iteration.\n\nas",
+      "strategy": "segments",
+      "selector_version": "lexical-v5",
+      "document_sha256": "d0ccd22feca46c8bda53c7fdec3841d63c3c8c28b43c38fe2703cfd3553e04bd",
+      "document_chars": 42406,
+      "segments": [
+        {
+          "text": "Wait for the aw awaitable to complete with a timeout.\n\ntimeout can either be None or a float or int number of seconds to wait for. If timeout is None, block until the future completes.\n\nIf a timeout occurs, it cancels aw and raises TimeoutError.\n\nTo prevent aw from being cancelled, wrap it in shield().\n\nThe function will wait until the future is actually cancelled, so the total wait time may exceed the timeout. If an exception happens during cancellation, it is propagated.\n\nIf the wait is cancelled, the future aw is also cancelled.",
+          "kind": "definition",
+          "heading_path": [
+            "Coroutines and tasks",
+            "Timeouts",
+            "async asyncio.wait_for(aw, timeout)"
+          ],
+          "definition_path": [
+            "async asyncio.wait_for(aw, timeout)"
+          ],
+          "definition_id": 15,
+          "link_density": 0.2033898305084746,
+          "definition_lead": true,
+          "start": 23029,
+          "end": 23566,
+          "segment_id": "SEG-3e87e28a33d7",
+          "score": 40,
+          "primary_definition": true,
+          "display_prefix": "[SEG-3e87e28a33d7] Coroutines and tasks / Timeouts / async asyncio.wait_for(aw, timeout): ",
+          "is_truncated": false
+        },
+        {
+          "text": "Example:\n\nasync def eternity():\n    # Sleep for one hour\n    await asyncio.sleep(3600)\n    print('yay!')\n\nasync def main():\n    # Wait for at most 1 second\n    try:\n        await asyncio.wait_for(eternity(), timeout=1.0)\n    except TimeoutError:\n        print('timeout!')\n\nasyncio.run(main())\n\n# Expected output:\n#\n#     timeout!\n\nChanged in version 3.7: When aw is cancelled due to a timeout, wait_for waits for aw to be cancelled. Previously, it raised TimeoutError immediately.",
+          "kind": "code_context",
+          "heading_path": [
+            "Coroutines and tasks",
+            "Timeouts",
+            "async asyncio.wait_for(aw, timeout)"
+          ],
+          "definition_path": [
+            "async asyncio.wait_for(aw, timeout)"
+          ],
+          "definition_id": 15,
+          "link_density": 0.08,
+          "members": [
+            {
+              "kind": "p",
+              "start": 0,
+              "end": 8
+            },
+            {
+              "kind": "pre",
+              "start": 10,
+              "end": 329
+            },
+            {
+              "kind": "p",
+              "start": 331,
+              "end": 480
+            }
+          ],
+          "member_offset_basis": "segment_text_unicode_codepoints_end_exclusive",
+          "code_block_count": 1,
+          "definition_lead": false,
+          "start": 23568,
+          "end": 24048,
+          "segment_id": "SEG-8149b5926c6e",
+          "score": 46,
+          "primary_definition": false,
+          "display_prefix": "[SEG-8149b5926c6e] Coroutines and tasks / Timeouts / async asyncio.wait_for(aw, timeout): [code + adjacent explanation] ",
+          "is_truncated": false
+        },
+        {
+          "text": "Changed in version 3.10: Removed the loop parameter.\n\nChanged in version 3.11: Raises TimeoutError instead of asyncio.TimeoutError.\n\nChanged in version 3.12: Implemented using asyncio.timeout(), a coroutine passed as aw is no longer wrapped in a Task when timeout is positive.",
+          "kind": "definition",
+          "heading_path": [
+            "Coroutines and tasks",
+            "Timeouts",
+            "async asyncio.wait_for(aw, timeout)"
+          ],
+          "definition_path": [
+            "async asyncio.wait_for(aw, timeout)"
+          ],
+          "definition_id": 15,
+          "link_density": 0.4155844155844156,
+          "definition_lead": false,
+          "start": 24050,
+          "end": 24326,
+          "segment_id": "SEG-d3538e3c9c9d",
+          "score": 22,
+          "primary_definition": false,
+          "display_prefix": "[SEG-d3538e3c9c9d] Coroutines and tasks / Timeouts / async asyncio.wait_for(aw, timeout): ",
+          "is_truncated": false
+        },
+        {
+          "text": "Unlike wait_for(), wait() does not cancel the futures when a timeout occurs.\n\nIf wait() is cancelled, the futures in aws are not cancelled and continue to run.\n\nChanged in version 3.10: Removed the loop parameter.\n\nChanged in version 3.11: Passing coroutine objects to wait() directly is forbidden.\n\nChanged in version 3.12: Added support for generators yielding tasks.",
+          "kind": "definition",
+          "heading_path": [
+            "Coroutines and tasks",
+            "Waiting primitives",
+            "async asyncio.wait(aws, *, timeout=None, return_when=ALL_COMPLETED)"
+          ],
+          "definition_path": [
+            "async asyncio.wait(aws, *, timeout=None, return_when=ALL_COMPLETED)"
+          ],
+          "definition_id": 16,
+          "link_density": 0.13157894736842105,
+          "definition_lead": false,
+          "start": 25504,
+          "end": 25873,
+          "segment_id": "SEG-44626d65daa5",
+          "score": 24,
+          "primary_definition": false,
+          "display_prefix": "[SEG-44626d65daa5] and tasks / Waiting primitives / async asyncio.wait(aws, *, timeout=None, return_when=ALL_COMPLETED): ",
+          "is_truncated": false
+        },
+        {
+          "text": "A TimeoutError is raised if the timeout occurs before all awaitables are done. This is raised by the async for loop during asynchronous iteration or by the coroutines yielded during plain iteration.\n\nas",
+          "kind": "definition",
+          "heading_path": [
+            "Coroutines and tasks",
+            "Waiting primitives",
+            "asyncio.as_completed(aws, *, timeout=None)"
+          ],
+          "definition_path": [
+            "asyncio.as_completed(aws, *, timeout=None)"
+          ],
+          "definition_id": 17,
+          "link_density": 0.19078947368421054,
+          "definition_lead": false,
+          "start": 27642,
+          "end": 27844,
+          "segment_id": "SEG-28a6bf8f9755",
+          "score": 20,
+          "primary_definition": false,
+          "display_prefix": "[SEG-28a6bf8f9755] Coroutines and tasks / Waiting primitives / asyncio.as_completed(aws, *, timeout=None): ",
+          "is_truncated": true
+        }
+      ],
+      "offset_basis": "normalized_extracted_text",
+      "is_full_document": false,
+      "selection_warnings": [
+        "partial_prose_fragment",
+        "table_rows_omitted_for_budget",
+        "code_blocks_omitted_for_budget",
+        "code_context_omitted_for_budget"
+      ],
+      "omitted_table_rows": 4,
+      "omitted_code_blocks": 15,
+      "omitted_code_contexts": 9,
+      "code_selection": {
+        "scope": "ranked_candidates_only",
+        "completeness_basis": "extracted_segment_not_whole_definition_or_page",
+        "retained": {
+          "state": "complete_extracted_segment",
+          "total": 1,
+          "details": [
+            {
+              "segment_id": "SEG-8149b5926c6e",
+              "heading": "Coroutines and tasks / Timeouts / async asyncio.wait_for(aw, timeout)",
+              "kind": "code_context",
+              "code_blocks": 1
+            }
+          ],
+          "unlisted": 0
+        },
+        "omitted": {
+          "reason": "page_character_budget",
+          "total": 13,
+          "details": [
+            {
+              "segment_id": "SEG-51d28c1979e9",
+              "heading": "Coroutines and tasks / Timeouts / asyncio.timeout(delay)",
+              "kind": "code_context",
+              "code_blocks": 1
+            },
+            {
+              "segment_id": "SEG-61f66c7bd2f9",
+              "heading": "oroutines and tasks / Shielding from cancellation / awaitable asyncio.shield(aw)",
+              "kind": "code_context",
+              "code_blocks": 2
+            },
+            {
+              "segment_id": "SEG-27daecb10624",
+              "heading": "oroutines and tasks / Shielding from cancellation / awaitable asyncio.shield(aw)",
+              "kind": "code_context",
+              "code_blocks": 1
+            },
+            {
+              "segment_id": "SEG-76c6f6e983df",
+              "heading": "Coroutines and tasks / Timeouts / asyncio.timeout(delay)",
+              "kind": "code_context",
+              "code_blocks": 1
+            }
+          ],
+          "unlisted": 9
+        }
+      },
+      "id": "SRC-4385BCC3",
+      "url": "https://docs.python.org/3.13/library/asyncio-task.html",
+      "fetched_at": "2026-11-02T07:22:43.698089+00:00",
+      "evidence_kind": "page_excerpt",
+      "citation": "[SRC-4385BCC3@page]"
+    }
+  ],
+  "trace": [
+    {
+      "tool": "read_page",
+      "source_id": "SRC-4385BCC3",
+      "backend_attempted": true,
+      "focus": "wait_for,timeout,cancel",
+      "status": "ok",
+      "duration_ms": 478.71,
+      "budget_after": {
+        "tool_observation_version": 3,
+        "search_attempts": 0,
+        "page_read_attempts": 1,
+        "pages_read": 1,
+        "remaining_searches": 0,
+        "remaining_page_reads": 0,
+        "search_stopped": true,
+        "page_reader_enabled": true,
+        "count_semantics": "attempts=started backend attempts including failures; pages_read=saved excerpts; remaining=unused quota, not completed calls or permission to continue"
+      }
+    }
+  ],
+  "provider_responses": [
+    {
+      "response_index": 1,
+      "finish_reason": "tool_calls",
+      "input_tokens": 1409,
+      "output_tokens": 67,
+      "reasoning_tokens": null,
+      "has_tool_calls": true,
+      "tool_calls_suppressed": false,
+      "incomplete": false
+    },
+    {
+      "response_index": 2,
+      "finish_reason": "stop",
+      "input_tokens": 2800,
+      "output_tokens": 313,
+      "reasoning_tokens": null,
+      "has_tool_calls": false,
+      "tool_calls_suppressed": false,
+      "incomplete": false
+    }
+  ],
+  "model_requests": [
+    {
+      "request_index": 1,
+      "status": "responded",
+      "message_count": 2,
+      "tool_schema_count": 1,
+      "tool_choice": null,
+      "duration_ms": 1543.33
+    },
+    {
+      "request_index": 2,
+      "status": "responded",
+      "message_count": 3,
+      "tool_schema_count": 1,
+      "tool_choice": null,
+      "duration_ms": 2255.36
+    }
+  ],
+  "tool_transport": "local",
+  "reader": "snapshot",
+  "excerpt_strategy": "segments",
+  "search_provider": "fixture",
+  "model_retry_budget": 0,
+  "model_max_tokens": 1800,
+  "model_thinking": "disabled",
+  "benchmark": {
+    "task_id": "python_wait_for",
+    "suite_sha256": "60dcdff015e3f20971d5a42e201eb6fd17d30ed54af8e90fea0b6eeacfc14c54",
+    "corpus_manifest_sha256": "eca101421fcd3f2cd46f4a16d62a385f744b9833f16b3a097c9c60fb416a39c1",
+    "trial_id": "python_wait_for__2__segments__standard",
+    "mode": "frozen"
+  }
+}

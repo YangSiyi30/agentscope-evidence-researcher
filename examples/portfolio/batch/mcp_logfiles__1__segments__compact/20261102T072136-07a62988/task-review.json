@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "kind": "research_task_review",
+  "run_sha256": "70d4c93e393f4b0e372a161a2efadd1cc0ab55284362622650aa59890748e6b8",
+  "task_sha256": "3865859ab4a06206aec26d57be1a8d95aacf6cffdb9c181c460b6822cf85abb1",
+  "task_id": "mcp_logfiles",
+  "reviewer": {
+    "kind": "assistant",
+    "name": "Codex saved-answer review 2026-11-02"
+  },
+  "coverage_checked": true,
+  "note": "Judge ONLY saved answer/evidence. Quotes are locators, not automatic entailment. Assistant is not independent human gold. Atomic claim precision requires the separate atomic review.",
+  "criteria": [
+    {
+      "id": "point_1",
+      "met": true,
+      "answer_quote": "不能据此推出禁止写任何日志文件。该规范仅规定：服务端只能向 stdout 写入有效的 MCP 消息，除此之外不得写入任何内容 [SRC-937FAE64@page]（SEG-a2ee1a79dd00、SEG-ab1bd7ae2384）。限制对象只是作为传输通道的 stdout，并且要求消息以换行分隔、不得含内嵌换行 [SRC-937FAE64@page]（SEG-625bf507c14c）。\n\n在日志方面，规范允许服务端为信息、调试和错误等目的向 stderr 写入 UTF-8 字符串；客户端可以捕获、转发或忽略这些内容，且不应假定 stderr 输出代表错误 [SRC-937FAE64@page]（SEG-a8f657b81b66、SEG-e0c991e6d2d9）。\n\n日志文件未在本次读取的片段中提及，因此规范是否允许或限制文件日志、其格式与路径等，证据不足，不能据此推断。本次读取的仅为页面片段，未核验全文。",
+      "evidence": [
+        {
+          "source_id": "SRC-937FAE64",
+          "kind": "page",
+          "quote": "[SEG-aced80da89fa] stdio, communication over standard in and standard out\n\n[SEG-27b8e9d1e276] Clients SHOULD support stdio whenever possible. It is also possible for clients and servers to implement custom transports in a pluggable fashion.\n\n[SEG-d0d142c8b118] stdio: stdio\n\n[SEG-de8a13eca0e5] stdio: In the stdio transport:\n\n[SEG-6da2bf209f51] stdio: The client launches the MCP server as a subprocess.\n\n[SEG-ab1bd7ae2384] stdio: The server reads JSON-RPC messages from its standard input (stdin) and sends messages to its standard output (stdout).\n\n[SEG-fdd80999e743] stdio: Messages are individual JSON-RPC requests, notifications, or responses.\n\n[SEG-625bf507c14c] stdio: Messages are delimited by newlines, and MUST NOT contain embedded newlines.\n\n[SEG-a8f657b81b66] stdio: The server MAY write UTF-8 strings to its standard error (stderr) for any logging purposes including informational, debug, and error messages.\n\n[SEG-e0c991e6d2d9] stdio: The client MAY capture, forward, or ignore the server’s stderr output and SHOULD NOT assume stderr output indicates error conditions.\n\n[SEG-a2ee1a79dd00] stdio: The server MUST NOT write anything to its stdout that is not a valid MCP message.\n\n[SEG-8218f6b31f47] stdio: The client MUST NOT write anything to the server’s stdin that is not a valid MCP message.\n\n[SEG-01bddb996ff7] Streamable HTTP / Session Management: An MCP “session” consists of logically related interactions between a client and a server, beginning with the initialization phase. To support servers which want to establish stateful sessions:"
+        }
+      ],
+      "reason": "正确限定stdout通道，不把文件日志未规定说成禁止一切日志。"
+    },
+    {
+      "id": "point_2",
+      "met": true,
+      "answer_quote": "不能据此推出禁止写任何日志文件。该规范仅规定：服务端只能向 stdout 写入有效的 MCP 消息，除此之外不得写入任何内容 [SRC-937FAE64@page]（SEG-a2ee1a79dd00、SEG-ab1bd7ae2384）。限制对象只是作为传输通道的 stdout，并且要求消息以换行分隔、不得含内嵌换行 [SRC-937FAE64@page]（SEG-625bf507c14c）。\n\n在日志方面，规范允许服务端为信息、调试和错误等目的向 stderr 写入 UTF-8 字符串；客户端可以捕获、转发或忽略这些内容，且不应假定 stderr 输出代表错误 [SRC-937FAE64@page]（SEG-a8f657b81b66、SEG-e0c991e6d2d9）。\n\n日志文件未在本次读取的片段中提及，因此规范是否允许或限制文件日志、其格式与路径等，证据不足，不能据此推断。本次读取的仅为页面片段，未核验全文。",
+      "evidence": [
+        {
+          "source_id": "SRC-937FAE64",
+          "kind": "page",
+          "quote": "[SEG-aced80da89fa] stdio, communication over standard in and standard out\n\n[SEG-27b8e9d1e276] Clients SHOULD support stdio whenever possible. It is also possible for clients and servers to implement custom transports in a pluggable fashion.\n\n[SEG-d0d142c8b118] stdio: stdio\n\n[SEG-de8a13eca0e5] stdio: In the stdio transport:\n\n[SEG-6da2bf209f51] stdio: The client launches the MCP server as a subprocess.\n\n[SEG-ab1bd7ae2384] stdio: The server reads JSON-RPC messages from its standard input (stdin) and sends messages to its standard output (stdout).\n\n[SEG-fdd80999e743] stdio: Messages are individual JSON-RPC requests, notifications, or responses.\n\n[SEG-625bf507c14c] stdio: Messages are delimited by newlines, and MUST NOT contain embedded newlines.\n\n[SEG-a8f657b81b66] stdio: The server MAY write UTF-8 strings to its standard error (stderr) for any logging purposes including informational, debug, and error messages.\n\n[SEG-e0c991e6d2d9] stdio: The client MAY capture, forward, or ignore the server’s stderr output and SHOULD NOT assume stderr output indicates error conditions.\n\n[SEG-a2ee1a79dd00] stdio: The server MUST NOT write anything to its stdout that is not a valid MCP message.\n\n[SEG-8218f6b31f47] stdio: The client MUST NOT write anything to the server’s stdin that is not a valid MCP message.\n\n[SEG-01bddb996ff7] Streamable HTTP / Session Management: An MCP “session” consists of logically related interactions between a client and a server, beginning with the initialization phase. To support servers which want to establish stateful sessions:"
+        }
+      ],
+      "reason": "关键条款在实际保存的stdio正文及@page引用中。"
+    },
+    {
+      "id": "readability",
+      "met": true,
+      "answer_quote": "不能据此推出禁止写任何日志文件。该规范仅规定：服务端只能向 stdout 写入有效的 MCP 消息，除此之外不得写入任何内容 [SRC-937FAE64@page]（SEG-a2ee1a79dd00、SEG-ab1bd7ae2384）。限制对象只是作为传输通道的 stdout，并且要求消息以换行分隔、不得含内嵌换行 [SRC-937FAE64@page]（SEG-625bf507c14c）。\n\n在日志方面，规范允许服务端为信息、调试和错误等目的向 stderr 写入 UTF-8 字符串；客户端可以捕获、转发或忽略这些内容，且不应假定 stderr 输出代表错误 [SRC-937FAE64@page]（SEG-a8f657b81b66、SEG-e0c991e6d2d9）。\n\n日志文件未在本次读取的片段中提及，因此规范是否允许或限制文件日志、其格式与路径等，证据不足，不能据此推断。本次读取的仅为页面片段，未核验全文。",
+      "evidence": [
+        {
+          "source_id": "SRC-937FAE64",
+          "kind": "page",
+          "quote": "[SEG-aced80da89fa] stdio, communication over standard in and standard out\n\n[SEG-27b8e9d1e276] Clients SHOULD support stdio whenever possible. It is also possible for clients and servers to implement custom transports in a pluggable fashion.\n\n[SEG-d0d142c8b118] stdio: stdio\n\n[SEG-de8a13eca0e5] stdio: In the stdio transport:\n\n[SEG-6da2bf209f51] stdio: The client launches the MCP server as a subprocess.\n\n[SEG-ab1bd7ae2384] stdio: The server reads JSON-RPC messages from its standard input (stdin) and sends messages to its standard output (stdout).\n\n[SEG-fdd80999e743] stdio: Messages are individual JSON-RPC requests, notifications, or responses.\n\n[SEG-625bf507c14c] stdio: Messages are delimited by newlines, and MUST NOT contain embedded newlines.\n\n[SEG-a8f657b81b66] stdio: The server MAY write UTF-8 strings to its standard error (stderr) for any logging purposes including informational, debug, and error messages.\n\n[SEG-e0c991e6d2d9] stdio: The client MAY capture, forward, or ignore the server’s stderr output and SHOULD NOT assume stderr output indicates error conditions.\n\n[SEG-a2ee1a79dd00] stdio: The server MUST NOT write anything to its stdout that is not a valid MCP message.\n\n[SEG-8218f6b31f47] stdio: The client MUST NOT write anything to the server’s stdin that is not a valid MCP message.\n\n[SEG-01bddb996ff7] Streamable HTTP / Session Management: An MCP “session” consists of logically related interactions between a client and a server, beginning with the initialization phase. To support servers which want to establish stateful sessions:"
+        }
+      ],
+      "reason": "重点可识别；长度另由500字符门槛检查，不靠本标签放行。"
+    }
+  ]
+}

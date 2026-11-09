@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "kind": "research_task_review",
+  "run_sha256": "28783928d15c7d6a3ccdb986e6e25b0571b4a8db6d4851d54e14485bced443c7",
+  "task_sha256": "3865859ab4a06206aec26d57be1a8d95aacf6cffdb9c181c460b6822cf85abb1",
+  "task_id": "mcp_logfiles",
+  "reviewer": {
+    "kind": "unassigned",
+    "name": ""
+  },
+  "coverage_checked": false,
+  "note": "Judge ONLY saved answer/evidence. Quotes are locators, not automatic entailment. Assistant is not independent human gold. Atomic claim precision requires the separate atomic review.",
+  "criteria": [
+    {
+      "id": "point_1",
+      "met": null,
+      "answer_quote": "",
+      "evidence": [],
+      "reason": ""
+    },
+    {
+      "id": "point_2",
+      "met": null,
+      "answer_quote": "",
+      "evidence": [],
+      "reason": ""
+    },
+    {
+      "id": "readability",
+      "met": null,
+      "answer_quote": "",
+      "evidence": [],
+      "reason": ""
+    }
+  ]
+}

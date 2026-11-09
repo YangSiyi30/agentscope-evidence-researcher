@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "kind": "research_task_review",
+  "run_sha256": "902600b3b8f7eaa0dca4fe621c0a920fbd890f0d1cc37e4bbe8fb9da7ea1c0e7",
+  "task_sha256": "5bbd314854b895b51877a0a7c6ff2bfdc1e056b23aec030aa01bc37846f53b13",
+  "task_id": "python_wait_for",
+  "reviewer": {
+    "kind": "assistant",
+    "name": "Codex saved-answer review 2026-11-02"
+  },
+  "coverage_checked": true,
+  "note": "Judge ONLY saved answer/evidence. Quotes are locators, not automatic entailment. Assistant is not independent human gold. Atomic claim precision requires the separate atomic review.",
+  "criteria": [
+    {
+      "id": "point_1",
+      "met": true,
+      "answer_quote": "**返回值时机**：超时发生时，`wait_for` 会取消 `aw`，并抛出 `TimeoutError`。不过，它并不是一超时就立即返回，而是会等到该 future 真正被取消之后才返回；因此总等待时间可能超过 `timeout`。如果取消过程中发生异常，该异常会被向外传播。另外，如果等待本身被取消，`aw` 也会被取消。[SRC-4385BCC3@page]\n\n**设置1秒并不保证总等待不超过1秒**：文档已经明确说明总等待可能超出设定的超时值。自 3.7 起，`wait_for` 会等待被取消的 awaitable 完成取消；而更早的版本会立刻抛出 `TimeoutError`。本次查看的 3.13 文档中，该条目注明，3.12 起改用 `asyncio.timeout()` 实现，并且当 timeout 为正数时，协程不再被包装为 Task。文档中“等待至多1秒”的示例预期输出为 `timeout!`；但这只是示例，不能据此推断总时长严格有界。[SRC-4385BCC3@page]\n\n**局限**：只读取了有限正文片段，未查看 `shield()`、`asyncio.timeout()` 的完整说明；对于超时后取消拖长的具体上限、以及被取消协程吞掉 `CancelledError` 时的行为，本次证据不足。",
+      "evidence": [
+        {
+          "source_id": "SRC-4385BCC3",
+          "kind": "page",
+          "quote": "[SEG-3e87e28a33d7] Coroutines and tasks / Timeouts / async asyncio.wait_for(aw, timeout): Wait for the aw awaitable to complete with a timeout.\n\ntimeout can either be None or a float or int number of seconds to wait for. If timeout is None, block until the future completes.\n\nIf a timeout occurs, it cancels aw and raises TimeoutError.\n\nTo prevent aw from being cancelled, wrap it in shield().\n\nThe function will wait until the future is actually cancelled, so the total wait time may exceed the timeout. If an exception happens during cancellation, it is propagated.\n\nIf the wait is cancelled, the future aw is also cancelled.\n\n[SEG-8149b5926c6e] Coroutines and tasks / Timeouts / async asyncio.wait_for(aw, timeout): [code + adjacent explanation] Example:\n\nasync def eternity():\n    # Sleep for one hour\n    await asyncio.sleep(3600)\n    print('yay!')\n\nasync def main():\n    # Wait for at most 1 second\n    try:\n        await asyncio.wait_for(eternity(), timeout=1.0)\n    except TimeoutError:\n        print('timeout!')\n\nasyncio.run(main())\n\n# Expected output:\n#\n#     timeout!\n\nChanged in version 3.7: When aw is cancelled due to a timeout, wait_for waits for aw to be cancelled. Previously, it raised TimeoutError immediately.\n\n[SEG-d3538e3c9c9d] Coroutines and tasks / Timeouts / async asyncio.wait_for(aw, timeout): Changed in version 3.10: Removed the loop parameter.\n\nChanged in version 3.11: Raises TimeoutError instead of asyncio.TimeoutError.\n\nChanged in version 3.12: Implemented using asyncio.timeout(), a coroutine passed as aw is no longer wrapped in a Task when timeout is positive.\n\n[SEG-44626d65daa5] and tasks / Waiting primitives / async asyncio.wait(aws, *, timeout=None, return_when=ALL_COMPLETED): Unlike wait_for(), wait() does not cancel the futures when a timeout occurs.\n\nIf wait() is cancelled, the futures in aws are not cancelled and continue to run.\n\nChanged in version 3.10: Removed the loop parameter.\n\nChanged in version 3.11: Passing coroutine objects to wait() directly is forbidden.\n\nChanged in version 3.12: Added support for generators yielding tasks.\n\n[SEG-28a6bf8f9755] Coroutines and tasks / Waiting primitives / asyncio.as_completed(aws, *, timeout=None): A TimeoutError is raised if the timeout occurs before all awaitables are done. This is raised by the async for loop during asynchronous iteration or by the coroutines yielded during plain iteration.\n\nas"
+        }
+      ],
+      "reason": "说明取消aw、等待实际取消完成、总时间可能超时，否定一秒硬上限。"
+    },
+    {
+      "id": "point_2",
+      "met": true,
+      "answer_quote": "**返回值时机**：超时发生时，`wait_for` 会取消 `aw`，并抛出 `TimeoutError`。不过，它并不是一超时就立即返回，而是会等到该 future 真正被取消之后才返回；因此总等待时间可能超过 `timeout`。如果取消过程中发生异常，该异常会被向外传播。另外，如果等待本身被取消，`aw` 也会被取消。[SRC-4385BCC3@page]\n\n**设置1秒并不保证总等待不超过1秒**：文档已经明确说明总等待可能超出设定的超时值。自 3.7 起，`wait_for` 会等待被取消的 awaitable 完成取消；而更早的版本会立刻抛出 `TimeoutError`。本次查看的 3.13 文档中，该条目注明，3.12 起改用 `asyncio.timeout()` 实现，并且当 timeout 为正数时，协程不再被包装为 Task。文档中“等待至多1秒”的示例预期输出为 `timeout!`；但这只是示例，不能据此推断总时长严格有界。[SRC-4385BCC3@page]\n\n**局限**：只读取了有限正文片段，未查看 `shield()`、`asyncio.timeout()` 的完整说明；对于超时后取消拖长的具体上限、以及被取消协程吞掉 `CancelledError` 时的行为，本次证据不足。",
+      "evidence": [
+        {
+          "source_id": "SRC-4385BCC3",
+          "kind": "page",
+          "quote": "[SEG-3e87e28a33d7] Coroutines and tasks / Timeouts / async asyncio.wait_for(aw, timeout): Wait for the aw awaitable to complete with a timeout.\n\ntimeout can either be None or a float or int number of seconds to wait for. If timeout is None, block until the future completes.\n\nIf a timeout occurs, it cancels aw and raises TimeoutError.\n\nTo prevent aw from being cancelled, wrap it in shield().\n\nThe function will wait until the future is actually cancelled, so the total wait time may exceed the timeout. If an exception happens during cancellation, it is propagated.\n\nIf the wait is cancelled, the future aw is also cancelled.\n\n[SEG-8149b5926c6e] Coroutines and tasks / Timeouts / async asyncio.wait_for(aw, timeout): [code + adjacent explanation] Example:\n\nasync def eternity():\n    # Sleep for one hour\n    await asyncio.sleep(3600)\n    print('yay!')\n\nasync def main():\n    # Wait for at most 1 second\n    try:\n        await asyncio.wait_for(eternity(), timeout=1.0)\n    except TimeoutError:\n        print('timeout!')\n\nasyncio.run(main())\n\n# Expected output:\n#\n#     timeout!\n\nChanged in version 3.7: When aw is cancelled due to a timeout, wait_for waits for aw to be cancelled. Previously, it raised TimeoutError immediately.\n\n[SEG-d3538e3c9c9d] Coroutines and tasks / Timeouts / async asyncio.wait_for(aw, timeout): Changed in version 3.10: Removed the loop parameter.\n\nChanged in version 3.11: Raises TimeoutError instead of asyncio.TimeoutError.\n\nChanged in version 3.12: Implemented using asyncio.timeout(), a coroutine passed as aw is no longer wrapped in a Task when timeout is positive.\n\n[SEG-44626d65daa5] and tasks / Waiting primitives / async asyncio.wait(aws, *, timeout=None, return_when=ALL_COMPLETED): Unlike wait_for(), wait() does not cancel the futures when a timeout occurs.\n\nIf wait() is cancelled, the futures in aws are not cancelled and continue to run.\n\nChanged in version 3.10: Removed the loop parameter.\n\nChanged in version 3.11: Passing coroutine objects to wait() directly is forbidden.\n\nChanged in version 3.12: Added support for generators yielding tasks.\n\n[SEG-28a6bf8f9755] Coroutines and tasks / Waiting primitives / asyncio.as_completed(aws, *, timeout=None): A TimeoutError is raised if the timeout occurs before all awaitables are done. This is raised by the async for loop during asynchronous iteration or by the coroutines yielded during plain iteration.\n\nas"
+        }
+      ],
+      "reason": "上述三个主要条件均有实际wait_for定义正文及@page；本项不穷尽额外时序推断的支持率。"
+    },
+    {
+      "id": "readability",
+      "met": true,
+      "answer_quote": "**返回值时机**：超时发生时，`wait_for` 会取消 `aw`，并抛出 `TimeoutError`。不过，它并不是一超时就立即返回，而是会等到该 future 真正被取消之后才返回；因此总等待时间可能超过 `timeout`。如果取消过程中发生异常，该异常会被向外传播。另外，如果等待本身被取消，`aw` 也会被取消。[SRC-4385BCC3@page]\n\n**设置1秒并不保证总等待不超过1秒**：文档已经明确说明总等待可能超出设定的超时值。自 3.7 起，`wait_for` 会等待被取消的 awaitable 完成取消；而更早的版本会立刻抛出 `TimeoutError`。本次查看的 3.13 文档中，该条目注明，3.12 起改用 `asyncio.timeout()` 实现，并且当 timeout 为正数时，协程不再被包装为 Task。文档中“等待至多1秒”的示例预期输出为 `timeout!`；但这只是示例，不能据此推断总时长严格有界。[SRC-4385BCC3@page]\n\n**局限**：只读取了有限正文片段，未查看 `shield()`、`asyncio.timeout()` 的完整说明；对于超时后取消拖长的具体上限、以及被取消协程吞掉 `CancelledError` 时的行为，本次证据不足。",
+      "evidence": [
+        {
+          "source_id": "SRC-4385BCC3",
+          "kind": "page",
+          "quote": "[SEG-3e87e28a33d7] Coroutines and tasks / Timeouts / async asyncio.wait_for(aw, timeout): Wait for the aw awaitable to complete with a timeout.\n\ntimeout can either be None or a float or int number of seconds to wait for. If timeout is None, block until the future completes.\n\nIf a timeout occurs, it cancels aw and raises TimeoutError.\n\nTo prevent aw from being cancelled, wrap it in shield().\n\nThe function will wait until the future is actually cancelled, so the total wait time may exceed the timeout. If an exception happens during cancellation, it is propagated.\n\nIf the wait is cancelled, the future aw is also cancelled.\n\n[SEG-8149b5926c6e] Coroutines and tasks / Timeouts / async asyncio.wait_for(aw, timeout): [code + adjacent explanation] Example:\n\nasync def eternity():\n    # Sleep for one hour\n    await asyncio.sleep(3600)\n    print('yay!')\n\nasync def main():\n    # Wait for at most 1 second\n    try:\n        await asyncio.wait_for(eternity(), timeout=1.0)\n    except TimeoutError:\n        print('timeout!')\n\nasyncio.run(main())\n\n# Expected output:\n#\n#     timeout!\n\nChanged in version 3.7: When aw is cancelled due to a timeout, wait_for waits for aw to be cancelled. Previously, it raised TimeoutError immediately.\n\n[SEG-d3538e3c9c9d] Coroutines and tasks / Timeouts / async asyncio.wait_for(aw, timeout): Changed in version 3.10: Removed the loop parameter.\n\nChanged in version 3.11: Raises TimeoutError instead of asyncio.TimeoutError.\n\nChanged in version 3.12: Implemented using asyncio.timeout(), a coroutine passed as aw is no longer wrapped in a Task when timeout is positive.\n\n[SEG-44626d65daa5] and tasks / Waiting primitives / async asyncio.wait(aws, *, timeout=None, return_when=ALL_COMPLETED): Unlike wait_for(), wait() does not cancel the futures when a timeout occurs.\n\nIf wait() is cancelled, the futures in aws are not cancelled and continue to run.\n\nChanged in version 3.10: Removed the loop parameter.\n\nChanged in version 3.11: Passing coroutine objects to wait() directly is forbidden.\n\nChanged in version 3.12: Added support for generators yielding tasks.\n\n[SEG-28a6bf8f9755] Coroutines and tasks / Waiting primitives / asyncio.as_completed(aws, *, timeout=None): A TimeoutError is raised if the timeout occurs before all awaitables are done. This is raised by the async for loop during asynchronous iteration or by the coroutines yielded during plain iteration.\n\nas"
+        }
+      ],
+      "reason": "核心结论可辨；超长另外失败，不以可读性免除500上限。"
+    }
+  ]
+}

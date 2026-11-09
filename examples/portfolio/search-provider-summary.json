@@ -1,0 +1,26 @@
+{
+  "kind": "search_provider_comparison",
+  "plan_sha256": "c3bacd41727408abb53fc0fdf2e3c786758baa8a2202b0c94e9f5c13266e9202",
+  "source_sha256": "9a366336fe50efbdf7030007e0449d388f0b0e888548c61fd7154d396663ea1f",
+  "providers": {
+    "duckduckgo": {
+      "planned": 4,
+      "executed": 4,
+      "nonempty": 0,
+      "host_hit_trials": 0,
+      "errors": 4,
+      "median_ms": 762.66
+    },
+    "tavily": {
+      "planned": 4,
+      "executed": 4,
+      "nonempty": 4,
+      "host_hit_trials": 4,
+      "errors": 0,
+      "median_ms": 2427.66
+    }
+  },
+  "note": "Small time-specific service diagnostic, not a relevance benchmark or answer accuracy. Host membership does not prove page version or factual support. Tavily basic may consume credits. No retry/fallback/model/page reads.",
+  "model_calls": 0,
+  "page_reads": 0
+}

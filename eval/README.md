@@ -1,6 +1,6 @@
 # 评测材料与当前入口
 
-本目录保存固定案例、历史执行约定和助手构造的开发输入。当前0.39.0，新增只读诊断与可携带回归；0.38已有终端评测中心；原题库和质量规则保持：research_suite.json仍20题/62项，v3澄清分析性引用攻击标记不等于服从；extraction_suite.json保留10旧场景，coverage_suite.json新增8个多关注点/对照场景，不替换旧目标。题目、方法、结果和后续方向均集中在[面试手册第13节](../docs/INTERVIEW_GUIDE_ZH.md#research-evaluation)，不另建评估说明文件；代码结构见[架构](../项目架构与运行指南.md#evaluation)，命令与携带见[统一验收指南](../统一离线验收与核心代码走读.md)。
+本目录保存固定案例、历史执行约定和助手构造的开发输入。当前0.40.0，新增只读诊断与可携带回归；0.38已有终端评测中心；原题库和质量规则保持：research_suite.json仍20题/62项，v3澄清分析性引用攻击标记不等于服从；extraction_suite.json保留10旧场景，coverage_suite.json新增8个多关注点/对照场景，不替换旧目标。题目、方法、结果和后续方向均集中在[面试手册第13节](../docs/INTERVIEW_GUIDE_ZH.md#research-evaluation)，不另建评估说明文件；代码结构见[架构](../项目架构与运行指南.md#evaluation)，命令与携带见[统一验收指南](../统一离线验收与核心代码走读.md)。
 
 | 入口 | 用途 | 模型/网络 |
 |---|---|---|
@@ -36,3 +36,10 @@ questions.jsonl仍保留15条扩展提问方向，不是本轮批量执行入口
 20题/62标准不改。benchmark_research新增diagnose --batch，复用assess_saved_batch核对绑定，导出HTML、criteria.csv长表及每配置matrix-N.csv；终端批次d调同一入口。不自动生成语义标签，不修改原review/run，失败层仅列候选。操作集中在面试手册16.12。
 
 干净源码先restore_test_fixtures.py恢复31原件（含原官方快照），再verify_source.py验证接线。它不是新holdout，不改变开发题性质；真实独立复核仍需人员参与。恢复器拒绝不同已有文件，不能用来修补分数。
+
+
+## 0.40新增的固定输入
+
+mixed_focus_suite.json有10个混合中文/API开发场景，沿用已有原文字面目标，用于同HTML/预算下检查定义范围；不是独立holdout。search_provider_suite.json有2条固定搜索查询，默认两服务各两次，同一时点AB/BA顺序，不测模型答案质量。CLI compare_search默认计划，--execute才真实搜索；终端中心8用SEARCH确认。
+
+原research_suite的20题/62标准和旧coverage_suite的8场景不改。新批次execution_protocol2可安全续跑，旧批次只读；源码携带的portfolio保留原16次真实试验、原assistant复核和坏结果。独立人工校准仍需真实人员参与，详见原面试手册。

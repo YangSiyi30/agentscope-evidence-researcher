@@ -1,0 +1,96 @@
+{
+  "kind": "mixed_focus_extraction_comparison",
+  "protocol_sha256": "1ccdfbf84dcaa994a13487ea667655222a77dbdd056c74cbb07285d8ced76059",
+  "candidate_source_sha256": "090d7377da26fb225b71cc8a622fefa1644864c352889f9c4ab9013c015c81dd",
+  "candidate_selector_code_sha256": "63ae58386bd8c6fc6ebae2b7ef7f03f91e2016e8b403640bbd97c5e708fee185",
+  "summary": {
+    "original/v2": {
+      "rows": 24,
+      "eligible": 21,
+      "literal_hits": 11,
+      "null": 3,
+      "median_ms": 72.23150000000001
+    },
+    "original/v3": {
+      "rows": 24,
+      "eligible": 21,
+      "literal_hits": 11,
+      "null": 3,
+      "median_ms": 72.4375
+    },
+    "mixed/v2": {
+      "rows": 30,
+      "eligible": 27,
+      "literal_hits": 7,
+      "null": 3,
+      "median_ms": 82.6885
+    },
+    "mixed/v3": {
+      "rows": 30,
+      "eligible": 27,
+      "literal_hits": 13,
+      "null": 3,
+      "median_ms": 75.6545
+    }
+  },
+  "regressions": [],
+  "improvements": [
+    {
+      "suite": "mixed",
+      "case": "mixed_timeout_waitfor",
+      "budget": 2400
+    },
+    {
+      "suite": "mixed",
+      "case": "mixed_timeout_waitfor",
+      "budget": 5000
+    },
+    {
+      "suite": "mixed",
+      "case": "mixed_waitfor_timeout_reverse",
+      "budget": 2400
+    },
+    {
+      "suite": "mixed",
+      "case": "mixed_waitfor_timeout_reverse",
+      "budget": 5000
+    },
+    {
+      "suite": "mixed",
+      "case": "mixed_extra_1",
+      "budget": 2400
+    },
+    {
+      "suite": "mixed",
+      "case": "mixed_extra_1",
+      "budget": 5000
+    }
+  ],
+  "all_bounded": true,
+  "all_offsets_valid": true,
+  "default_controls_unchanged": true,
+  "note": "Developer-authored/existing targets, not holdout; no model or page network calls; times warm local parse+select, no QA accuracy claim; retain negative results Measurement implementation: independent process per scenario; 5 parse+select repetitions, explicit collection outside timing. Full first attempt crashed without results; retained log, no target or acceptance changes.",
+  "protocol": {
+    "created_utc": "2026-11-09T10:52:00Z",
+    "baseline_source_sha256": "6ab0dadbd219fabcb28eb9a6c29d83a3976e38f96108291141d34f42f44b9ee6",
+    "baseline_selector": "balanced-v2",
+    "candidate_selector": "balanced-v3",
+    "suite_sha256": "26668c44f7d769409596dbfb59fc7eedb6c9d101eb4ce56c36ab46e4cfdedd5a",
+    "baseline_code_sha256": "423b3c10195e81b5ae3477c3325ac68e535e84a9f81a99be15632adc28f9937a",
+    "corpus_manifest_sha256": "eca101421fcd3f2cd46f4a16d62a385f744b9833f16b3a097c9c60fb416a39c1",
+    "budgets": [
+      800,
+      2400,
+      5000
+    ],
+    "comparison": "literal target co-occurrence + strict budget + unchanged segments/bm25 controls; also original 8 coverage scenarios",
+    "acceptance": [
+      "Original coverage scenarios no per-case regression",
+      "New mixed cases no per-case target regression and exercise exact_definition_mixed",
+      "All excerpt chars <= budget, offsets match normalized document",
+      "Single/ambiguous/no-match branches preserve fallback; no default change"
+    ],
+    "boundaries": "Developer-authored/existing targets, not holdout; no model or page network calls; times warm local parse+select, no QA accuracy claim; retain negative results"
+  },
+  "baseline_git": "f52c039:src/as_researcher/segments.py"
+}

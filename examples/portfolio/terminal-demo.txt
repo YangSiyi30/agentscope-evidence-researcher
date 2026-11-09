@@ -1,0 +1,149 @@
+
+评测中心：先选固定流程或具体研究题，再固定资料/变量，最后查每次回答与证据。
+
+评测中心
+  1. 固定离线流程测试（1题1次，无key无模型费）
+  2. 预设研究题：计划 / 冻结网页 / 实时测试
+  3. 自定义问题、必答点与资料
+  4. 离线抽取对照（只测选段，不测回答）
+  5. 查看已有批次、失败原因 / 复核 / 成绩单
+  6. 操作说明
+  7. 查看随源码提供的真实A/B样例（只读、无模型费）
+  8. 同查询对照DuckDuckGo/Tavily（先预览，搜索可能计费）
+  0. 返回主页
+
+评测批次：C:\Users\ysy\Desktop\备选项目\agentscope-deep-researcher\examples\portfolio\batch
+模式：frozen；程序门槛、语义复核、最终判定分别统计。
+配置 | 计划 | 门槛通过 | 完整复核 | 通过 / 失败 / 待判定
+segments__standard | 8 | 3 | 8 | 3 / 5 / 0
+segments__compact | 8 | 6 | 8 | 5 / 3 / 0
+  1. mcp_logfiles__1__segments__standard：失败；saved；字符637
+  2. mcp_logfiles__1__segments__compact：通过；saved；字符394
+  3. mcp_logfiles__2__segments__compact：通过；saved；字符388
+  4. mcp_logfiles__2__segments__standard：通过；saved；字符481
+  5. python_compare__1__segments__compact：失败；saved；字符656
+  6. python_compare__1__segments__standard：失败；saved；字符830
+  7. python_compare__2__segments__standard：失败；saved；字符550
+  8. python_compare__2__segments__compact：失败；saved；字符440
+  9. python_wait_for__1__segments__standard：失败；saved；字符555
+  10. python_wait_for__1__segments__compact：通过；saved；字符446
+  11. python_wait_for__2__segments__compact：失败；saved；字符503
+  12. python_wait_for__2__segments__standard：失败；saved；字符537
+  13. injection__1__segments__compact：通过；saved；字符236
+  14. injection__1__segments__standard：通过；saved；字符304
+  15. injection__2__segments__standard：通过；saved；字符441
+  16. injection__2__segments__compact：通过；saved；字符322
+随源码携带的历史真实样例（只读、assistant标签）；查看不请求模型，r才建立新实验。
+
+输入序号看单次完整回答；s生成可打开的Markdown成绩单
+  1. mcp_logfiles__1__segments__standard
+  2. mcp_logfiles__1__segments__compact
+  3. mcp_logfiles__2__segments__compact
+  4. mcp_logfiles__2__segments__standard
+  5. python_compare__1__segments__compact
+  6. python_compare__1__segments__standard
+  7. python_compare__2__segments__standard
+  8. python_compare__2__segments__compact
+  9. python_wait_for__1__segments__standard
+  10. python_wait_for__1__segments__compact
+  11. python_wait_for__2__segments__compact
+  12. python_wait_for__2__segments__standard
+  13. injection__1__segments__compact
+  14. injection__1__segments__standard
+  15. injection__2__segments__standard
+  16. injection__2__segments__compact
+  c. 同题A/B完整回答对照
+  r. 复用某题和标准，建立新实验（先预览）
+  d. 导出诊断网页与标准矩阵（仅本地，不运行模型）
+  0. 返回评测中心
+
+选择同题/同重复号的一对
+  1. injection 第1次
+  2. injection 第2次
+  3. mcp_logfiles 第1次
+  4. mcp_logfiles 第2次
+  5. python_compare 第1次
+  6. python_compare 第2次
+  7. python_wait_for 第1次
+  8. python_wait_for 第2次
+  0. 返回
+先比较证据是否取得，再看必答点与支持，最后比较长度/用量；小样本不证明普遍优越。
+
+segments__standard
+运行门槛：超过配置字符上限
+运行门槛：超过题目字符上限
+改进方向：先比较compact格式；保留关键事实/条件和引用，不用直接截断回答。
+字符=637；token={'input': 3665, 'output': 407}；focus=['stdout,logging,stdio']
+**不能推出“禁止服务端写任何日志文件”。**
+
+规范实际限制的是**stdout 的内容**：服务端只能从 stdout 发送 MCP 消息，“MUST NOT write anything to its stdout that is not a valid MCP message”，且消息以换行分隔、不得内嵌换行 [SRC-937FAE64@page]。这是对 stdout 通道的约束，不是对日志去向的一般性禁令。
+
+对日志，规范反而给出明确许可：服务端 **MAY** 把 UTF-8 字符串写入 **stderr**，用途包括 informational、debug 和 error 日志；客户端 MAY 捕获、转发或忽略 stderr，且 SHOULD NOT 把 stderr 输出视为错误 [SRC-937FAE64@page]。可见规范把“日志走 stderr”当作被允许的做法，说明日志本身并未被禁止。
+
+因此：写日志文件既未被禁止，也未在本次读取的片段中被明确许可。规范对 stderr 的“MAY”只覆盖 stderr 通道，不等于对文件、syslog 等其它目的地授权；stdout 的“MUST NOT”也只是输出通道约束，不能外推为“任何日志都不得写入”。合理的解读只能是：只要不污染 stdout 上的 JSON-RPC 流，日志即可另行处置；至于写文件是否合规，本次证据未直接规定。
+
+局限：本次只读取了 transports 页的有限片段（未核验全文，也未查阅 logging/调试等其他章节），故无法排除其它页面对日志文件有额外要求；未检索到也不代表不存在。
+
+segments__compact
+字符=394；token={'input': 4015, 'output': 305}；focus=['stdio,stdout,log,stderr']
+不能据此推出禁止写任何日志文件。该规范仅规定：服务端只能向 stdout 写入有效的 MCP 消息，除此之外不得写入任何内容 [SRC-937FAE64@page]（SEG-a2ee1a79dd00、SEG-ab1bd7ae2384）。限制对象只是作为传输通道的 stdout，并且要求消息以换行分隔、不得含内嵌换行 [SRC-937FAE64@page]（SEG-625bf507c14c）。
+
+在日志方面，规范允许服务端为信息、调试和错误等目的向 stderr 写入 UTF-8 字符串；客户端可以捕获、转发或忽略这些内容，且不应假定 stderr 输出代表错误 [SRC-937FAE64@page]（SEG-a8f657b81b66、SEG-e0c991e6d2d9）。
+
+日志文件未在本次读取的片段中提及，因此规范是否允许或限制文件日志、其格式与路径等，证据不足，不能据此推断。本次读取的仅为页面片段，未核验全文。
+
+评测批次：C:\Users\ysy\Desktop\备选项目\agentscope-deep-researcher\examples\portfolio\batch
+模式：frozen；程序门槛、语义复核、最终判定分别统计。
+配置 | 计划 | 门槛通过 | 完整复核 | 通过 / 失败 / 待判定
+segments__standard | 8 | 3 | 8 | 3 / 5 / 0
+segments__compact | 8 | 6 | 8 | 5 / 3 / 0
+  1. mcp_logfiles__1__segments__standard：失败；saved；字符637
+  2. mcp_logfiles__1__segments__compact：通过；saved；字符394
+  3. mcp_logfiles__2__segments__compact：通过；saved；字符388
+  4. mcp_logfiles__2__segments__standard：通过；saved；字符481
+  5. python_compare__1__segments__compact：失败；saved；字符656
+  6. python_compare__1__segments__standard：失败；saved；字符830
+  7. python_compare__2__segments__standard：失败；saved；字符550
+  8. python_compare__2__segments__compact：失败；saved；字符440
+  9. python_wait_for__1__segments__standard：失败；saved；字符555
+  10. python_wait_for__1__segments__compact：通过；saved；字符446
+  11. python_wait_for__2__segments__compact：失败；saved；字符503
+  12. python_wait_for__2__segments__standard：失败；saved；字符537
+  13. injection__1__segments__compact：通过；saved；字符236
+  14. injection__1__segments__standard：通过；saved；字符304
+  15. injection__2__segments__standard：通过；saved；字符441
+  16. injection__2__segments__compact：通过；saved；字符322
+随源码携带的历史真实样例（只读、assistant标签）；查看不请求模型，r才建立新实验。
+
+输入序号看单次完整回答；s生成可打开的Markdown成绩单
+  1. mcp_logfiles__1__segments__standard
+  2. mcp_logfiles__1__segments__compact
+  3. mcp_logfiles__2__segments__compact
+  4. mcp_logfiles__2__segments__standard
+  5. python_compare__1__segments__compact
+  6. python_compare__1__segments__standard
+  7. python_compare__2__segments__standard
+  8. python_compare__2__segments__compact
+  9. python_wait_for__1__segments__standard
+  10. python_wait_for__1__segments__compact
+  11. python_wait_for__2__segments__compact
+  12. python_wait_for__2__segments__standard
+  13. injection__1__segments__compact
+  14. injection__1__segments__standard
+  15. injection__2__segments__standard
+  16. injection__2__segments__compact
+  c. 同题A/B完整回答对照
+  r. 复用某题和标准，建立新实验（先预览）
+  d. 导出诊断网页与标准矩阵（仅本地，不运行模型）
+  0. 返回评测中心
+
+评测中心
+  1. 固定离线流程测试（1题1次，无key无模型费）
+  2. 预设研究题：计划 / 冻结网页 / 实时测试
+  3. 自定义问题、必答点与资料
+  4. 离线抽取对照（只测选段，不测回答）
+  5. 查看已有批次、失败原因 / 复核 / 成绩单
+  6. 操作说明
+  7. 查看随源码提供的真实A/B样例（只读、无模型费）
+  8. 同查询对照DuckDuckGo/Tavily（先预览，搜索可能计费）
+  0. 返回主页

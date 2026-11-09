@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "kind": "research_task_review",
+  "run_sha256": "7a9aaff50fa31566540ec16ffb2f9806b1078400bfdc3006583e42bd001fa663",
+  "task_sha256": "3865859ab4a06206aec26d57be1a8d95aacf6cffdb9c181c460b6822cf85abb1",
+  "task_id": "mcp_logfiles",
+  "reviewer": {
+    "kind": "assistant",
+    "name": "Codex saved-answer review 2026-11-02"
+  },
+  "coverage_checked": true,
+  "note": "Judge ONLY saved answer/evidence. Quotes are locators, not automatic entailment. Assistant is not independent human gold. Atomic claim precision requires the separate atomic review.",
+  "criteria": [
+    {
+      "id": "point_1",
+      "met": true,
+      "answer_quote": "不能推出“禁止服务端写任何日志文件”。规范（2025-11-25 transports）限制的对象是 stdio 三个流中 stdout 和 stdin 两份通道的内容：stdout 只能承载有效 MCP 消息，服务端不得向 stdout 写任何非 MCP 消息的内容；客户端不得向服务端 stdin 写非 MCP 消息内容 [SRC-937FAE64@page]。至于日志，规范明确允许（MAY）服务端向 stderr 写 UTF-8 字符串，用于信息、调试和错误日志；客户端可捕获、转发或忽略 stderr，且不应假定 stderr 输出就代表错误 [SRC-937FAE64@page]。\n\n日志文件不在上述限制范围内：规范既未禁止写文件，也未规定文件日志的内容。但这里只是“未禁止”，并不等于“允许”：本次读取的是页面片段，并非全文 [SRC-937FAE64@page]，因此其他章节或本规范之外的政策是否另有要求，尚不清楚。",
+      "evidence": [
+        {
+          "source_id": "SRC-937FAE64",
+          "kind": "page",
+          "quote": "[SEG-aced80da89fa] stdio, communication over standard in and standard out\n\n[SEG-27b8e9d1e276] Clients SHOULD support stdio whenever possible. It is also possible for clients and servers to implement custom transports in a pluggable fashion.\n\n[SEG-d0d142c8b118] stdio: stdio\n\n[SEG-de8a13eca0e5] stdio: In the stdio transport:\n\n[SEG-6da2bf209f51] stdio: The client launches the MCP server as a subprocess.\n\n[SEG-ab1bd7ae2384] stdio: The server reads JSON-RPC messages from its standard input (stdin) and sends messages to its standard output (stdout).\n\n[SEG-fdd80999e743] stdio: Messages are individual JSON-RPC requests, notifications, or responses.\n\n[SEG-625bf507c14c] stdio: Messages are delimited by newlines, and MUST NOT contain embedded newlines.\n\n[SEG-a8f657b81b66] stdio: The server MAY write UTF-8 strings to its standard error (stderr) for any logging purposes including informational, debug, and error messages.\n\n[SEG-e0c991e6d2d9] stdio: The client MAY capture, forward, or ignore the server’s stderr output and SHOULD NOT assume stderr output indicates error conditions.\n\n[SEG-a2ee1a79dd00] stdio: The server MUST NOT write anything to its stdout that is not a valid MCP message.\n\n[SEG-8218f6b31f47] stdio: The client MUST NOT write anything to the server’s stdin that is not a valid MCP message."
+        }
+      ],
+      "reason": "正确限定stdout通道，不把文件日志未规定说成禁止一切日志。"
+    },
+    {
+      "id": "point_2",
+      "met": true,
+      "answer_quote": "不能推出“禁止服务端写任何日志文件”。规范（2025-11-25 transports）限制的对象是 stdio 三个流中 stdout 和 stdin 两份通道的内容：stdout 只能承载有效 MCP 消息，服务端不得向 stdout 写任何非 MCP 消息的内容；客户端不得向服务端 stdin 写非 MCP 消息内容 [SRC-937FAE64@page]。至于日志，规范明确允许（MAY）服务端向 stderr 写 UTF-8 字符串，用于信息、调试和错误日志；客户端可捕获、转发或忽略 stderr，且不应假定 stderr 输出就代表错误 [SRC-937FAE64@page]。\n\n日志文件不在上述限制范围内：规范既未禁止写文件，也未规定文件日志的内容。但这里只是“未禁止”，并不等于“允许”：本次读取的是页面片段，并非全文 [SRC-937FAE64@page]，因此其他章节或本规范之外的政策是否另有要求，尚不清楚。",
+      "evidence": [
+        {
+          "source_id": "SRC-937FAE64",
+          "kind": "page",
+          "quote": "[SEG-aced80da89fa] stdio, communication over standard in and standard out\n\n[SEG-27b8e9d1e276] Clients SHOULD support stdio whenever possible. It is also possible for clients and servers to implement custom transports in a pluggable fashion.\n\n[SEG-d0d142c8b118] stdio: stdio\n\n[SEG-de8a13eca0e5] stdio: In the stdio transport:\n\n[SEG-6da2bf209f51] stdio: The client launches the MCP server as a subprocess.\n\n[SEG-ab1bd7ae2384] stdio: The server reads JSON-RPC messages from its standard input (stdin) and sends messages to its standard output (stdout).\n\n[SEG-fdd80999e743] stdio: Messages are individual JSON-RPC requests, notifications, or responses.\n\n[SEG-625bf507c14c] stdio: Messages are delimited by newlines, and MUST NOT contain embedded newlines.\n\n[SEG-a8f657b81b66] stdio: The server MAY write UTF-8 strings to its standard error (stderr) for any logging purposes including informational, debug, and error messages.\n\n[SEG-e0c991e6d2d9] stdio: The client MAY capture, forward, or ignore the server’s stderr output and SHOULD NOT assume stderr output indicates error conditions.\n\n[SEG-a2ee1a79dd00] stdio: The server MUST NOT write anything to its stdout that is not a valid MCP message.\n\n[SEG-8218f6b31f47] stdio: The client MUST NOT write anything to the server’s stdin that is not a valid MCP message."
+        }
+      ],
+      "reason": "关键条款在实际保存的stdio正文及@page引用中。"
+    },
+    {
+      "id": "readability",
+      "met": true,
+      "answer_quote": "不能推出“禁止服务端写任何日志文件”。规范（2025-11-25 transports）限制的对象是 stdio 三个流中 stdout 和 stdin 两份通道的内容：stdout 只能承载有效 MCP 消息，服务端不得向 stdout 写任何非 MCP 消息的内容；客户端不得向服务端 stdin 写非 MCP 消息内容 [SRC-937FAE64@page]。至于日志，规范明确允许（MAY）服务端向 stderr 写 UTF-8 字符串，用于信息、调试和错误日志；客户端可捕获、转发或忽略 stderr，且不应假定 stderr 输出就代表错误 [SRC-937FAE64@page]。\n\n日志文件不在上述限制范围内：规范既未禁止写文件，也未规定文件日志的内容。但这里只是“未禁止”，并不等于“允许”：本次读取的是页面片段，并非全文 [SRC-937FAE64@page]，因此其他章节或本规范之外的政策是否另有要求，尚不清楚。",
+      "evidence": [
+        {
+          "source_id": "SRC-937FAE64",
+          "kind": "page",
+          "quote": "[SEG-aced80da89fa] stdio, communication over standard in and standard out\n\n[SEG-27b8e9d1e276] Clients SHOULD support stdio whenever possible. It is also possible for clients and servers to implement custom transports in a pluggable fashion.\n\n[SEG-d0d142c8b118] stdio: stdio\n\n[SEG-de8a13eca0e5] stdio: In the stdio transport:\n\n[SEG-6da2bf209f51] stdio: The client launches the MCP server as a subprocess.\n\n[SEG-ab1bd7ae2384] stdio: The server reads JSON-RPC messages from its standard input (stdin) and sends messages to its standard output (stdout).\n\n[SEG-fdd80999e743] stdio: Messages are individual JSON-RPC requests, notifications, or responses.\n\n[SEG-625bf507c14c] stdio: Messages are delimited by newlines, and MUST NOT contain embedded newlines.\n\n[SEG-a8f657b81b66] stdio: The server MAY write UTF-8 strings to its standard error (stderr) for any logging purposes including informational, debug, and error messages.\n\n[SEG-e0c991e6d2d9] stdio: The client MAY capture, forward, or ignore the server’s stderr output and SHOULD NOT assume stderr output indicates error conditions.\n\n[SEG-a2ee1a79dd00] stdio: The server MUST NOT write anything to its stdout that is not a valid MCP message.\n\n[SEG-8218f6b31f47] stdio: The client MUST NOT write anything to the server’s stdin that is not a valid MCP message."
+        }
+      ],
+      "reason": "重点可识别；长度另由500字符门槛检查，不靠本标签放行。"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "kind": "research_task_review",
+  "run_sha256": "28783928d15c7d6a3ccdb986e6e25b0571b4a8db6d4851d54e14485bced443c7",
+  "task_sha256": "3865859ab4a06206aec26d57be1a8d95aacf6cffdb9c181c460b6822cf85abb1",
+  "task_id": "mcp_logfiles",
+  "reviewer": {
+    "kind": "assistant",
+    "name": "Codex saved-answer review 2026-11-02"
+  },
+  "coverage_checked": true,
+  "note": "Judge ONLY saved answer/evidence. Quotes are locators, not automatic entailment. Assistant is not independent human gold. Atomic claim precision requires the separate atomic review.",
+  "criteria": [
+    {
+      "id": "point_1",
+      "met": true,
+      "answer_quote": "**不能推出“禁止服务端写任何日志文件”。**\n\n规范实际限制的是**stdout 的内容**：服务端只能从 stdout 发送 MCP 消息，“MUST NOT write anything to its stdout that is not a valid MCP message”，且消息以换行分隔、不得内嵌换行 [SRC-937FAE64@page]。这是对 stdout 通道的约束，不是对日志去向的一般性禁令。\n\n对日志，规范反而给出明确许可：服务端 **MAY** 把 UTF-8 字符串写入 **stderr**，用途包括 informational、debug 和 error 日志；客户端 MAY 捕获、转发或忽略 stderr，且 SHOULD NOT 把 stderr 输出视为错误 [SRC-937FAE64@page]。可见规范把“日志走 stderr”当作被允许的做法，说明日志本身并未被禁止。\n\n因此：写日志文件既未被禁止，也未在本次读取的片段中被明确许可。规范对 stderr 的“MAY”只覆盖 stderr 通道，不等于对文件、syslog 等其它目的地授权；stdout 的“MUST NOT”也只是输出通道约束，不能外推为“任何日志都不得写入”。合理的解读只能是：只要不污染 stdout 上的 JSON-RPC 流，日志即可另行处置；至于写文件是否合规，本次证据未直接规定。\n\n局限：本次只读取了 transports 页的有限片段（未核验全文，也未查阅 logging/调试等其他章节），故无法排除其它页面对日志文件有额外要求；未检索到也不代表不存在。",
+      "evidence": [
+        {
+          "source_id": "SRC-937FAE64",
+          "kind": "page",
+          "quote": "[SEG-aced80da89fa] stdio, communication over standard in and standard out\n\n[SEG-27b8e9d1e276] Clients SHOULD support stdio whenever possible. It is also possible for clients and servers to implement custom transports in a pluggable fashion.\n\n[SEG-d0d142c8b118] stdio: stdio\n\n[SEG-de8a13eca0e5] stdio: In the stdio transport:\n\n[SEG-6da2bf209f51] stdio: The client launches the MCP server as a subprocess.\n\n[SEG-ab1bd7ae2384] stdio: The server reads JSON-RPC messages from its standard input (stdin) and sends messages to its standard output (stdout).\n\n[SEG-fdd80999e743] stdio: Messages are individual JSON-RPC requests, notifications, or responses.\n\n[SEG-625bf507c14c] stdio: Messages are delimited by newlines, and MUST NOT contain embedded newlines.\n\n[SEG-a8f657b81b66] stdio: The server MAY write UTF-8 strings to its standard error (stderr) for any logging purposes including informational, debug, and error messages.\n\n[SEG-e0c991e6d2d9] stdio: The client MAY capture, forward, or ignore the server’s stderr output and SHOULD NOT assume stderr output indicates error conditions.\n\n[SEG-a2ee1a79dd00] stdio: The server MUST NOT write anything to its stdout that is not a valid MCP message.\n\n[SEG-8218f6b31f47] stdio: The client MUST NOT write anything to the server’s stdin that is not a valid MCP message."
+        }
+      ],
+      "reason": "正确限定stdout通道，不把文件日志未规定说成禁止一切日志。"
+    },
+    {
+      "id": "point_2",
+      "met": true,
+      "answer_quote": "**不能推出“禁止服务端写任何日志文件”。**\n\n规范实际限制的是**stdout 的内容**：服务端只能从 stdout 发送 MCP 消息，“MUST NOT write anything to its stdout that is not a valid MCP message”，且消息以换行分隔、不得内嵌换行 [SRC-937FAE64@page]。这是对 stdout 通道的约束，不是对日志去向的一般性禁令。\n\n对日志，规范反而给出明确许可：服务端 **MAY** 把 UTF-8 字符串写入 **stderr**，用途包括 informational、debug 和 error 日志；客户端 MAY 捕获、转发或忽略 stderr，且 SHOULD NOT 把 stderr 输出视为错误 [SRC-937FAE64@page]。可见规范把“日志走 stderr”当作被允许的做法，说明日志本身并未被禁止。\n\n因此：写日志文件既未被禁止，也未在本次读取的片段中被明确许可。规范对 stderr 的“MAY”只覆盖 stderr 通道，不等于对文件、syslog 等其它目的地授权；stdout 的“MUST NOT”也只是输出通道约束，不能外推为“任何日志都不得写入”。合理的解读只能是：只要不污染 stdout 上的 JSON-RPC 流，日志即可另行处置；至于写文件是否合规，本次证据未直接规定。\n\n局限：本次只读取了 transports 页的有限片段（未核验全文，也未查阅 logging/调试等其他章节），故无法排除其它页面对日志文件有额外要求；未检索到也不代表不存在。",
+      "evidence": [
+        {
+          "source_id": "SRC-937FAE64",
+          "kind": "page",
+          "quote": "[SEG-aced80da89fa] stdio, communication over standard in and standard out\n\n[SEG-27b8e9d1e276] Clients SHOULD support stdio whenever possible. It is also possible for clients and servers to implement custom transports in a pluggable fashion.\n\n[SEG-d0d142c8b118] stdio: stdio\n\n[SEG-de8a13eca0e5] stdio: In the stdio transport:\n\n[SEG-6da2bf209f51] stdio: The client launches the MCP server as a subprocess.\n\n[SEG-ab1bd7ae2384] stdio: The server reads JSON-RPC messages from its standard input (stdin) and sends messages to its standard output (stdout).\n\n[SEG-fdd80999e743] stdio: Messages are individual JSON-RPC requests, notifications, or responses.\n\n[SEG-625bf507c14c] stdio: Messages are delimited by newlines, and MUST NOT contain embedded newlines.\n\n[SEG-a8f657b81b66] stdio: The server MAY write UTF-8 strings to its standard error (stderr) for any logging purposes including informational, debug, and error messages.\n\n[SEG-e0c991e6d2d9] stdio: The client MAY capture, forward, or ignore the server’s stderr output and SHOULD NOT assume stderr output indicates error conditions.\n\n[SEG-a2ee1a79dd00] stdio: The server MUST NOT write anything to its stdout that is not a valid MCP message.\n\n[SEG-8218f6b31f47] stdio: The client MUST NOT write anything to the server’s stdin that is not a valid MCP message."
+        }
+      ],
+      "reason": "关键条款在实际保存的stdio正文及@page引用中。"
+    },
+    {
+      "id": "readability",
+      "met": true,
+      "answer_quote": "**不能推出“禁止服务端写任何日志文件”。**\n\n规范实际限制的是**stdout 的内容**：服务端只能从 stdout 发送 MCP 消息，“MUST NOT write anything to its stdout that is not a valid MCP message”，且消息以换行分隔、不得内嵌换行 [SRC-937FAE64@page]。这是对 stdout 通道的约束，不是对日志去向的一般性禁令。\n\n对日志，规范反而给出明确许可：服务端 **MAY** 把 UTF-8 字符串写入 **stderr**，用途包括 informational、debug 和 error 日志；客户端 MAY 捕获、转发或忽略 stderr，且 SHOULD NOT 把 stderr 输出视为错误 [SRC-937FAE64@page]。可见规范把“日志走 stderr”当作被允许的做法，说明日志本身并未被禁止。\n\n因此：写日志文件既未被禁止，也未在本次读取的片段中被明确许可。规范对 stderr 的“MAY”只覆盖 stderr 通道，不等于对文件、syslog 等其它目的地授权；stdout 的“MUST NOT”也只是输出通道约束，不能外推为“任何日志都不得写入”。合理的解读只能是：只要不污染 stdout 上的 JSON-RPC 流，日志即可另行处置；至于写文件是否合规，本次证据未直接规定。\n\n局限：本次只读取了 transports 页的有限片段（未核验全文，也未查阅 logging/调试等其他章节），故无法排除其它页面对日志文件有额外要求；未检索到也不代表不存在。",
+      "evidence": [
+        {
+          "source_id": "SRC-937FAE64",
+          "kind": "page",
+          "quote": "[SEG-aced80da89fa] stdio, communication over standard in and standard out\n\n[SEG-27b8e9d1e276] Clients SHOULD support stdio whenever possible. It is also possible for clients and servers to implement custom transports in a pluggable fashion.\n\n[SEG-d0d142c8b118] stdio: stdio\n\n[SEG-de8a13eca0e5] stdio: In the stdio transport:\n\n[SEG-6da2bf209f51] stdio: The client launches the MCP server as a subprocess.\n\n[SEG-ab1bd7ae2384] stdio: The server reads JSON-RPC messages from its standard input (stdin) and sends messages to its standard output (stdout).\n\n[SEG-fdd80999e743] stdio: Messages are individual JSON-RPC requests, notifications, or responses.\n\n[SEG-625bf507c14c] stdio: Messages are delimited by newlines, and MUST NOT contain embedded newlines.\n\n[SEG-a8f657b81b66] stdio: The server MAY write UTF-8 strings to its standard error (stderr) for any logging purposes including informational, debug, and error messages.\n\n[SEG-e0c991e6d2d9] stdio: The client MAY capture, forward, or ignore the server’s stderr output and SHOULD NOT assume stderr output indicates error conditions.\n\n[SEG-a2ee1a79dd00] stdio: The server MUST NOT write anything to its stdout that is not a valid MCP message.\n\n[SEG-8218f6b31f47] stdio: The client MUST NOT write anything to the server’s stdin that is not a valid MCP message."
+        }
+      ],
+      "reason": "重点可识别；长度另由500字符门槛检查，不靠本标签放行。"
+    }
+  ]
+}

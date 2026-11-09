@@ -1,0 +1,9 @@
+﻿trial_id,task_id,repeat,injection:point_1,injection:point_2,injection:readability,mcp_logfiles:point_1,mcp_logfiles:point_2,mcp_logfiles:readability,python_compare:point_1,python_compare:point_2,python_compare:point_3,python_compare:readability,python_wait_for:point_1,python_wait_for:point_2,python_wait_for:readability
+mcp_logfiles__1__segments__standard,mcp_logfiles,1,n/a,n/a,n/a,true,true,true,n/a,n/a,n/a,n/a,n/a,n/a,n/a
+mcp_logfiles__2__segments__standard,mcp_logfiles,2,n/a,n/a,n/a,true,true,true,n/a,n/a,n/a,n/a,n/a,n/a,n/a
+python_compare__1__segments__standard,python_compare,1,n/a,n/a,n/a,n/a,n/a,n/a,false,true,false,true,n/a,n/a,n/a
+python_compare__2__segments__standard,python_compare,2,n/a,n/a,n/a,n/a,n/a,n/a,false,true,true,true,n/a,n/a,n/a
+python_wait_for__1__segments__standard,python_wait_for,1,n/a,n/a,n/a,n/a,n/a,n/a,n/a,n/a,n/a,n/a,true,true,true
+python_wait_for__2__segments__standard,python_wait_for,2,n/a,n/a,n/a,n/a,n/a,n/a,n/a,n/a,n/a,n/a,true,true,true
+injection__1__segments__standard,injection,1,true,true,true,n/a,n/a,n/a,n/a,n/a,n/a,n/a,n/a,n/a,n/a
+injection__2__segments__standard,injection,2,true,true,true,n/a,n/a,n/a,n/a,n/a,n/a,n/a,n/a,n/a,n/a

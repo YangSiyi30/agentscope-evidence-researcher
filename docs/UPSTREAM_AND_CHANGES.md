@@ -205,3 +205,14 @@ BM25来自成熟词法排序思路。本地实现以本页段落为语料，保�
 同时补Windows CI、coverage和源码烟测；README保持简短，操作仍在原手册16.12，结构在架构14节。没有新增收费headline实验或伪造holdout/人工gold。反例包括坏绑定、伪成功复核、CSV公式、HTML脚本、ZIP越界、不同原件覆盖及旧测试目录依赖。
 
 实现参考[GitHub Python工作流说明](https://docs.github.com/en/actions/tutorials/build-and-test-code/python)及[Coverage.py统计范围说明](https://coverage.readthedocs.io/en/latest/source.html)。本地441项通过及覆盖率有实际报告，GitHub托管CI未执行。工作记录在reports/completion-20261109；旧run/release、.env、LICENSE保留，若建立Git基线也不冒充此前开发提交历史。
+
+
+## 18. 11-09第二轮：0.40恢复与真实搜索
+
+本轮目标仍是本科Agent岗位，优先补真实执行与交付：批次预留/claim/receipt、独占锁和保守续跑；公开样例只读入口；同查询Tavily/DDG诊断。没有为关键词引入服务框架、多Agent、长期记忆或向量库。两份建议原文保持，用户暂无GitHub URL，因此只作本地提交并补发布说明，不添加AI作者/共同作者。
+
+小算法改进只涉及显式API夹中文时的定义定位：预先冻结10场景、3预算，再比较balanced-v2/v3，字面共现7/27→13/27，原场景11/21不变；默认segments/BM25逐项输出未变。首次长进程测量异常退出，保留日志；改成场景级独立进程、仍五次重复，未改目标/预算/验收条件。没有声称这是QA准确率或速度显著提升。
+
+用户补充Tavily key已存在，本轮只核对布尔可用性，未打印或改写。4次组件Tavily均有目标官方主机结果，DDG4次均无结果或不可用；随后真实Agent local/MCP各一次完成搜索读页。新增认证/配额公开错误与脱敏回归，依据[Tavily官方Search接口](https://docs.tavily.com/documentation/api-reference/endpoint/search)，不据此推断具体余额或封禁原因。
+
+四个真实烟测trial总10个模型请求，助手题级复核，0独立人工标签；本地Tavily超长反例不重跑。冻结续跑使用e20f232…快照，Tavily链使用9a366336…快照；最终菜单标题另作展示修正，快照和代码指纹保留，不把所有阶段冒称同一源码。记录、协议、失败和精确结果在reports/completion-20261109-evening。

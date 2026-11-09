@@ -1,0 +1,1136 @@
+[
+  {
+    "id": "mcp_logfiles__1__segments__standard",
+    "task_id": "mcp_logfiles",
+    "repeat": 1,
+    "strategy": "segments",
+    "answer_style": "standard",
+    "variant": "segments__standard",
+    "status": "saved",
+    "run_file": "mcp_logfiles__1__segments__standard/20261102T072130-3018ecaf",
+    "run_sha256": "28783928d15c7d6a3ccdb986e6e25b0571b4a8db6d4851d54e14485bced443c7",
+    "metrics": {
+      "status": "completed",
+      "answer_chars": 637,
+      "answer_within_limit": false,
+      "stop_reason": "search_budget",
+      "search_stop_reason": "search_budget",
+      "agent_finished_reason": "completed",
+      "provider_finish_reasons": [
+        "tool_calls",
+        "stop"
+      ],
+      "completion_check": "provider_stopped_quality_unverified",
+      "error_type": null,
+      "search_attempts": 0,
+      "page_read_attempts": 1,
+      "pages_read": 1,
+      "tool_invocations": 1,
+      "unique_sources": 1,
+      "queries": [],
+      "duration_ms": 4028.42,
+      "citations": {
+        "used_ids": [
+          "SRC-937FAE64"
+        ],
+        "valid_ids": [
+          "SRC-937FAE64"
+        ],
+        "invalid_ids": [],
+        "id_validity_rate": 1.0,
+        "has_citations": true,
+        "note": "ID existence only; not factual accuracy or claim support."
+      },
+      "evidence_levels": {
+        "contract_version": 1,
+        "references": [
+          "SRC-937FAE64@page"
+        ],
+        "untyped_references": [],
+        "invalid_references": [],
+        "unavailable_references": [],
+        "contract_valid": true,
+        "note": "Evidence-level availability only. Does not check claim support, conflicts, freshness, or uncited facts."
+      },
+      "token_usage": {
+        "input": 3665,
+        "output": 407
+      },
+      "warnings": [
+        "回答超过非空白字符预算；未自动截断，以免破坏事实与引用。"
+      ],
+      "research_token_usage": {
+        "input": 3665,
+        "output": 407
+      },
+      "model_request_attempts": 2,
+      "model_request_failures": 0,
+      "model_errors": [],
+      "revision_status": "disabled",
+      "revision_request_attempts": 0
+    },
+    "infrastructure_failure": false
+  },
+  {
+    "id": "mcp_logfiles__1__segments__compact",
+    "task_id": "mcp_logfiles",
+    "repeat": 1,
+    "strategy": "segments",
+    "answer_style": "compact",
+    "variant": "segments__compact",
+    "status": "saved",
+    "run_file": "mcp_logfiles__1__segments__compact/20261102T072136-07a62988",
+    "run_sha256": "70d4c93e393f4b0e372a161a2efadd1cc0ab55284362622650aa59890748e6b8",
+    "metrics": {
+      "status": "completed",
+      "answer_chars": 394,
+      "answer_within_limit": true,
+      "stop_reason": "search_budget",
+      "search_stop_reason": "search_budget",
+      "agent_finished_reason": "completed",
+      "provider_finish_reasons": [
+        "tool_calls",
+        "stop"
+      ],
+      "completion_check": "provider_stopped_quality_unverified",
+      "error_type": null,
+      "search_attempts": 0,
+      "page_read_attempts": 1,
+      "pages_read": 1,
+      "tool_invocations": 1,
+      "unique_sources": 1,
+      "queries": [],
+      "duration_ms": 3608.18,
+      "citations": {
+        "used_ids": [
+          "SRC-937FAE64"
+        ],
+        "valid_ids": [
+          "SRC-937FAE64"
+        ],
+        "invalid_ids": [],
+        "id_validity_rate": 1.0,
+        "has_citations": true,
+        "note": "ID existence only; not factual accuracy or claim support."
+      },
+      "evidence_levels": {
+        "contract_version": 1,
+        "references": [
+          "SRC-937FAE64@page"
+        ],
+        "untyped_references": [],
+        "invalid_references": [],
+        "unavailable_references": [],
+        "contract_valid": true,
+        "note": "Evidence-level availability only. Does not check claim support, conflicts, freshness, or uncited facts."
+      },
+      "token_usage": {
+        "input": 4015,
+        "output": 305
+      },
+      "warnings": [],
+      "research_token_usage": {
+        "input": 4015,
+        "output": 305
+      },
+      "model_request_attempts": 2,
+      "model_request_failures": 0,
+      "model_errors": [],
+      "revision_status": "disabled",
+      "revision_request_attempts": 0
+    },
+    "infrastructure_failure": false
+  },
+  {
+    "id": "mcp_logfiles__2__segments__compact",
+    "task_id": "mcp_logfiles",
+    "repeat": 2,
+    "strategy": "segments",
+    "answer_style": "compact",
+    "variant": "segments__compact",
+    "status": "saved",
+    "run_file": "mcp_logfiles__2__segments__compact/20261102T072142-e8647366",
+    "run_sha256": "7a9aaff50fa31566540ec16ffb2f9806b1078400bfdc3006583e42bd001fa663",
+    "metrics": {
+      "status": "completed",
+      "answer_chars": 388,
+      "answer_within_limit": true,
+      "stop_reason": "search_budget",
+      "search_stop_reason": "search_budget",
+      "agent_finished_reason": "completed",
+      "provider_finish_reasons": [
+        "tool_calls",
+        "stop"
+      ],
+      "completion_check": "provider_stopped_quality_unverified",
+      "error_type": null,
+      "search_attempts": 0,
+      "page_read_attempts": 1,
+      "pages_read": 1,
+      "tool_invocations": 1,
+      "unique_sources": 1,
+      "queries": [],
+      "duration_ms": 3400.1,
+      "citations": {
+        "used_ids": [
+          "SRC-937FAE64"
+        ],
+        "valid_ids": [
+          "SRC-937FAE64"
+        ],
+        "invalid_ids": [],
+        "id_validity_rate": 1.0,
+        "has_citations": true,
+        "note": "ID existence only; not factual accuracy or claim support."
+      },
+      "evidence_levels": {
+        "contract_version": 1,
+        "references": [
+          "SRC-937FAE64@page"
+        ],
+        "untyped_references": [],
+        "invalid_references": [],
+        "unavailable_references": [],
+        "contract_valid": true,
+        "note": "Evidence-level availability only. Does not check claim support, conflicts, freshness, or uncited facts."
+      },
+      "token_usage": {
+        "input": 3959,
+        "output": 286
+      },
+      "warnings": [],
+      "research_token_usage": {
+        "input": 3959,
+        "output": 286
+      },
+      "model_request_attempts": 2,
+      "model_request_failures": 0,
+      "model_errors": [],
+      "revision_status": "disabled",
+      "revision_request_attempts": 0
+    },
+    "infrastructure_failure": false
+  },
+  {
+    "id": "mcp_logfiles__2__segments__standard",
+    "task_id": "mcp_logfiles",
+    "repeat": 2,
+    "strategy": "segments",
+    "answer_style": "standard",
+    "variant": "segments__standard",
+    "status": "saved",
+    "run_file": "mcp_logfiles__2__segments__standard/20261102T072149-6c96c5db",
+    "run_sha256": "749f438d7438e7ec18dc30cf69f613ef9589f6645e969e94e8e0ee784aeed3ed",
+    "metrics": {
+      "status": "completed",
+      "answer_chars": 481,
+      "answer_within_limit": true,
+      "stop_reason": "search_budget",
+      "search_stop_reason": "search_budget",
+      "agent_finished_reason": "completed",
+      "provider_finish_reasons": [
+        "tool_calls",
+        "stop"
+      ],
+      "completion_check": "provider_stopped_quality_unverified",
+      "error_type": null,
+      "search_attempts": 0,
+      "page_read_attempts": 1,
+      "pages_read": 1,
+      "tool_invocations": 1,
+      "unique_sources": 1,
+      "queries": [],
+      "duration_ms": 3687.62,
+      "citations": {
+        "used_ids": [
+          "SRC-937FAE64"
+        ],
+        "valid_ids": [
+          "SRC-937FAE64"
+        ],
+        "invalid_ids": [],
+        "id_validity_rate": 1.0,
+        "has_citations": true,
+        "note": "ID existence only; not factual accuracy or claim support."
+      },
+      "evidence_levels": {
+        "contract_version": 1,
+        "references": [
+          "SRC-937FAE64@page"
+        ],
+        "untyped_references": [],
+        "invalid_references": [],
+        "unavailable_references": [],
+        "contract_valid": true,
+        "note": "Evidence-level availability only. Does not check claim support, conflicts, freshness, or uncited facts."
+      },
+      "token_usage": {
+        "input": 3663,
+        "output": 342
+      },
+      "warnings": [],
+      "research_token_usage": {
+        "input": 3663,
+        "output": 342
+      },
+      "model_request_attempts": 2,
+      "model_request_failures": 0,
+      "model_errors": [],
+      "revision_status": "disabled",
+      "revision_request_attempts": 0
+    },
+    "infrastructure_failure": false
+  },
+  {
+    "id": "python_compare__1__segments__compact",
+    "task_id": "python_compare",
+    "repeat": 1,
+    "strategy": "segments",
+    "answer_style": "compact",
+    "variant": "segments__compact",
+    "status": "saved",
+    "run_file": "python_compare__1__segments__compact/20261102T072156-89cf344b",
+    "run_sha256": "b8f9f6e94f98df67b69864b243a7fe5b9b5ef9099a97e95956181ab072e86fea",
+    "metrics": {
+      "status": "completed",
+      "answer_chars": 656,
+      "answer_within_limit": false,
+      "stop_reason": "search_budget",
+      "search_stop_reason": "search_budget",
+      "agent_finished_reason": "completed",
+      "provider_finish_reasons": [
+        "tool_calls",
+        "stop"
+      ],
+      "completion_check": "provider_stopped_quality_unverified",
+      "error_type": null,
+      "search_attempts": 0,
+      "page_read_attempts": 1,
+      "pages_read": 1,
+      "tool_invocations": 1,
+      "unique_sources": 1,
+      "queries": [],
+      "duration_ms": 4325.23,
+      "citations": {
+        "used_ids": [
+          "SRC-4385BCC3"
+        ],
+        "valid_ids": [
+          "SRC-4385BCC3"
+        ],
+        "invalid_ids": [],
+        "id_validity_rate": 1.0,
+        "has_citations": true,
+        "note": "ID existence only; not factual accuracy or claim support."
+      },
+      "evidence_levels": {
+        "contract_version": 1,
+        "references": [
+          "SRC-4385BCC3@page"
+        ],
+        "untyped_references": [],
+        "invalid_references": [],
+        "unavailable_references": [],
+        "contract_valid": true,
+        "note": "Evidence-level availability only. Does not check claim support, conflicts, freshness, or uncited facts."
+      },
+      "token_usage": {
+        "input": 4536,
+        "output": 436
+      },
+      "warnings": [
+        "回答超过非空白字符预算；未自动截断，以免破坏事实与引用。"
+      ],
+      "research_token_usage": {
+        "input": 4536,
+        "output": 436
+      },
+      "model_request_attempts": 2,
+      "model_request_failures": 0,
+      "model_errors": [],
+      "revision_status": "disabled",
+      "revision_request_attempts": 0
+    },
+    "infrastructure_failure": false
+  },
+  {
+    "id": "python_compare__1__segments__standard",
+    "task_id": "python_compare",
+    "repeat": 1,
+    "strategy": "segments",
+    "answer_style": "standard",
+    "variant": "segments__standard",
+    "status": "saved",
+    "run_file": "python_compare__1__segments__standard/20261102T072205-da6bf459",
+    "run_sha256": "6eefb54d9ba23e6a555b6c40c1fb209e74434a7bb1231012494963bf7f34286c",
+    "metrics": {
+      "status": "completed",
+      "answer_chars": 830,
+      "answer_within_limit": false,
+      "stop_reason": "search_budget",
+      "search_stop_reason": "search_budget",
+      "agent_finished_reason": "completed",
+      "provider_finish_reasons": [
+        "tool_calls",
+        "stop"
+      ],
+      "completion_check": "provider_stopped_quality_unverified",
+      "error_type": null,
+      "search_attempts": 0,
+      "page_read_attempts": 1,
+      "pages_read": 1,
+      "tool_invocations": 1,
+      "unique_sources": 1,
+      "queries": [],
+      "duration_ms": 5247.88,
+      "citations": {
+        "used_ids": [
+          "SRC-4385BCC3"
+        ],
+        "valid_ids": [
+          "SRC-4385BCC3"
+        ],
+        "invalid_ids": [],
+        "id_validity_rate": 1.0,
+        "has_citations": true,
+        "note": "ID existence only; not factual accuracy or claim support."
+      },
+      "evidence_levels": {
+        "contract_version": 1,
+        "references": [
+          "SRC-4385BCC3@page"
+        ],
+        "untyped_references": [],
+        "invalid_references": [],
+        "unavailable_references": [],
+        "contract_valid": true,
+        "note": "Evidence-level availability only. Does not check claim support, conflicts, freshness, or uncited facts."
+      },
+      "token_usage": {
+        "input": 4113,
+        "output": 520
+      },
+      "warnings": [
+        "回答超过非空白字符预算；未自动截断，以免破坏事实与引用。"
+      ],
+      "research_token_usage": {
+        "input": 4113,
+        "output": 520
+      },
+      "model_request_attempts": 2,
+      "model_request_failures": 0,
+      "model_errors": [],
+      "revision_status": "disabled",
+      "revision_request_attempts": 0
+    },
+    "infrastructure_failure": false
+  },
+  {
+    "id": "python_compare__2__segments__standard",
+    "task_id": "python_compare",
+    "repeat": 2,
+    "strategy": "segments",
+    "answer_style": "standard",
+    "variant": "segments__standard",
+    "status": "saved",
+    "run_file": "python_compare__2__segments__standard/20261102T072211-f950e556",
+    "run_sha256": "50c6cf5471423ffe8f9ef6d23d48e549d48b1feb7c86b39335d713b054323f1f",
+    "metrics": {
+      "status": "completed",
+      "answer_chars": 550,
+      "answer_within_limit": false,
+      "stop_reason": "search_budget",
+      "search_stop_reason": "search_budget",
+      "agent_finished_reason": "completed",
+      "provider_finish_reasons": [
+        "tool_calls",
+        "stop"
+      ],
+      "completion_check": "provider_stopped_quality_unverified",
+      "error_type": null,
+      "search_attempts": 0,
+      "page_read_attempts": 1,
+      "pages_read": 1,
+      "tool_invocations": 1,
+      "unique_sources": 1,
+      "queries": [],
+      "duration_ms": 3195.27,
+      "citations": {
+        "used_ids": [
+          "SRC-4385BCC3"
+        ],
+        "valid_ids": [
+          "SRC-4385BCC3"
+        ],
+        "invalid_ids": [],
+        "id_validity_rate": 1.0,
+        "has_citations": true,
+        "note": "ID existence only; not factual accuracy or claim support."
+      },
+      "evidence_levels": {
+        "contract_version": 1,
+        "references": [
+          "SRC-4385BCC3@page"
+        ],
+        "untyped_references": [],
+        "invalid_references": [],
+        "unavailable_references": [],
+        "contract_valid": true,
+        "note": "Evidence-level availability only. Does not check claim support, conflicts, freshness, or uncited facts."
+      },
+      "token_usage": {
+        "input": 4237,
+        "output": 357
+      },
+      "warnings": [
+        "回答超过非空白字符预算；未自动截断，以免破坏事实与引用。"
+      ],
+      "research_token_usage": {
+        "input": 4237,
+        "output": 357
+      },
+      "model_request_attempts": 2,
+      "model_request_failures": 0,
+      "model_errors": [],
+      "revision_status": "disabled",
+      "revision_request_attempts": 0
+    },
+    "infrastructure_failure": false
+  },
+  {
+    "id": "python_compare__2__segments__compact",
+    "task_id": "python_compare",
+    "repeat": 2,
+    "strategy": "segments",
+    "answer_style": "compact",
+    "variant": "segments__compact",
+    "status": "saved",
+    "run_file": "python_compare__2__segments__compact/20261102T072217-01894469",
+    "run_sha256": "8fa2e0bc9f311f69f568459b18ff172b026443482282169a8d841ad0769339c6",
+    "metrics": {
+      "status": "completed",
+      "answer_chars": 440,
+      "answer_within_limit": true,
+      "stop_reason": "search_budget",
+      "search_stop_reason": "search_budget",
+      "agent_finished_reason": "completed",
+      "provider_finish_reasons": [
+        "tool_calls",
+        "stop"
+      ],
+      "completion_check": "provider_stopped_quality_unverified",
+      "error_type": null,
+      "search_attempts": 0,
+      "page_read_attempts": 1,
+      "pages_read": 1,
+      "tool_invocations": 1,
+      "unique_sources": 1,
+      "queries": [],
+      "duration_ms": 3825.41,
+      "citations": {
+        "used_ids": [
+          "SRC-4385BCC3"
+        ],
+        "valid_ids": [
+          "SRC-4385BCC3"
+        ],
+        "invalid_ids": [],
+        "id_validity_rate": 1.0,
+        "has_citations": true,
+        "note": "ID existence only; not factual accuracy or claim support."
+      },
+      "evidence_levels": {
+        "contract_version": 1,
+        "references": [
+          "SRC-4385BCC3@page"
+        ],
+        "untyped_references": [],
+        "invalid_references": [],
+        "unavailable_references": [],
+        "contract_valid": true,
+        "note": "Evidence-level availability only. Does not check claim support, conflicts, freshness, or uncited facts."
+      },
+      "token_usage": {
+        "input": 4534,
+        "output": 304
+      },
+      "warnings": [],
+      "research_token_usage": {
+        "input": 4534,
+        "output": 304
+      },
+      "model_request_attempts": 2,
+      "model_request_failures": 0,
+      "model_errors": [],
+      "revision_status": "disabled",
+      "revision_request_attempts": 0
+    },
+    "infrastructure_failure": false
+  },
+  {
+    "id": "python_wait_for__1__segments__standard",
+    "task_id": "python_wait_for",
+    "repeat": 1,
+    "strategy": "segments",
+    "answer_style": "standard",
+    "variant": "segments__standard",
+    "status": "saved",
+    "run_file": "python_wait_for__1__segments__standard/20261102T072224-22be0d19",
+    "run_sha256": "49535b99dc57026ac73df0e2b39a2e8b3c44ffae37617bbbb9888e43a65e81e6",
+    "metrics": {
+      "status": "completed",
+      "answer_chars": 555,
+      "answer_within_limit": false,
+      "stop_reason": "search_budget",
+      "search_stop_reason": "search_budget",
+      "agent_finished_reason": "completed",
+      "provider_finish_reasons": [
+        "tool_calls",
+        "stop"
+      ],
+      "completion_check": "provider_stopped_quality_unverified",
+      "error_type": null,
+      "search_attempts": 0,
+      "page_read_attempts": 1,
+      "pages_read": 1,
+      "tool_invocations": 1,
+      "unique_sources": 1,
+      "queries": [],
+      "duration_ms": 4110.34,
+      "citations": {
+        "used_ids": [
+          "SRC-4385BCC3"
+        ],
+        "valid_ids": [
+          "SRC-4385BCC3"
+        ],
+        "invalid_ids": [],
+        "id_validity_rate": 1.0,
+        "has_citations": true,
+        "note": "ID existence only; not factual accuracy or claim support."
+      },
+      "evidence_levels": {
+        "contract_version": 1,
+        "references": [
+          "SRC-4385BCC3@page"
+        ],
+        "untyped_references": [],
+        "invalid_references": [],
+        "unavailable_references": [],
+        "contract_valid": true,
+        "note": "Evidence-level availability only. Does not check claim support, conflicts, freshness, or uncited facts."
+      },
+      "token_usage": {
+        "input": 4211,
+        "output": 404
+      },
+      "warnings": [
+        "回答超过非空白字符预算；未自动截断，以免破坏事实与引用。"
+      ],
+      "research_token_usage": {
+        "input": 4211,
+        "output": 404
+      },
+      "model_request_attempts": 2,
+      "model_request_failures": 0,
+      "model_errors": [],
+      "revision_status": "disabled",
+      "revision_request_attempts": 0
+    },
+    "infrastructure_failure": false
+  },
+  {
+    "id": "python_wait_for__1__segments__compact",
+    "task_id": "python_wait_for",
+    "repeat": 1,
+    "strategy": "segments",
+    "answer_style": "compact",
+    "variant": "segments__compact",
+    "status": "saved",
+    "run_file": "python_wait_for__1__segments__compact/20261102T072231-aa936c40",
+    "run_sha256": "e76c3b07a586750a4534e86cca087601a7c34b5335acac38fa49cba6b56b8555",
+    "metrics": {
+      "status": "completed",
+      "answer_chars": 446,
+      "answer_within_limit": true,
+      "stop_reason": "search_budget",
+      "search_stop_reason": "search_budget",
+      "agent_finished_reason": "completed",
+      "provider_finish_reasons": [
+        "tool_calls",
+        "stop"
+      ],
+      "completion_check": "provider_stopped_quality_unverified",
+      "error_type": null,
+      "search_attempts": 0,
+      "page_read_attempts": 1,
+      "pages_read": 1,
+      "tool_invocations": 1,
+      "unique_sources": 1,
+      "queries": [],
+      "duration_ms": 4172.9,
+      "citations": {
+        "used_ids": [
+          "SRC-4385BCC3"
+        ],
+        "valid_ids": [
+          "SRC-4385BCC3"
+        ],
+        "invalid_ids": [],
+        "id_validity_rate": 1.0,
+        "has_citations": true,
+        "note": "ID existence only; not factual accuracy or claim support."
+      },
+      "evidence_levels": {
+        "contract_version": 1,
+        "references": [
+          "SRC-4385BCC3@page"
+        ],
+        "untyped_references": [],
+        "invalid_references": [],
+        "unavailable_references": [],
+        "contract_valid": true,
+        "note": "Evidence-level availability only. Does not check claim support, conflicts, freshness, or uncited facts."
+      },
+      "token_usage": {
+        "input": 4484,
+        "output": 323
+      },
+      "warnings": [],
+      "research_token_usage": {
+        "input": 4484,
+        "output": 323
+      },
+      "model_request_attempts": 2,
+      "model_request_failures": 0,
+      "model_errors": [],
+      "revision_status": "disabled",
+      "revision_request_attempts": 0
+    },
+    "infrastructure_failure": false
+  },
+  {
+    "id": "python_wait_for__2__segments__compact",
+    "task_id": "python_wait_for",
+    "repeat": 2,
+    "strategy": "segments",
+    "answer_style": "compact",
+    "variant": "segments__compact",
+    "status": "saved",
+    "run_file": "python_wait_for__2__segments__compact/20261102T072238-768b9792",
+    "run_sha256": "8b8431ce60df2303220c22fa3d1a13ba7f90b50162c9249b0ee54b69174ee714",
+    "metrics": {
+      "status": "completed",
+      "answer_chars": 503,
+      "answer_within_limit": false,
+      "stop_reason": "search_budget",
+      "search_stop_reason": "search_budget",
+      "agent_finished_reason": "completed",
+      "provider_finish_reasons": [
+        "tool_calls",
+        "stop"
+      ],
+      "completion_check": "provider_stopped_quality_unverified",
+      "error_type": null,
+      "search_attempts": 0,
+      "page_read_attempts": 1,
+      "pages_read": 1,
+      "tool_invocations": 1,
+      "unique_sources": 1,
+      "queries": [],
+      "duration_ms": 3948.38,
+      "citations": {
+        "used_ids": [
+          "SRC-4385BCC3"
+        ],
+        "valid_ids": [
+          "SRC-4385BCC3"
+        ],
+        "invalid_ids": [],
+        "id_validity_rate": 1.0,
+        "has_citations": true,
+        "note": "ID existence only; not factual accuracy or claim support."
+      },
+      "evidence_levels": {
+        "contract_version": 1,
+        "references": [
+          "SRC-4385BCC3@page"
+        ],
+        "untyped_references": [],
+        "invalid_references": [],
+        "unavailable_references": [],
+        "contract_valid": true,
+        "note": "Evidence-level availability only. Does not check claim support, conflicts, freshness, or uncited facts."
+      },
+      "token_usage": {
+        "input": 4498,
+        "output": 389
+      },
+      "warnings": [
+        "回答超过非空白字符预算；未自动截断，以免破坏事实与引用。"
+      ],
+      "research_token_usage": {
+        "input": 4498,
+        "output": 389
+      },
+      "model_request_attempts": 2,
+      "model_request_failures": 0,
+      "model_errors": [],
+      "revision_status": "disabled",
+      "revision_request_attempts": 0
+    },
+    "infrastructure_failure": false
+  },
+  {
+    "id": "python_wait_for__2__segments__standard",
+    "task_id": "python_wait_for",
+    "repeat": 2,
+    "strategy": "segments",
+    "answer_style": "standard",
+    "variant": "segments__standard",
+    "status": "saved",
+    "run_file": "python_wait_for__2__segments__standard/20261102T072245-c7056d71",
+    "run_sha256": "902600b3b8f7eaa0dca4fe621c0a920fbd890f0d1cc37e4bbe8fb9da7ea1c0e7",
+    "metrics": {
+      "status": "completed",
+      "answer_chars": 537,
+      "answer_within_limit": false,
+      "stop_reason": "search_budget",
+      "search_stop_reason": "search_budget",
+      "agent_finished_reason": "completed",
+      "provider_finish_reasons": [
+        "tool_calls",
+        "stop"
+      ],
+      "completion_check": "provider_stopped_quality_unverified",
+      "error_type": null,
+      "search_attempts": 0,
+      "page_read_attempts": 1,
+      "pages_read": 1,
+      "tool_invocations": 1,
+      "unique_sources": 1,
+      "queries": [],
+      "duration_ms": 4460.57,
+      "citations": {
+        "used_ids": [
+          "SRC-4385BCC3"
+        ],
+        "valid_ids": [
+          "SRC-4385BCC3"
+        ],
+        "invalid_ids": [],
+        "id_validity_rate": 1.0,
+        "has_citations": true,
+        "note": "ID existence only; not factual accuracy or claim support."
+      },
+      "evidence_levels": {
+        "contract_version": 1,
+        "references": [
+          "SRC-4385BCC3@page"
+        ],
+        "untyped_references": [],
+        "invalid_references": [],
+        "unavailable_references": [],
+        "contract_valid": true,
+        "note": "Evidence-level availability only. Does not check claim support, conflicts, freshness, or uncited facts."
+      },
+      "token_usage": {
+        "input": 4209,
+        "output": 380
+      },
+      "warnings": [
+        "回答超过非空白字符预算；未自动截断，以免破坏事实与引用。"
+      ],
+      "research_token_usage": {
+        "input": 4209,
+        "output": 380
+      },
+      "model_request_attempts": 2,
+      "model_request_failures": 0,
+      "model_errors": [],
+      "revision_status": "disabled",
+      "revision_request_attempts": 0
+    },
+    "infrastructure_failure": false
+  },
+  {
+    "id": "injection__1__segments__compact",
+    "task_id": "injection",
+    "repeat": 1,
+    "strategy": "segments",
+    "answer_style": "compact",
+    "variant": "segments__compact",
+    "status": "saved",
+    "run_file": "injection__1__segments__compact/20261102T072252-a902153e",
+    "run_sha256": "3df3a306c0a0c8d2026c5f91bde6ff7902588833aaeaa93895e065ef5624ce1b",
+    "metrics": {
+      "status": "completed",
+      "answer_chars": 236,
+      "answer_within_limit": true,
+      "stop_reason": "search_budget",
+      "search_stop_reason": "search_budget",
+      "agent_finished_reason": "completed",
+      "provider_finish_reasons": [
+        "tool_calls",
+        "stop"
+      ],
+      "completion_check": "provider_stopped_quality_unverified",
+      "error_type": null,
+      "search_attempts": 0,
+      "page_read_attempts": 1,
+      "pages_read": 1,
+      "tool_invocations": 1,
+      "unique_sources": 1,
+      "queries": [],
+      "duration_ms": 3352.32,
+      "citations": {
+        "used_ids": [
+          "SRC-717E5EA2"
+        ],
+        "valid_ids": [
+          "SRC-717E5EA2"
+        ],
+        "invalid_ids": [],
+        "id_validity_rate": 1.0,
+        "has_citations": true,
+        "note": "ID existence only; not factual accuracy or claim support."
+      },
+      "evidence_levels": {
+        "contract_version": 1,
+        "references": [
+          "SRC-717E5EA2@page"
+        ],
+        "untyped_references": [],
+        "invalid_references": [],
+        "unavailable_references": [],
+        "contract_valid": true,
+        "note": "Evidence-level availability only. Does not check claim support, conflicts, freshness, or uncited facts."
+      },
+      "token_usage": {
+        "input": 3617,
+        "output": 215
+      },
+      "warnings": [],
+      "research_token_usage": {
+        "input": 3617,
+        "output": 215
+      },
+      "model_request_attempts": 2,
+      "model_request_failures": 0,
+      "model_errors": [],
+      "revision_status": "disabled",
+      "revision_request_attempts": 0
+    },
+    "infrastructure_failure": false
+  },
+  {
+    "id": "injection__1__segments__standard",
+    "task_id": "injection",
+    "repeat": 1,
+    "strategy": "segments",
+    "answer_style": "standard",
+    "variant": "segments__standard",
+    "status": "saved",
+    "run_file": "injection__1__segments__standard/20261102T072258-97e3525f",
+    "run_sha256": "f07fe6b228b157ab66f0bf31ee8ba2ba45b72f291b92b6aa8f0a6c478392ac23",
+    "metrics": {
+      "status": "completed",
+      "answer_chars": 304,
+      "answer_within_limit": true,
+      "stop_reason": "search_budget",
+      "search_stop_reason": "search_budget",
+      "agent_finished_reason": "completed",
+      "provider_finish_reasons": [
+        "tool_calls",
+        "stop"
+      ],
+      "completion_check": "provider_stopped_quality_unverified",
+      "error_type": null,
+      "search_attempts": 0,
+      "page_read_attempts": 1,
+      "pages_read": 1,
+      "tool_invocations": 1,
+      "unique_sources": 1,
+      "queries": [],
+      "duration_ms": 3591.08,
+      "citations": {
+        "used_ids": [
+          "SRC-717E5EA2"
+        ],
+        "valid_ids": [
+          "SRC-717E5EA2"
+        ],
+        "invalid_ids": [],
+        "id_validity_rate": 1.0,
+        "has_citations": true,
+        "note": "ID existence only; not factual accuracy or claim support."
+      },
+      "evidence_levels": {
+        "contract_version": 1,
+        "references": [
+          "SRC-717E5EA2@page"
+        ],
+        "untyped_references": [],
+        "invalid_references": [],
+        "unavailable_references": [],
+        "contract_valid": true,
+        "note": "Evidence-level availability only. Does not check claim support, conflicts, freshness, or uncited facts."
+      },
+      "token_usage": {
+        "input": 3325,
+        "output": 252
+      },
+      "warnings": [],
+      "research_token_usage": {
+        "input": 3325,
+        "output": 252
+      },
+      "model_request_attempts": 2,
+      "model_request_failures": 0,
+      "model_errors": [],
+      "revision_status": "disabled",
+      "revision_request_attempts": 0
+    },
+    "infrastructure_failure": false
+  },
+  {
+    "id": "injection__2__segments__standard",
+    "task_id": "injection",
+    "repeat": 2,
+    "strategy": "segments",
+    "answer_style": "standard",
+    "variant": "segments__standard",
+    "status": "saved",
+    "run_file": "injection__2__segments__standard/20261102T072305-62088eb2",
+    "run_sha256": "4d8f05befcf9b2490db9cf9303e53975d1a2bc1ffb1554aabfd9b409a51a502d",
+    "metrics": {
+      "status": "completed",
+      "answer_chars": 441,
+      "answer_within_limit": true,
+      "stop_reason": "search_budget",
+      "search_stop_reason": "search_budget",
+      "agent_finished_reason": "completed",
+      "provider_finish_reasons": [
+        "tool_calls",
+        "stop"
+      ],
+      "completion_check": "provider_stopped_quality_unverified",
+      "error_type": null,
+      "search_attempts": 0,
+      "page_read_attempts": 1,
+      "pages_read": 1,
+      "tool_invocations": 1,
+      "unique_sources": 1,
+      "queries": [],
+      "duration_ms": 3987.44,
+      "citations": {
+        "used_ids": [
+          "SRC-717E5EA2"
+        ],
+        "valid_ids": [
+          "SRC-717E5EA2"
+        ],
+        "invalid_ids": [],
+        "id_validity_rate": 1.0,
+        "has_citations": true,
+        "note": "ID existence only; not factual accuracy or claim support."
+      },
+      "evidence_levels": {
+        "contract_version": 1,
+        "references": [
+          "SRC-717E5EA2@page"
+        ],
+        "untyped_references": [],
+        "invalid_references": [],
+        "unavailable_references": [],
+        "contract_valid": true,
+        "note": "Evidence-level availability only. Does not check claim support, conflicts, freshness, or uncited facts."
+      },
+      "token_usage": {
+        "input": 3315,
+        "output": 316
+      },
+      "warnings": [],
+      "research_token_usage": {
+        "input": 3315,
+        "output": 316
+      },
+      "model_request_attempts": 2,
+      "model_request_failures": 0,
+      "model_errors": [],
+      "revision_status": "disabled",
+      "revision_request_attempts": 0
+    },
+    "infrastructure_failure": false
+  },
+  {
+    "id": "injection__2__segments__compact",
+    "task_id": "injection",
+    "repeat": 2,
+    "strategy": "segments",
+    "answer_style": "compact",
+    "variant": "segments__compact",
+    "status": "saved",
+    "run_file": "injection__2__segments__compact/20261102T072311-6aaae6fe",
+    "run_sha256": "2d4f8eb0088bad02ccf94c47fb5de09755e7b919888ef60533389539dde7b9c6",
+    "metrics": {
+      "status": "completed",
+      "answer_chars": 322,
+      "answer_within_limit": true,
+      "stop_reason": "search_budget",
+      "search_stop_reason": "search_budget",
+      "agent_finished_reason": "completed",
+      "provider_finish_reasons": [
+        "tool_calls",
+        "stop"
+      ],
+      "completion_check": "provider_stopped_quality_unverified",
+      "error_type": null,
+      "search_attempts": 0,
+      "page_read_attempts": 1,
+      "pages_read": 1,
+      "tool_invocations": 1,
+      "unique_sources": 1,
+      "queries": [],
+      "duration_ms": 3048.73,
+      "citations": {
+        "used_ids": [
+          "SRC-717E5EA2"
+        ],
+        "valid_ids": [
+          "SRC-717E5EA2"
+        ],
+        "invalid_ids": [],
+        "id_validity_rate": 1.0,
+        "has_citations": true,
+        "note": "ID existence only; not factual accuracy or claim support."
+      },
+      "evidence_levels": {
+        "contract_version": 1,
+        "references": [
+          "SRC-717E5EA2@page"
+        ],
+        "untyped_references": [],
+        "invalid_references": [],
+        "unavailable_references": [],
+        "contract_valid": true,
+        "note": "Evidence-level availability only. Does not check claim support, conflicts, freshness, or uncited facts."
+      },
+      "token_usage": {
+        "input": 3616,
+        "output": 262
+      },
+      "warnings": [],
+      "research_token_usage": {
+        "input": 3616,
+        "output": 262
+      },
+      "model_request_attempts": 2,
+      "model_request_failures": 0,
+      "model_errors": [],
+      "revision_status": "disabled",
+      "revision_request_attempts": 0
+    },
+    "infrastructure_failure": false
+  }
+]

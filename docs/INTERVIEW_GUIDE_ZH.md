@@ -2,7 +2,7 @@
 
 这是一份可以从头读到尾的面试材料。原来的五分钟演示、零散追问和7份专题中的关键解释已汇入本文；问题后面直接给出答案、例子和本项目依据，不要求先跳到其他指南才能理解。
 
-对应应用0.39.0、AgentScope 2.0.8；0.39增加只读诊断与可携带验证，0.38增加终端评测操作，第16节给完整流程，11-03的16.11补齐逐页图鉴；保留11-01研究评估/正文修复及11-02多关注点、精简度、缩稿对照和盲评工具。本文含80个面试问答、完整演示、20道研究测试题、benchmark入门与全部正负结果。第13节保留11-01历史，第15节保留0.37工程与实测，第16节解释终端操作，16.12补0.39诊断与交付。文中的“通过”区分程序、机械检查、实际样例与语义判断；不同日期/配置的试验不能相加成为当前准确率。
+对应应用0.40.0、AgentScope 2.0.8；0.39增加只读诊断与可携带验证，0.38增加终端评测操作，第16节给完整流程，11-03的16.11补齐逐页图鉴；保留11-01研究评估/正文修复及11-02多关注点、精简度、缩稿对照和盲评工具。本文含80个面试问答、完整演示、20道研究测试题、benchmark入门与全部正负结果。第13节保留11-01历史，第15节保留0.37工程与实测，第16节解释终端操作，16.12补0.39诊断与交付。文中的“通过”区分程序、机械检查、实际样例与语义判断；不同日期/配置的试验不能相加成为当前准确率。
 
 ## 如何使用这份手册
 
@@ -981,7 +981,7 @@ uv run --offline --no-sync python scripts/benchmark_research.py run --mode froze
 
 ### 13.7 后续哪些方案值得对照，怎样控制变量
 
-以下记录11-01结束时的候选。11-02已实现多关注点、精简格式对照、缩稿接入和盲评工具，结果与限制见同文件第15节；它们尚未解决全部语义和短答问题。实际人工校准、Tavily对照等仍未完成，不能把工具完成等同质量已被证明。先保证每次只比较一个主要变化，保留相同问题、官方HTML、模型参数、字符预算和评分标准，再看覆盖、支持、资源与失败；不要只展示最好的一次。
+以下记录11-01结束时的候选。11-02已实现多关注点、精简格式对照、缩稿接入和盲评工具，结果与限制见同文件第15节；它们尚未解决全部语义和短答问题。实际人工校准仍未完成；Tavily对照已在0.40补齐真实时点验证，不能把工具完成等同质量已被证明。先保证每次只比较一个主要变化，保留相同问题、官方HTML、模型参数、字符预算和评分标准，再看覆盖、支持、资源与失败；不要只展示最好的一次。
 
 | 优先级/方向 | 现有问题 | 可比较方案 | 需要同时检测 |
 |---|---|---|---|
@@ -1158,7 +1158,7 @@ tool-focus-pair中一份回答把“推荐timeout/timeout_at而非直接实例�
 
 已经完成本轮可独立实现的选择器、格式/缩稿对照、盲评工具、记录与说明。没有理由再说项目“所有回答都正确”。后续优先由实际人工校准标准；针对取消对象、比较范围、否定与短答设计新开发反例，建立独立保留组后再选择格式/压缩方案。若试模型提取，应另存生成层，不把摘要伪作原文；若试结构化字段，要同时测试漏项、引用和条件，不只看JSON合法。
 
-搜索服务DDGS此前两次在本机失败；这轮指定URL成功不等于公共搜索已修好。没有Tavily key，未执行或编造服务A/B；未来有实际凭据再按同查询/时点/预算比较。多Agent、向量库、长期记忆和服务化仍需任务规模证据，不因面试名词而引入。
+搜索服务DDGS此前两次在本机失败；这轮指定URL成功不等于公共搜索已修好。0.37当时没有Tavily key，未执行或编造服务A/B；0.40已按同查询/时点/预算补齐，详见16.15。多Agent、向量库、长期记忆和服务化仍需任务规模证据，不因面试名词而引入。
 
 全部新原件在[本轮结果](../reports/improvement-20261102/result.json)与[过程记录](../reports/improvement-20261102/journal.md)，三份执行源码快照区分v1、v2、新工具说明；最终维护代码另有release-v037。每份计划预先绑定执行hash，不宣称41次都在同一精确源码上运行。408项离线程序回归、代码规范、四步验收和摘要回读负责程序交付，不能把真实坏答案变为好答案。
 
@@ -1200,6 +1200,8 @@ uv run --offline --no-sync as-research --interactive
 | 4 离线抽取对照 | 8场景×3预算×5策略，120行 | 不调用模型；可查每行实际返回片段 |
 | 5 查看已有批次 | 批次汇总、完整回答、A/B、证据、复核与成绩单 | 纯查看不请求模型；r明确另建新实验 |
 | 6 操作说明 | 显示简短步骤与本节位置 | 不写标签或运行任务 |
+| 7 真实A/B只读样例 | 随源码的原16次开发试验 | 数字/c/d读原件，r才准备新实验；无原件写回 |
+| 8 搜索服务对照 | 两固定查询×两服务×两重复 | 先预览，SEARCH才真实搜索；无模型、可能消耗Tavily积分 |
 
 回车选择方括号内的默认项；q取消当前设置，评测流程回评测中心、单次研究回主页，已有题库/计划仍保留；0按本页标签返回，并不保证只退一层。程序只创建新实验目录，不因打开结果而重新调用模型。若已经在运行，Ctrl+C退出；当前只保证直接子进程的有限等待，不承诺整个进程树无条件瞬间终止，之后应看index中的已保存与未运行行。
 
@@ -1366,9 +1368,9 @@ reports/evaluations/时间-随机后缀/
 
 ### 16.11 整套终端逐页图鉴：每一项是什么意思
 
-本节把主页、单次研究、历史查看和评测中心全部放在一起。下面的菜单文字已按0.39当前代码的实际调用重新核对；数字清单来自本机当时的保存材料，所以历史顺序、题号行及路径可能与你稍后看到的不同。`Pxx`只是说明文件内部的页面样本编号，不是终端里要输入的指令。
+本节把主页、单次研究、历史查看和评测中心全部放在一起。下面的菜单文字已按0.40当前代码的实际调用重新核对；数字清单来自本机当时的保存材料，所以历史顺序、题号行及路径可能与你稍后看到的不同。`Pxx`只是说明文件内部的页面样本编号，不是终端里要输入的指令。
 
-这次共采集58组菜单/输入状态，覆盖terminal.py与evaluation_terminal.py中全部52个业务输入调用位置。采集只进入设置、读取原件及取消路径；真实模式的确认是页面样本，没有调用真实模型、下载网页、SAVE复核或打开外部编辑器。输入错误、无数据等提示在本节末尾另列。当前采集原件在reports/completion-20261109/menus-final.json；11-03原件保留为历史，维护者可据此对照源码。
+本轮共采集64组菜单/输入状态，覆盖terminal.py与evaluation_terminal.py中全部55个业务输入调用位置。采集只进入设置、读取原件及取消路径；真实模式的确认是页面样本，没有调用真实模型、下载网页、SAVE复核或打开外部编辑器。输入错误、无数据等提示在本节末尾另列。当前采集原件在reports/completion-20261109-evening/menus.json；11-03原件保留为历史，维护者可据此对照源码。
 
 **先认清页面层级。** 主页1/2属于“一次研究”，主页3看单份run；主页4进入“评测中心”，它按一题多配置/多次尝试组织批次。一次研究的查看页和一次评测试验的查看页不是同一页，相同数字可能做不同的事。需要复核、A/B与成绩单时进入评测中心。
 
@@ -1738,26 +1740,26 @@ P02来自单次研究；P40来自评测环境web/search，标签略有不同，�
 
 ```text
 最近20次以内的记录（按文件修改时间；只读查看）
-  1. live_model_snapshot | 比较asyncio.timeout与wait_for的取消对象和总等待时间 请仅依据本次保存证据作答；非空白字符不超过5 | evaluations\20261103T074056-0aee90\batch\custom_question__1__segments\20261103T074148-871017ee
-  2. live_model_snapshot | 根据Python 3.13文档，When does wait_for actually return after tim | evaluations\20261103T072303-d67069\batch\python_wait_for__1__segments\20261103T072521-27ff5b74
-  3. offline_scripted_snapshot | 根据MCP 2025-11-25规范，stdio中客户端、服务端、stdin和stdout分别怎样配合？ 请仅依据本次取 | evaluations\20261103T071308-486da2\batch\mcp_stdio__1__segments\20261103T071323-070e0eb2
-  4. offline_fixture | 离线验证搜索后按来源ID读页 | evaluation-ux-20261102\summary-mcp-fixture
-  5. offline_scripted_snapshot | 比较asyncio.timeout与wait_for的取消对象和总等待时间 请仅依据本次保存证据作答；非空白字符不超过5 | evaluation-ux-20261102\custom\batch\custom_question__1__segments__compact\20261102T121336-9baefce3
-  6. offline_scripted_snapshot | 比较asyncio.timeout与wait_for的取消对象和总等待时间 请仅依据本次保存证据作答；非空白字符不超过5 | evaluation-ux-20261102\custom\batch\custom_question__1__segments__standard\20261102T121334-e690a1ce
-  7. offline_scripted_snapshot | 根据MCP 2025-11-25规范，stdio中客户端、服务端、stdin和stdout分别怎样配合？ 请仅依据本次取 | evaluation-ux-20261102\fixed\batch\mcp_stdio__1__segments\20261102T121328-1baa9b9f
-  8. offline_fixture | 离线验证搜索后按来源ID读页 | improvement-20261102\summary-mcp-fixture
-  9. live_model_snapshot | 根据Python 3.13文档比较asyncio.timeout与wait_for：取消对象、异常、总等待时间以及适用方 | improvement-20261102\tool-focus-pair\python_compare__2__bm25__compact\20261102T073559-4deb1be1
-  10. live_model_snapshot | 根据Python 3.13文档比较asyncio.timeout与wait_for：取消对象、异常、总等待时间以及适用方 | improvement-20261102\tool-focus-pair\python_compare__2__balanced__compact\20261102T073552-59635dab
-  11. live_model_snapshot | 根据Python 3.13文档比较asyncio.timeout与wait_for：取消对象、异常、总等待时间以及适用方 | improvement-20261102\tool-focus-pair\python_compare__1__balanced__compact\20261102T073545-27382130
-  12. live_model_snapshot | 根据Python 3.13文档比较asyncio.timeout与wait_for：取消对象、异常、总等待时间以及适用方 | improvement-20261102\tool-focus-pair\python_compare__1__bm25__compact\20261102T073537-32f11942
-  13. live_model_snapshot | 根据Python 3.13文档比较asyncio.timeout与wait_for：取消对象、异常、总等待时间以及适用方 | improvement-20261102\prefix-v2-pair\python_compare__2__bm25\20261102T073145-a91a227a
-  14. live_model_snapshot | 根据Python 3.13文档比较asyncio.timeout与wait_for：取消对象、异常、总等待时间以及适用方 | improvement-20261102\prefix-v2-pair\python_compare__2__balanced\20261102T073137-6c46b3ab
-  15. live_model_snapshot | 根据Python 3.13文档比较asyncio.timeout与wait_for：取消对象、异常、总等待时间以及适用方 | improvement-20261102\prefix-v2-pair\python_compare__1__balanced\20261102T073128-3a05ad84
-  16. live_model_snapshot | 根据Python 3.13文档比较asyncio.timeout与wait_for：取消对象、异常、总等待时间以及适用方 | improvement-20261102\prefix-v2-pair\python_compare__1__bm25\20261102T073120-fc257646
-  17. live | 根据MCP 2025-11-25规范，stdio中客户端、服务端、stdin和stdout分别怎样配合？ 请仅依据本次取 | improvement-20261102\web\mcp_stdio__1__balanced__compact\20261102T072731-394759f9
-  18. live_model_snapshot | 根据Python 3.13文档比较asyncio.timeout与wait_for：取消对象、异常、总等待时间以及适用方 | improvement-20261102\revision\python_compare__2__segments\20261102T072621-460bbeba
-  19. live_model_snapshot | 根据Python 3.13文档比较asyncio.timeout与wait_for：取消对象、异常、总等待时间以及适用方 | improvement-20261102\revision\python_compare__1__segments\20261102T072614-8cdc38df
-  20. live_model_snapshot | MCP stdio禁止stdout混入日志，是否可以推出禁止服务端写任何日志文件？请解释规范实际限制的范围。 请仅依据本 | improvement-20261102\revision\mcp_logfiles__2__segments\20261102T072605-e1aec767
+  1. offline_scripted_snapshot | 根据MCP 2025-11-25规范，stdio中客户端、服务端、stdin和stdout分别怎样配合？ 请仅依据本次取 | completion-20261109-evening\ui-resume-batch\mcp_stdio__1__segments\20261109T113153-08422f05
+  2. live | 根据MCP 2025-11-25规范，stdio中客户端、服务端、stdin和stdout分别怎样配合？ 请仅依据本次取 | completion-20261109-evening\tavily-mcp-batch\mcp_stdio__1__segments\20261109T111502-bc4c282d
+  3. live | 根据MCP 2025-11-25规范，stdio中客户端、服务端、stdin和stdout分别怎样配合？ 请仅依据本次取 | completion-20261109-evening\tavily-local-batch\mcp_stdio__1__segments\20261109T111439-a6bdcfb5
+  4. live_model_snapshot | 根据MCP 2025-11-25规范，stdio中客户端、服务端、stdin和stdout分别怎样配合？ 请仅依据本次取 | completion-20261109-evening\live-batch\mcp_stdio__1__segments\20261109T110918-402c6415
+  5. live_model_snapshot | 根据Python 3.13文档，When does wait_for actually return after tim | completion-20261109-evening\live-batch\python_wait_for__1__segments\20261109T110640-26a4ac62
+  6. offline_scripted_snapshot | 根据MCP 2025-11-25规范，stdio中客户端、服务端、stdin和stdout分别怎样配合？ 请仅依据本次取 | completion-20261109-evening\source-smoke\batch\mcp_stdio__2__segments\20261109T110612-4ec82c4f
+  7. offline_scripted_snapshot | 根据MCP 2025-11-25规范，stdio中客户端、服务端、stdin和stdout分别怎样配合？ 请仅依据本次取 | completion-20261109-evening\source-smoke\batch\mcp_stdio__1__segments\20261109T110609-3a9f30aa
+  8. offline_fixture | 离线验证搜索后按来源ID读页 | completion-20261109-evening\source-smoke\mcp
+  9. offline_fixture | 离线搜索后读页 | completion-20261109-evening\source-smoke\local\20261109T110604-b5302f1d
+  10. offline_scripted_snapshot | 根据MCP 2025-11-25规范，stdio中客户端、服务端、stdin和stdout分别怎样配合？ 请仅依据本次取 | completion-20261109-evening\resume-live-path\mcp_stdio__2__segments\20261109T105006-7263b5c6
+  11. offline_scripted_snapshot | 根据MCP 2025-11-25规范，stdio中客户端、服务端、stdin和stdout分别怎样配合？ 请仅依据本次取 | completion-20261109-evening\resume-live-path\mcp_stdio__1__segments\20261109T104859-8a82f28c
+  12. offline_fixture | 离线验证搜索后按来源ID读页 | completion-20261109\offline-summary-final-mcp-fixture
+  13. offline_fixture | 离线验证搜索后按来源ID读页 | completion-20261109\offline-summary-mcp-fixture
+  14. offline_scripted_snapshot | 根据MCP 2025-11-25规范，stdio中客户端、服务端、stdin和stdout分别怎样配合？ 请仅依据本次取 | completion-20261109\source-smoke\batch\mcp_stdio__1__segments\20261109T074640-79594360
+  15. offline_fixture | 离线验证搜索后按来源ID读页 | completion-20261109\source-smoke\mcp
+  16. offline_fixture | 离线搜索后读页 | completion-20261109\source-smoke\local\20261109T074636-f8757874
+  17. live | MCP stdio 中 stdout 的规则是什么？ | tavily-probe\20261105T112445-ef90d751
+  18. live | 根据给定文档，说明 asyncio.wait 设置 timeout 后如何处理未完成的任务，以及 done/pendin | 20261105T111816-53099b7d
+  19. live_model_snapshot | MCP stdio禁止stdout混入日志，是否可以推出禁止服务端写任何日志文件？请解释规范实际限制的范围。 请仅依据本 | evaluations\20261103T124723-f40211\batch\mcp_logfiles__1__segments__compact\20261103T124745-be8d7fc6
+  20. live_model_snapshot | MCP stdio禁止stdout混入日志，是否可以推出禁止服务端写任何日志文件？请解释规范实际限制的范围。 请仅依据本 | evaluations\20261103T124723-f40211\batch\mcp_logfiles__1__segments__standard\20261103T124736-0702b676
   0. 返回主页
 选择 [0]：
 ```
@@ -1776,6 +1778,8 @@ P02来自单次研究；P40来自评测环境web/search，标签略有不同，�
   4. 离线抽取对照（只测选段，不测回答）
   5. 查看已有批次、失败原因 / 复核 / 成绩单
   6. 操作说明
+  7. 查看随源码提供的真实A/B样例（只读、无模型费）
+  8. 同查询对照DuckDuckGo/Tavily（先预览，搜索可能计费）
   0. 返回主页
 选择 [1]：
 ```
@@ -2056,24 +2060,33 @@ URL 10～2000字符，允许的地址会规范化；不接受登录凭据/私网
 
 ```text
 最近30组以内的问答评测（查看不请求模型）
-  1. evaluations\20261103T074056-0aee90\batch
-  2. evaluations\20261103T072303-d67069\batch
-  3. evaluations\20261103T071308-486da2\batch
-  4. evaluation-ux-20261102\custom\batch
-  5. evaluation-ux-20261102\fixed\batch
-  6. improvement-20261102\tool-focus-pair
-  7. improvement-20261102\prefix-v2-pair
-  8. improvement-20261102\web
-  9. improvement-20261102\revision
-  10. improvement-20261102\selector-pair
-  11. improvement-20261102\style-pair
-  12. evaluation-20261101\live-web-clean
-  13. evaluation-20261101\paired-clean
-  14. evaluation-20261101\live-search
-  15. evaluation-20261101\live-web
-  16. evaluation-20261101\injection-exposed
-  17. evaluation-20261101\paired
-  18. evaluation-20261101\frozen-baseline
+  1. completion-20261109-evening\ui-resume-batch
+  2. completion-20261109-evening\tavily-mcp-batch
+  3. completion-20261109-evening\tavily-local-batch
+  4. completion-20261109-evening\live-batch
+  5. completion-20261109-evening\source-smoke\batch
+  6. completion-20261109-evening\resume-live-path
+  7. completion-20261109-evening\resume-demo
+  8. completion-20261109\source-smoke\batch
+  9. evaluations\20261103T124723-f40211\batch
+  10. evaluations\20261103T074056-0aee90\batch
+  11. evaluations\20261103T072303-d67069\batch
+  12. evaluations\20261103T071308-486da2\batch
+  13. evaluation-ux-20261102\custom\batch
+  14. evaluation-ux-20261102\fixed\batch
+  15. improvement-20261102\tool-focus-pair
+  16. improvement-20261102\prefix-v2-pair
+  17. improvement-20261102\web
+  18. improvement-20261102\revision
+  19. improvement-20261102\selector-pair
+  20. improvement-20261102\style-pair
+  21. evaluation-20261101\live-web-clean
+  22. evaluation-20261101\paired-clean
+  23. evaluation-20261101\live-search
+  24. evaluation-20261101\live-web
+  25. evaluation-20261101\injection-exposed
+  26. evaluation-20261101\paired
+  27. evaluation-20261101\frozen-baseline
   e. 查看已有抽取对照
   0. 返回
 选择 [0]：
@@ -2115,6 +2128,7 @@ segments | 1 | 1 | 0 | 0 / 0 / 1
   r. 复用某题和标准，建立新实验（先预览）
   s. 生成成绩单（仅本地，不运行模型）
   d. 导出诊断网页与标准矩阵（仅本地，不运行模型）
+  u. 预览续跑：保留已保存，只补未启动试验
   o. 打开最新成绩单
   0. 返回评测中心
 选择 [0]：
@@ -2527,6 +2541,7 @@ s是重新生成逐题Markdown成绩单，c是只看同题两个已有回答；d
   r. 复用某题和标准，建立新实验（先预览）
   s. 生成成绩单（仅本地，不运行模型）
   d. 导出诊断网页与标准矩阵（仅本地，不运行模型）
+  u. 预览续跑：保留已保存，只补未启动试验
   o. 打开最新成绩单
   0. 返回评测中心
 选择 [0]：d
@@ -2597,3 +2612,302 @@ CI是持续集成：代码push/PR后GitHub按配置自动检查；coverage记录
 “我发现只有大量trace不够，还需要把失败转成可定位的实验输入。于是复用原绑定检查器，做了一个只读批次诊断：分开普通问答与对抗，导出逐标准矩阵，把症状和根因候选分开。我也实际验证干净目录，修掉历史测试对原目录的依赖。没有因此声称模型更准，因为这一轮没有改生成算法或新增真实质量实验。”
 
 追问时打开diagnostics.py说明三件事：为什么无效复核不能进入矩阵、为什么null不能变零、为什么L2/L3/L4不能凭漏答自动归因。再用test_diagnostics.py展示坏绑定、CSV公式、HTML脚本和ZIP越界的反例。Git基线、CI、coverage是支撑可信交付的工程工具，不替代对Agent循环和证据契约的理解。
+
+
+<a id="resume-workflow"></a>
+
+### 16.13 0.40：分段运行与安全续跑，从零操作
+
+#### 16.13.1 什么能继续，什么不能继续
+
+这里继续的是一个batch里还没有启动的题，不是恢复某道题运行到一半的Agent。每个新trial仍从新的Session开始。模型可能已经收到请求、甚至已经计费，但程序来不及保存结果；因此“没有run文件”不能推出“没有发出请求”。
+
+| 预览项 | 从零理解 | 续跑时会做什么 |
+|---|---|---|
+| saved | 已登记且绑定正确的原run | 保留，不再调用模型、不覆盖答案 |
+| recoverable | worker已写好提交凭据，父进程还没把index改成saved | 核对后登记，纯文件恢复，不调模型 |
+| pending | 真正not_run，没attempt、没残留题目录 | 才会启动新worker，真实模式可能计费 |
+| uncertain | 启动过/超时/失败/中断，缺少可确认的提交凭据 | 不自动重试；原件和费用不确定性保留 |
+
+即使某行预留后实际上没有发出请求，也可能被保守归入uncertain。这样会留下需人工处理的行，但不会为了“把表补满”默认再收费。需要重做时用r创建新的有明确身份的实验，而不是修改旧status/hash。
+
+#### 16.13.2 可以无key复现的一次完整流程
+
+在项目目录先恢复固定资料，然后先运行原计划两次中的第一题：
+
+```powershell
+uv run --no-sync python scripts/restore_test_fixtures.py
+uv run --no-sync python scripts/benchmark_research.py run --mode fixture --case mcp_stdio --strategy segments --repeats 2 --corpus reports/evaluation-20261101/corpus-exposed --max-new-trials 1 --execute
+```
+
+命令会打印batch绝对路径，例如reports/research-benchmark-时间-随机号。第一行应saved，第二行not_run；退出码4表示主动按一题分段，**不是程序失败，也不是全部题已完成**。此时打开第一份run.json看看答案和source_sha256，再继续：
+
+```powershell
+# 将路径替换为刚才打印的实际batch目录
+uv run --no-sync python scripts/benchmark_research.py resume --batch reports/YOUR_BATCH
+uv run --no-sync python scripts/benchmark_research.py resume --batch reports/YOUR_BATCH --execute
+```
+
+第一条只读预览，不读.env、不发搜索/模型请求、不更新index；第二条才执行剩余pending。完成后应两行saved，第一份run字节保持不变；语义标签仍null，因为没有人复核。若想再次只补一题，可追加--max-new-trials 1。resume不能附带新strategy/timeout等研究参数；想换配置就新建实验。
+
+本轮实际做了上述固定流程，也在真实冻结网页两题中先跑一题再resume。两次真实题分别247与418字符，均保存，原第一题hash不变。这是恢复接线证据，不是普遍准确率。
+
+#### 16.13.3 终端u怎样操作
+
+普通批次菜单新增：
+
+```text
+u. 预览续跑：保留已保存，只补未启动试验
+```
+
+主页4→5→选本轮新批次→u，会列已保存、仅恢复凭据、将启动、不确定不重试的ID。固定模式默认取消，选1才执行；真实模式有pending时必须输入LIVE。若只是登记recoverable，没有新模型请求，就不要求LIVE。旧0.37/0.39批次没有本协议记录，不能自动续跑，仍可c/d/查看，r可新建实验。
+
+| 退出码 | 此处的含义 |
+|---|---|
+| 0 | 计划内全部run已保存且基础设施完成，语义仍需复核 |
+| 2 | 设置/绑定无效或存在未确认/基础设施失败行；不是知识零分 |
+| 4 | 按max-new-trials正常分段，剩余题仍not_run |
+| 130 | 用户中断，尽可能记录interrupted |
+
+后续score的0/3仍是另一阶段：全部通过 / 存在失败或待定。不要把run返回0当成答案正确。
+
+#### 16.13.4 目录中的新文件是什么
+
+```text
+batch/
+  plan.json                 原计划，续跑不重算
+  suite.json                原题目和标准
+  execution.json            计划/题库文件与模型配置绑定
+  execution.lock            父执行器OS锁所用文件
+  worker.lock               防止旧worker仍活跃时重叠执行
+  index.json                每行not_run/running/saved等状态
+  attempts/TRIAL.json       启动前预留的attempt身份
+  attempts/TRIAL.claimed    worker的一次性领取标记
+  TRIAL.result.json         完整提交凭据
+  TRIAL/时间目录/run.json   原研究结果
+```
+
+原子写JSON是“先完整写临时文件，再替换名字”，防止读到半截；文件锁限制同时写者；attempt/receipt帮助辨认崩溃窗口。三者不能把外部模型计费变成数据库事务，所以不宣称exactly-once。锁文件存在不表示仍锁定，OS会在进程退出时释放；不要为了强行运行而手动删除活跃锁。
+
+恢复要求代码、脚本入口、题库、计划和冻结语料相符；执行时模型名/端点配置也需一致。API key轮换允许，不保存key hash；这不保证模型供应商内部权重永远不变。更新代码后旧批次可能无法继续，应该保留对应源码快照或新建实验，不改旧hash绕过。
+
+面试追问时可围绕这条故障链讲：先请求后记账会误重跑；先预留会产生保守的不确定行；receipt可恢复已提交结果；OS锁防两个终端重复执行；这些仍不等于恢复Agent中间状态。
+
+### 16.14 随源码携带的真实A/B样例
+
+主页4→7无需key，直接读取examples/portfolio/batch。它包含原0.37四题×两格式×两次的全部16行、原答案、证据与assistant复核，坏结果没有被挑掉。c选同题对照；d在reports新目录导出诊断；r只是准备新的实验，后续LIVE才可能收费。
+
+```text
+只读样例：数字看原回答，c对照，d导出诊断，r准备新实验
+  数字. 具体历史trial
+  c. 同题A/B完整回答对照
+  r. 复用某题和标准，建立新实验（先预览）
+  d. 导出诊断网页与标准矩阵（仅本地，不运行模型）
+  0. 返回评测中心
+```
+
+只读页没有s/u/o，也不显示试验页4“亲自填写复核”，避免把学习操作写回版本控制内的历史样例。想填写自己的标签，请在新批次里进行。复用资料时程序通过manifest hash查项目内同一快照，不信任旧电脑的绝对路径。
+
+README截图是真实本地HTML渲染，terminal-demo.txt是原UI实际读样例的输出；不是新调用模型后生成的演示答案。GitHub会展示PNG/TXT，HTML下载后本地打开或从d重新生成。旧3/8对5/8以及普通/对抗分表的边界仍按16.12解释。
+
+### 16.15 Tavily已经可用：真实搜索怎样测试和排错
+
+#### 16.15.1 Tavily和key到底是什么
+
+Tavily是搜索服务；key是调用凭据，不是模型。本项目通过HTTPX向其REST API请求query和最多N条结果，没有再安装Tavily SDK。搜索content属于snippet，必须真的read_page并保存正文后才能称page。主机是官方也不能自动推出摘要完整、网页已核验或结论正确。
+
+用户已配置真实TAVILY_API_KEY，本轮确认可读取并实际成功调用。密钥留在本机.env，代码、Git和展示页都不包含它。真实单次菜单auto会在有key时用Tavily；auto是启动时选服务，不是失败后自动切换。默认0搜索/指定URL的任务仍不会搜索；评测search环境可选Tavily，CLI明确加--search-provider tavily。
+
+#### 16.15.2 中心8的完整流程
+
+主页4→8先生成固定计划，列出两条查询，最多8次逻辑搜索：DuckDuckGo/Tavily各4次，AB/BA交替；Tavily basic可能消耗积分。计划阶段不读.env、不联网、不调用模型。回车仅保留计划，输入SEARCH才真正搜索。计划文件与执行时的代码/题库须一致，变化会拒绝并要求重新预览。
+
+```text
+固定对照查询：Python wait_for取消；MCP stdio/stderr
+最多8次逻辑搜索，其中4次Tavily basic可能消耗积分；无模型、无正文读取、无自动重试。
+输入 SEARCH 才进行真实搜索；回车仅保留计划：
+```
+
+完成后终端显示providers汇总，完整results.json与report.md在该次reports/evaluations目录的search-comparison下。Markdown同时有汇总表与逐次查询/错误/来源数/耗时；需要核对原摘要时再看JSON。没有自动judge标签。
+
+CLI等价入口：
+
+```powershell
+uv run --no-sync python scripts/compare_search.py
+# 明确执行才使用真实搜索服务
+uv run --no-sync python scripts/compare_search.py --execute
+```
+
+#### 16.15.3 本轮真实结果怎样理解
+
+| 当前机器与时点，2查询×2次 | Tavily | DuckDuckGo |
+|---|---:|---:|
+| 已执行逻辑搜索 | 4 | 4 |
+| 有可登记来源 | 4 | 0 |
+| 至少一条目标官方主机来源 | 4 | 0 |
+| 错误 | 0 | 4（无结果或暂不可用） |
+| 耗时中位数 | 2427.66ms | 762.66ms（失败返回，不能当更快检索） |
+
+来源数是应用规范化、去重后的登记数，不是服务商原始返回条数。目标主机命中不是网页版本验证、相关性人工打分或事实支持；只有两条开发查询，不能推断全球可用率。DDGS的一次逻辑搜索可能发多个底层HTTP，不能把“一次”当一次网络请求或等价费用。
+
+随后真实模型local/MCP各一次Tavily任务都完成search→read_page→回答。但local答案537字符超题目500，本轮按失败保留，没有重跑；MCP为391字符。它证明搜索链能用，不证明所有回答都合规。全轮四个真实烟测共10次模型请求，所有语义标签仍是助手，不是两位真实独立评审。
+
+#### 16.15.4 七类公开错误与实际处理
+
+| 类别 | 表示什么 | 先做什么 |
+|---|---|---|
+| search_auth_error | Tavily401/403，凭据或权限方向 | 本机确认key是否有效/有访问权限；不要把key贴进日志或聊天 |
+| search_quota_exceeded | Tavily432/433，计划或配额方向 | 看Tavily控制台配额/计划；不与429混为一谈 |
+| search_rate_limited | 429等速率限制 | 降低调用频率，保留失败；本项目不自动重试 |
+| search_timeout | 应用/后端超时 | 看本次耗时与网络，不直接判服务永久不可用 |
+| search_no_results_or_unavailable | DDGS可能把底层失败折成相同文字 | 只能说没取得结果或暂不可用，不能推出事实不存在、403或封禁 |
+| search_invalid_response | JSON/字段形状不符合合同 | 查接口兼容性，用离线反例验证，不能接受半个有效列表 |
+| search_provider_error | 其余服务失败 | 保留公开类别与异常类型，避免输出服务原文中的凭据 |
+
+失败仍消耗一次后端尝试，之后搜索停止；已知来源若还有页预算仍可读。错误正文和鉴权头不保存。搜索积分与模型token是两种开销，实际货币费用请看各自账单，不能因为代码没保存usage就说零费用。
+
+### 16.16 小算法亮点：混合中文/API的定义范围
+
+原balanced-v2只在一个facet完全等于API名字时按定义范围选。比如`asyncio.timeout,asyncio.wait_for`能识别；`asyncio.timeout 取消谁,asyncio.wait_for 等待完成`会退回全页词法，容易把相邻定义或长示例挤进首轮配额。
+
+balanced-v3新增definition_focus：每个混合facet若只有一个明确的ASCII API（带点或下划线），保留大小写，找该API最内层定义；若出现两个API、没有API或没有对应定义，就保留page_lexical回退。中文紧邻也可识别，如asyncio.wait_for取消谁。原问题词仍用于BM25排序，配额/整块代码/原文偏移/全局回填不改，不生成或翻译证据。
+
+本轮先冻结10个mixed场景、预算800/2400/5000与目标，再测：eligible场景预算共27个，v2字面共现7/27，v3为13/27；原8场景eligible21个，两者均11/21，没有逐项命中回退；segments/BM25对照输出相同。无目标负控制仍null，所有片段守预算、偏移可回指原文。
+
+这只是**保存片段里几句指定原文能否共同出现**，不是模型答案准确率、独立holdout或显著性结论。场景与预算不是独立题，不能把7/27到13/27写成“准确率提升85.7%”。默认仍segments/standard/缩稿关闭，候选balanced可按需求显式选。
+
+首次整批长进程测量异常退出，没有完整结果；保留日志后改成每场景独立进程，仍相同题/预算/目标、五次解析加选择测量，未挑掉坏场景。这里不声称已定位Windows异常退出根因，也不据微小耗时差宣称更快。面试可展开的重点是：反例→冻结条件→一个小改动→回归/负控制→诚实边界，而非复杂算法名词。
+
+
+
+
+#### 新增页面 P59：只读样例：数字看原回答，c对照，d导出诊断，r准备新实验
+
+数字读已有回答；c只比较原配对，d在新reports导出，r准备新实验。这里没有写回原样例的操作。
+
+<!-- TERMINAL_PAGE:P59 -->
+
+```text
+只读样例：数字看原回答，c对照，d导出诊断，r准备新实验
+  1. mcp_logfiles__1__segments__standard
+  2. mcp_logfiles__1__segments__compact
+  3. mcp_logfiles__2__segments__compact
+  4. mcp_logfiles__2__segments__standard
+  5. python_compare__1__segments__compact
+  6. python_compare__1__segments__standard
+  7. python_compare__2__segments__standard
+  8. python_compare__2__segments__compact
+  9. python_wait_for__1__segments__standard
+  10. python_wait_for__1__segments__compact
+  11. python_wait_for__2__segments__compact
+  12. python_wait_for__2__segments__standard
+  13. injection__1__segments__compact
+  14. injection__1__segments__standard
+  15. injection__2__segments__standard
+  16. injection__2__segments__compact
+  c. 同题A/B完整回答对照
+  r. 复用某题和标准，建立新实验（先预览）
+  d. 导出诊断网页与标准矩阵（仅本地，不运行模型）
+  0. 返回评测中心
+选择 [0]：
+```
+
+
+
+
+#### 新增页面 P60：本次试验
+
+这是只读样例试验页：1看trace、2证据、3标签，5/6/7打开原文件；没有4复核入口。
+
+<!-- TERMINAL_PAGE:P60 -->
+
+```text
+本次试验
+  1. 查看工具trace
+  2. 查看保存证据与选段（定位漏答）
+  3. 查看评分标准、现有标签和理由
+  5. 默认打开report.md
+  6. 默认打开run.json
+  7. 打开本次文件夹
+  0. 返回批次
+选择 [0]：
+```
+
+
+
+
+#### 新增页面 P61：输入序号看单次完整回答；s生成可打开的Markdown成绩单
+
+这是新协议未完批次示例；u先列保存/凭据/待启动/不确定，仍须下一步确认。其余快捷键沿用16.11.22。
+
+<!-- TERMINAL_PAGE:P61 -->
+
+```text
+输入序号看单次完整回答；s生成可打开的Markdown成绩单
+  1. mcp_stdio__1__segments
+  2. mcp_stdio__2__segments
+  c. 同题A/B完整回答对照
+  r. 复用某题和标准，建立新实验（先预览）
+  s. 生成成绩单（仅本地，不运行模型）
+  d. 导出诊断网页与标准矩阵（仅本地，不运行模型）
+  u. 预览续跑：保留已保存，只补未启动试验
+  o. 打开最新成绩单
+  0. 返回评测中心
+选择 [0]：
+```
+
+
+
+
+#### 新增页面 P62：提交本次续跑？
+
+这是固定流程或仅凭据恢复确认：默认0取消，1才继续；没有真实模型请求。
+
+<!-- TERMINAL_PAGE:P62 -->
+
+```text
+提交本次续跑？
+  1. 继续（不请求真实模型）
+  0. 取消
+选择 [0]：
+```
+
+
+
+
+#### 新增页面 P63：输入 LIVE 才启动剩余真实模型试验；回车取消：
+
+这是明确执行确认；回车取消，不会启动新请求。LIVE用于真实模型剩余题，SEARCH用于真实搜索。
+
+<!-- TERMINAL_PAGE:P63 -->
+
+```text
+输入 LIVE 才启动剩余真实模型试验；回车取消：
+```
+
+
+
+
+#### 新增页面 P64：输入 SEARCH 才进行真实搜索；回车仅保留计划：
+
+这是明确执行确认；回车取消，不会启动新请求。LIVE用于真实模型剩余题，SEARCH用于真实搜索。
+
+<!-- TERMINAL_PAGE:P64 -->
+
+```text
+输入 SEARCH 才进行真实搜索；回车仅保留计划：
+```
+
+
+复现当前mixed抽取（150行，包含5策略，不是自动重新取得balanced-v2历史代码）：
+
+```powershell
+uv run --no-sync python scripts/benchmark_research.py ablate --corpus reports/evaluation-20261101/corpus-exposed --extraction-plan eval/mixed_focus_suite.json
+```
+
+结果目录含results.json和Markdown，按case/budget/strategy查保存片段；先看target_in_page，再看all_targets_hit。要复核历史v2/v3对照，还需本轮mixed-focus协议/基线代码/结果，或用Git初始基线f52c039中的segments.py；不能把一次当前五策略抽取误称重新完成了历史两版本实验。中心4仍是原8场景120行，便于保持旧固定练习。
+
+
+本轮另准备了实际四个烟测答案的人工校准材料：reports/completion-20261109-evening/human-calibration/reviewer内有template、reviewer-A、reviewer-B三份初始空表，private-map在外层。请让两位真实参与者分别只拿reviewer目录与既有填写说明，不看private-map或助手既有结论，各自署名并填写true/false/null与理由；冻结后再用blind-check作一致性核对。现在12条标准全部未判，jointly_judged=0、κ=null，没有完成任何人工校准。
+
+为续跑补了一项真实进程反例：worker已保存run/草稿/receipt后，测试让父进程在写saved前立即os._exit(23)。新进程实际resume后两行saved、第一run hash不变且只有一份；测试不是仅改index模拟崩溃，也没有生产环境的“制造崩溃”开关。它证明这个提交窗口的恢复，不保证任意断电或外部计费exactly-once。
