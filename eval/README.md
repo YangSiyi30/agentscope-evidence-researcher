@@ -1,10 +1,12 @@
 # 评测材料与当前入口
 
-本目录保存固定案例、历史执行约定和助手构造的开发输入。当前0.40.0，新增只读诊断与可携带回归；0.38已有终端评测中心；原题库和质量规则保持：research_suite.json仍20题/62项，v3澄清分析性引用攻击标记不等于服从；extraction_suite.json保留10旧场景，coverage_suite.json新增8个多关注点/对照场景，不替换旧目标。题目、方法、结果和后续方向均集中在[面试手册第13节](../docs/INTERVIEW_GUIDE_ZH.md#research-evaluation)，不另建评估说明文件；代码结构见[架构](../项目架构与运行指南.md#evaluation)，命令与携带见[统一验收指南](../统一离线验收与核心代码走读.md)。
+本目录保存固定案例、历史执行约定和助手构造的开发输入。当前0.40.0，已有只读诊断、可携带回归，新增保守续跑、混合语言focus场景和搜索服务对照。原题库和质量规则保持：research_suite.json仍20题/62项，v3澄清分析性引用攻击标记不等于服从；extraction_suite.json保留10旧场景，coverage_suite.json保留8个多关注点/对照场景，不替换旧目标。题目、方法、结果和后续方向均集中在[面试手册第13节](../docs/INTERVIEW_GUIDE_ZH.md#research-evaluation)，不另建评估说明文件；代码结构见[架构](../项目架构与运行指南.md#evaluation)，命令与携带见[统一验收指南](../统一离线验收与核心代码走读.md)。
 
 | 入口 | 用途 | 模型/网络 |
 |---|---|---|
-| scripts/benchmark_research.py | plan/题库只读；fetch保存HTML；ablate同页对照；run --execute逐次运行；score核对原件；blind-prepare/blind-check准备和检查盲评 | plan/ablate/score无模型；fetch只下载公开页；run真实模式可计费 |
+| scripts/benchmark_research.py | plan/题库只读；fetch保存HTML；ablate同页对照；run --execute逐次运行；resume预览或保守续跑；score/diagnose核对原件；blind-prepare/blind-check准备和检查盲评 | plan/ablate/score/diagnose无模型；fetch只下载公开页；run或resume实际启动真实任务可计费 |
+| scripts/verify_source.py | local、MCP、fixture批次先一题、续跑剩余、诊断五步；核对原第一份run未变 | 固定模型和资料；子进程不传模型key |
+| scripts/compare_search.py | 默认仅计划；--execute对同查询做DDG/Tavily有界对照 | 无模型和读页；实际Tavily可能消耗积分 |
 | scripts/evaluate_offline.py | 9个固定控制流回放，刷新examples | 固定模型和证据，无真实请求 |
 | scripts/verify_offline.py | 默认计划；--run-offline显式四步；--check-summary只读核验 | 离线；历史摘要核验不执行所存command |
 | scripts/review_run.py | prepare-atomic/check/worksheet，绑定run并检查声明/摘录/覆盖 | 不请求模型，不自动判事实蕴含 |
@@ -24,11 +26,11 @@ questions.jsonl仍保留15条扩展提问方向，不是本轮批量执行入口
 
 0.37默认仍segments/standard、缩稿关闭。--answer-style可列一或两种，比较两种格式时只选一种strategy；重复组按variant分开。--revise-answer另启最多一次无工具缩稿，原稿、候选和额外用量保留，仍须核对语义。balanced-v2在多关注点打包时缩短显示前缀，保存的完整路径与原文定位不变。
 
-本轮两个抽取批次各120行（8场景×3预算×5策略），各15行缺目标而为null；真实模型41次、84请求含2次缩稿。它们是开发对照，不合并为独立测试题准确率。当前无真实人工盲评，示例表全部null。全部方法/命令/好坏结果在面试手册13.0与15节，不另建一份入门评估指南。
+0.37历史的两个抽取批次各120行（8场景×3预算×5策略），各15行缺目标而为null；该轮真实模型41次、84请求含2次缩稿。它们是开发对照，不合并为独立测试题准确率。当前无真实人工盲评，盲评示例表全部null。全部方法/命令/好坏结果在面试手册13.0与15节，不另建一份入门评估指南。
 
-从start.bat主页4进入评测中心：1固定离线，2预设题，3自定义题与必答点，4抽取对照，5结果与复核。自定义输入保存到新的reports/evaluations/*/custom-suite.json，不修改本目录预设题库；后续可在原批次r复用题目/标准和资料建立新实验。全部操作/例子/结果判读集中在面试手册16节。
+从start.bat主页4进入评测中心：1固定离线，2预设题，3自定义题与必答点，4抽取对照，5结果与复核，6操作帮助，7随源码真实只读样例，8搜索服务诊断。自定义输入保存到新的reports/evaluations/*/custom-suite.json，不修改本目录预设题库；后续可在原批次r复用题目/标准和资料建立新实验。全部操作/例子/结果判读集中在面试手册16节。
 
-11-03逐页菜单与各选项含义已集中到面试手册16.11。c只读已有结果；r可从保存的完整suite选题，重新配置并预览新试验，不继承旧答案/标签；冻结页、实际URL、公共搜索分别是固定资料、重新取给定页、先检索取来源。评测web/search为HTTP，Edge在主页2单次向导。代码/题库本次不变。
+逐页菜单与各选项含义已集中到面试手册16.11，并按0.40更新。c只读已有结果；r可从保存的完整suite选题，重新配置并预览新试验，不继承旧答案/标签；冻结页、实际URL、公共搜索分别是固定资料、重新取给定页、先检索取来源。评测web/search为HTTP，Edge在主页2单次向导。11-03当时只改文档，当前新增代码与场景详见末节；原20题/62标准保持。
 
 
 ## 0.39：只读诊断与可携带测试
