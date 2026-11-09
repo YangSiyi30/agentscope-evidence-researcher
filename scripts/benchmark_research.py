@@ -20,6 +20,17 @@ from datetime import UTC, datetime
 from pathlib import Path
 from uuid import uuid4
 
+from as_researcher.batch_runtime import (
+    atomic_json,
+    batch_lock,
+    infrastructure_failure,
+    model_binding,
+    recovery_preview,
+    reserve_trial,
+    seal_execution,
+    validate_receipt,
+    worker_claim,
+)
 from as_researcher.benchmark import (
     STRATEGIES,
     FrozenReader,
@@ -45,9 +56,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def write_json(path, value):
-    temp = path.with_suffix(path.suffix + ".tmp")
-    temp.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    temp.replace(path)
+    atomic_json(path, value)
 
 
 def new_output(value, label):
@@ -133,6 +142,7 @@ def make_plan(args, suite):
     return {
         "schema_version": 1,
         "kind": "research_benchmark_plan",
+        "execution_protocol": 2,
         "application_version": importlib.metadata.version("agentscope-deep-researcher-interview"),
         "created_at": datetime.now(UTC).isoformat(),
         "suite_sha256": digest(args.suite.read_bytes()),
@@ -213,6 +223,9 @@ async def worker(batch, trial_id):
     ):
         raise ValueError("Implementation/suite changed after plan")
     trial = next(t for t in plan["trials"] if t["id"] == trial_id)
+    indexed = json.loads((batch / "index.json").read_bytes())
+    running = next(t for t in indexed if t["id"] == trial_id)
+    attempt_id = worker_claim(batch, running, plan, ROOT)
     task = next(t for t in suite.tasks if t.id == trial["task_id"])
     mode, strategy = plan["mode"], trial["strategy"]
     for name in ("as", "openai", "httpx"):
@@ -250,6 +263,7 @@ async def worker(batch, trial_id):
     )
     try:
         async with AsyncExitStack() as stack:
+            stack.enter_context(batch_lock(batch, "worker.lock"))
             provider = plan["search_provider"] if mode == "search" else "fixture"
             backend = make_search(provider)
             if mode in {"frozen", "fixture"}:
@@ -309,15 +323,11 @@ async def worker(batch, trial_id):
             write_json(
                 batch / (trial_id + ".result.json"),
                 {
+                    "attempt_id": attempt_id,
                     "run_file": target.relative_to(batch).as_posix(),
                     "run_sha256": fingerprint(run),
                     "metrics": run["metrics"],
-                    "infrastructure_failure": run["metrics"]["status"] != "completed"
-                    or run["metrics"]["stop_reason"] == "search_error"
-                    or (
-                        run["metrics"]["page_read_attempts"] > 0
-                        and run["metrics"]["pages_read"] == 0
-                    ),
+                    "infrastructure_failure": infrastructure_failure(run),
                 },
             )
     finally:
@@ -327,61 +337,96 @@ async def worker(batch, trial_id):
                 await revision_model.client.close()
 
 
-def execute(args, suite, plan):
-    output = new_output(args.output, "research-benchmark")
-    write_json(output / "plan.json", plan)
-    (output / "suite.json").write_bytes(args.suite.read_bytes())
-    rows = [dict(t) for t in plan["trials"]]
-    write_json(output / "index.json", rows)
+def run_rows(output, plan, rows, eligible, max_new_trials=None):
     failures = 0
+    started = 0
     for row in rows:
+        if row["id"] not in eligible:
+            continue
+        if max_new_trials is not None and started >= max_new_trials:
+            break
+        reserve_trial(output, row, plan)
+        write_json(output / "index.json", rows)
+        started += 1
         try:
             process = subprocess.run(
                 [sys.executable, str(Path(__file__).resolve()), "_worker", str(output), row["id"]],
-                cwd=ROOT,
-                env={**os.environ, "PYTHONIOENCODING": "utf-8"},
-                stdin=subprocess.DEVNULL,
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
+                cwd=ROOT, env={**os.environ, "PYTHONIOENCODING": "utf-8"},
+                stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                 timeout=plan["timeout"] + 40 + (30 if plan.get("revise_answer") else 0),
             )
-            result_path = output / (row["id"] + ".result.json")
-            if process.returncode == 0 and result_path.exists():
-                row.update(json.loads(result_path.read_bytes()), status="saved")
-                failed = row["infrastructure_failure"]
+            receipt = validate_receipt(output, row, plan)
+            if receipt is not None:
+                row.update(receipt, status="saved")
+                failed = receipt["infrastructure_failure"]
             else:
                 row.update(status="worker_failed", exit_code=process.returncode)
                 failed = True
         except subprocess.TimeoutExpired:
+            # The child could have committed just before the timeout. Recovery
+            # may adopt its receipt, but never re-execute this trial.
             row.update(status="process_deadline")
+            failed = True
+        except KeyboardInterrupt:
+            row.update(status="interrupted")
+            write_json(output / "index.json", rows)
+            return 130
+        except (ValueError, OSError, KeyError, TypeError):
+            row.update(status="worker_failed", receipt_invalid=True)
             failed = True
         failures = failures + 1 if failed else 0
         write_json(output / "index.json", rows)
-        print(
-            json.dumps({k: row.get(k) for k in ("id", "status", "run_file")}, ensure_ascii=False),
-            flush=True,
-        )
+        print(json.dumps({k: row.get(k) for k in ("id", "status", "run_file")}), flush=True)
         if failures >= 2:
             break
-    print(
-        json.dumps(
-            {
-                "batch": str(output),
-                "planned": len(rows),
-                "saved": sum(r["status"] == "saved" for r in rows),
-            }
-        )
-    )
-    return (
-        2
-        if any(
-            r["status"] != "saved"
-            or r["metrics"]["status"] != "completed"
-            or r.get("infrastructure_failure") is True
-            for r in rows
-        )
-        else 0
-    )
+    print(json.dumps({"batch": str(output), "planned": len(rows),
+                      "saved": sum(r["status"] == "saved" for r in rows)}))
+    if all(r["status"] == "saved" and not r.get("infrastructure_failure", True)
+           and r.get("metrics", {}).get("status") == "completed" for r in rows):
+        return 0
+    if max_new_trials is not None and started >= max_new_trials and all(
+        r["status"] == "not_run" or (r["status"] == "saved" and not r.get("infrastructure_failure", True))
+        for r in rows
+    ):
+        return 4  # Intentional chunk boundary, not an infrastructure failure.
+    return 2
+
+
+def execute(args, suite, plan):
+    output = new_output(args.output, "research-benchmark")
+    with batch_lock(output):
+        write_json(output / "plan.json", plan)
+        (output / "suite.json").write_bytes(args.suite.read_bytes())
+        rows = [dict(t) for t in plan["trials"]]
+        write_json(output / "index.json", rows)
+        seal_execution(output, plan, ROOT)
+        return run_rows(output, plan, rows, {r["id"] for r in rows}, getattr(args, "max_new_trials", None))
+
+
+def resume(batch, execute=False, max_new_trials=None):
+    preview = recovery_preview(batch, Path(__file__))
+    if not execute:
+        display = {k: v for k, v in preview.items() if k != "context"}
+        display["recoverable"] = list(preview["recoverable"])
+        display["will_start"] = preview["pending"][:max_new_trials]
+        print(json.dumps(display, ensure_ascii=False, indent=2))
+        return 0
+    if not batch.is_relative_to((ROOT / "reports").resolve()):
+        raise ValueError("Execution must remain inside project reports")
+    with batch_lock(batch):
+        # A worker outliving a crashed parent still owns this independent lock.
+        with batch_lock(batch, "worker.lock"):
+            preview = recovery_preview(batch, Path(__file__))
+        context = preview["context"]
+        plan, rows = context["plan"], context["rows"]
+        seal = json.loads((batch / "execution.json").read_bytes())
+        if preview["pending"] and seal["model_binding"] != model_binding(plan["mode"], ROOT):
+            raise ValueError("Model endpoint/name changed; use a new experiment")
+        for row in rows:
+            if row["id"] in preview["recoverable"]:
+                row.update(preview["recoverable"][row["id"]], status="saved")
+        write_json(batch / "index.json", rows)
+        return run_rows(batch, plan, rows, set(preview["pending"]), max_new_trials)
 
 
 def score(batch):
@@ -655,7 +700,7 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "operation",
-        choices=["plan", "fetch", "ablate", "run", "score", "diagnose", "blind-prepare", "blind-check"],
+        choices=["plan", "fetch", "ablate", "run", "score", "diagnose", "resume", "blind-prepare", "blind-check"],
         nargs="?",
         default="plan",
     )
@@ -697,8 +742,13 @@ def main(argv=None):
     parser.add_argument("--review", type=Path, action="append")
     parser.add_argument("--output", type=Path)
     parser.add_argument("--execute", action="store_true")
+    parser.add_argument("--max-new-trials", type=int, choices=range(1, 41), help="Gracefully stop this invocation after N new trials; retain the remaining original plan")
     args = parser.parse_args(argv)
     try:
+        if args.operation == "resume":
+            if not args.batch or any(v.startswith("--") and v not in {"--batch", "--execute", "--max-new-trials"} for v in argv):
+                raise ValueError("resume accepts --batch, optional --execute/--max-new-trials; original configuration is reused")
+            return resume(args.batch.resolve(), args.execute, args.max_new_trials)
         if args.operation == "diagnose":
             if not args.batch:
                 raise ValueError("diagnose requires --batch")

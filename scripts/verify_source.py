@@ -58,13 +58,25 @@ def commands(output):
                 "--case",
                 "mcp_stdio",
                 "--repeats",
-                "1",
+                "2",
                 "--strategy",
                 "segments",
+                "--max-new-trials",
+                "1",
                 "--corpus",
                 "reports/evaluation-20261101/corpus-exposed",
                 "--output",
                 str(output / "batch"),
+            ],
+        ),
+        (
+            "resume",
+            [
+                "scripts/benchmark_research.py",
+                "resume",
+                "--batch",
+                str(output / "batch"),
+                "--execute",
             ],
         ),
         (
@@ -94,6 +106,7 @@ def verify(output):
         "steps": [],
         "note": "Program checks only, no model/network quality claims. Full historical delivery audit is separate.",
     }
+    initial_runs = {}
     for name, argv in commands(output):
         with (
             (output / (name + ".stdout.log")).open("wb") as stdout,
@@ -113,16 +126,23 @@ def verify(output):
                 code = child.returncode
             except subprocess.TimeoutExpired:
                 code = 124
-        result["steps"].append({"id": name, "exit_code": code})
-        if code:
+        expected = 4 if name == "batch" else 0
+        result["steps"].append({"id": name, "exit_code": code, "expected_exit_code": expected})
+        if code != expected:
             break
-    if len(result["steps"]) == 4 and all(s["exit_code"] == 0 for s in result["steps"]):
+        if name == "batch":
+            initial_runs = {p: digest(p.read_bytes()) for p in (output / "batch").rglob("run.json")}
+    if len(result["steps"]) == 5 and all(
+        s["exit_code"] == s["expected_exit_code"] for s in result["steps"]
+    ):
         report = json.loads((output / "diagnostics/diagnostics.json").read_bytes())
         checks = {
             "fixture_mode": report["mode"] == "fixture",
-            "one_saved_trial": len(report["trials"]) == 1
-            and report["trials"][0]["status"] == "saved",
-            "semantic_still_unknown": report["trials"][0]["passed"] is None,
+            "two_saved_trials": len(report["trials"]) == 2
+            and all(t["status"] == "saved" for t in report["trials"]),
+            "semantic_still_unknown": all(t["passed"] is None for t in report["trials"]),
+            "first_run_unchanged": len(initial_runs) == 1
+            and all(p.is_file() and digest(p.read_bytes()) == h for p, h in initial_runs.items()),
             "no_generated_labels": all(c["met"] is None for c in report["criteria"]),
             "html_and_matrix": (output / "diagnostics/index.html").is_file()
             and (output / "diagnostics/matrix-1.csv").is_file(),

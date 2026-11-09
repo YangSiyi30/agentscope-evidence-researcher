@@ -591,6 +591,22 @@ def focus_facets(focus: str) -> list[str]:
     return list(dict.fromkeys(t.strip() for t in re.split(r"[,，;；]", focus) if t.strip()))[:3]
 
 
+def definition_focus(facet: str) -> tuple[str | None, str]:
+    """Scope only an unambiguous explicit API, never infer a Chinese translation.
+
+    ASCII boundaries allow ``asyncio.wait_for取消谁``. Multiple qualified APIs in
+    one facet are ambiguous, so keep page-level BM25 rather than choose one.
+    """
+    identifier = r"[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*"
+    if re.fullmatch(identifier, facet):
+        return facet, "exact_definition"
+    names = list(dict.fromkeys(re.findall(r"(?<![A-Za-z0-9_.])" + identifier, facet)))
+    names = [name for name in names if "." in name or "_" in name]
+    if len(names) == 1:
+        return names[0], "exact_definition_mixed"
+    return None, "page_lexical"
+
+
 def select_balanced(document: dict, focus: str, limit: int) -> dict:
     """Reserve a fair first round for up to three explicit focuses, then refill.
 
@@ -601,7 +617,7 @@ def select_balanced(document: dict, focus: str, limit: int) -> dict:
     facets = focus_facets(focus)
     if len(facets) < 2:
         result = select_passages(document, focus, limit, ranking="bm25")
-        result.update(strategy="balanced", selector_version="balanced-v2")
+        result.update(strategy="balanced", selector_version="balanced-v3")
         return result
     selected = {}
     used = 0
@@ -620,13 +636,14 @@ def select_balanced(document: dict, focus: str, limit: int) -> dict:
         # Explicit API names can use exact innermost definition boundaries.
         # Preserve case: asyncio.timeout and asyncio.Timeout are different APIs.
         scoped = []
-        if re.fullmatch(r"[A-Za-z_][\w.]*", facet):
+        identifier, scope = definition_focus(facet)
+        if identifier is not None:
             scoped = [
                 p
                 for p in candidates
                 if p["definition_path"]
                 and re.search(
-                    r"(?<!\w)" + re.escape(facet) + r"(?![\w.])", p["definition_path"][-1]
+                    r"(?<!\w)" + re.escape(identifier) + r"(?![\w.])", p["definition_path"][-1]
                 )
             ]
         if scoped:
@@ -648,7 +665,7 @@ def select_balanced(document: dict, focus: str, limit: int) -> dict:
         diagnostics.append(
             {
                 "focus": facet,
-                "scope": "exact_definition" if scoped else "page_lexical",
+                "scope": scope if scoped else "page_lexical",
                 "reserved_chars": quota,
                 "matched_candidates": len(candidates),
                 "new_segments": added,
@@ -703,7 +720,7 @@ def select_balanced(document: dict, focus: str, limit: int) -> dict:
     return {
         **refill,
         "strategy": "balanced",
-        "selector_version": "balanced-v2",
+        "selector_version": "balanced-v3",
         "content": "\n\n".join(p["display_prefix"] + p["text"] for p in rows),
         "segments": rows,
         "focus_allocation": {

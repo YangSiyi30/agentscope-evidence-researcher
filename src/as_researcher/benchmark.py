@@ -303,10 +303,17 @@ def load_bound_batch(batch: Path) -> dict:
     """Read saved runs with the same bindings for CLI grading and terminal views."""
     batch = batch.resolve()
     plan = json.loads((batch / "plan.json").read_bytes())
+    if (not isinstance(plan, dict) or not isinstance(plan.get("trials"), list)
+        or not 1 <= len(plan["trials"]) <= 40
+        or not all(isinstance(r, dict) and isinstance(r.get("id"), str) for r in plan["trials"])
+        or len({r["id"] for r in plan["trials"]}) != len(plan["trials"])):
+        raise ValueError("Invalid/empty/duplicate planned trial set")
     suite = load_suite(batch / "suite.json")
     if digest((batch / "suite.json").read_bytes()) != plan["suite_sha256"]:
         raise ValueError("Suite fingerprint mismatch")
     rows = json.loads((batch / "index.json").read_bytes())
+    if not isinstance(rows, list) or not all(isinstance(row, dict) for row in rows):
+        raise ValueError("Invalid index rows")
     keys = ("id", "task_id", "repeat", "strategy", "answer_style", "variant")
     if [{k: r.get(k) for k in keys} for r in rows] != [
         {k: r.get(k) for k in keys} for r in plan["trials"]
@@ -314,6 +321,8 @@ def load_bound_batch(batch: Path) -> dict:
         raise ValueError("Missing/reordered/extra planned trials")
     tasks, runs = {t.id: t for t in suite.tasks}, {}
     for row in rows:
+        if row.get("status") not in {"not_run", "running", "saved", "worker_failed", "process_deadline", "interrupted"}:
+            raise ValueError("Invalid trial status")
         if row["task_id"] not in tasks or not re.fullmatch(r"[a-zA-Z0-9_]+", row["id"]):
             raise ValueError("Invalid trial identity")
         if row["status"] != "saved":

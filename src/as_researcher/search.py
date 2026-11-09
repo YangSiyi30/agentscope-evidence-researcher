@@ -14,6 +14,8 @@ SEARCH_ERROR_CODES = frozenset(
         "search_provider_error",
         "search_no_results_or_unavailable",
         "search_invalid_response",
+        "search_auth_error",
+        "search_quota_exceeded",
     }
 )
 
@@ -110,6 +112,10 @@ class TavilySearch:
                 # Classify by status, not provider text; no implicit retries.
                 if response.status_code == 429:
                     raise SearchBackendError("search_rate_limited") from None
+                if response.status_code in {401, 403}:
+                    raise SearchBackendError("search_auth_error") from None
+                if response.status_code in {432, 433}:
+                    raise SearchBackendError("search_quota_exceeded") from None
                 response.raise_for_status()
                 try:
                     payload = response.json()

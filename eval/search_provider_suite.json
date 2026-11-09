@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "queries": [
+    {"id": "python_cancellation", "query": "site:docs.python.org/3.13/library/asyncio-task.html asyncio.wait_for cancellation", "expected_hosts": ["docs.python.org"]},
+    {"id": "mcp_stdio", "query": "site:modelcontextprotocol.io/specification/2025-11-25/basic/transports stdio stderr", "expected_hosts": ["modelcontextprotocol.io"]}
+  ],
+  "providers": ["duckduckgo", "tavily"],
+  "repeats": 2,
+  "result_limit": 3,
+  "search_timeout": 20,
+  "note": "Small time-specific service diagnostic, not a relevance benchmark or answer accuracy. Host membership does not prove page version or factual support. Tavily basic may consume credits. No retry/fallback/model/page reads."
+}

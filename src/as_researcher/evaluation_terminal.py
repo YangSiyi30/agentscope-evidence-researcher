@@ -12,11 +12,13 @@ from datetime import UTC, datetime
 from pathlib import Path
 from uuid import uuid4
 
+from .batch_runtime import recovery_preview
 from .benchmark import (
     STRATEGIES,
     ResearchSuite,
     assess_saved_batch,
     check_task_review,
+    digest,
     load_suite,
     prepare_task_review,
 )
@@ -57,9 +59,12 @@ def save_json(path: Path, data) -> None:
     temp.replace(path)
 
 
-def run_operation(arguments: list[str], workspace: Path, timeout: float = 600) -> int:
+def run_operation(arguments: list[str], workspace: Path, timeout: float = 600,
+                  script: str = "benchmark_research.py") -> int:
     """Fixed script/argv, no shell; logs stay in this evaluation workspace."""
-    command = [sys.executable, str(ROOT / "scripts/benchmark_research.py"), *arguments]
+    if script not in {"benchmark_research.py", "compare_search.py"}:
+        raise ValueError("Unknown fixed evaluation script")
+    command = [sys.executable, str(ROOT / "scripts" / script), *arguments]
     print("\n正在执行：" + terminal_text(" ".join(arguments)) + "；不会自动重试。", flush=True)
     # Keep SDK/provider bodies out of the menu. The runner already suppresses
     # worker payloads; show validated artifacts rather than arbitrary stderr.
@@ -408,7 +413,7 @@ def review_trial(run: dict, task, folder: Path) -> bool:
     return True
 
 
-def view_trial(context: dict, row: dict, batch: Path) -> None:
+def view_trial(context: dict, row: dict, batch: Path, readonly: bool = False) -> None:
     task = context["tasks"][row["task_id"]]
     for line in describe_trial(row, task):
         print(terminal_text(line))
@@ -430,7 +435,7 @@ def view_trial(context: dict, row: dict, batch: Path) -> None:
                 "1": "查看工具trace",
                 "2": "查看保存证据与选段（定位漏答）",
                 "3": "查看评分标准、现有标签和理由",
-                "4": "亲自填写任务复核",
+                **({} if readonly else {"4": "亲自填写任务复核"}),
                 "5": "默认打开report.md",
                 "6": "默认打开run.json",
                 "7": "打开本次文件夹",
@@ -477,19 +482,39 @@ def view_trial(context: dict, row: dict, batch: Path) -> None:
                 print("打开失败，可复制路径手动查看：" + terminal_text(path))
 
 
-def view_batch(batch: Path) -> None:
+def available_corpus(plan: dict) -> Path | None:
+    """Relocate saved examples by matching bytes, not by trusting an old path."""
+    candidates = [Path(plan["corpus"])] if plan.get("corpus") else []
+    candidates.append(CORPUS)
+    for candidate in candidates:
+        candidate = candidate.resolve()
+        if not candidate.is_relative_to(ROOT.resolve()):
+            continue
+        path = candidate / "manifest.json"
+        if path.is_file() and digest(path.read_bytes()) == plan.get("corpus_manifest_sha256"):
+            return candidate
+    return None
+
+
+def view_batch(batch: Path, readonly: bool = False) -> None:
     while True:
         context = assess_saved_batch(batch)
         show_batch(context, batch)
+        if readonly:
+            print("随源码携带的历史真实样例（只读、assistant标签）；查看不请求模型，r才建立新实验。")
         selected = choice(
-            "输入序号看单次完整回答；s生成可打开的Markdown成绩单",
+            "只读样例：数字看原回答，c对照，d导出诊断，r准备新实验" if readonly
+            else "输入序号看单次完整回答；s生成可打开的Markdown成绩单",
             {str(i): row["id"] for i, row in enumerate(context["rows"], 1)}
             | {
                 "c": "同题A/B完整回答对照",
                 "r": "复用某题和标准，建立新实验（先预览）",
-                "s": "生成成绩单（仅本地，不运行模型）",
+                **({} if readonly else {"s": "生成成绩单（仅本地，不运行模型）"}),
                 "d": "导出诊断网页与标准矩阵（仅本地，不运行模型）",
-                "o": "打开最新成绩单",
+                **({} if readonly else {
+                    "u": "预览续跑：保留已保存，只补未启动试验",
+                    "o": "打开最新成绩单",
+                }),
                 "0": "返回评测中心",
             },
             "0",
@@ -498,6 +523,28 @@ def view_batch(batch: Path) -> None:
             return
         if selected == "c":
             show_pairs(context)
+            continue
+        if selected == "u":
+            try:
+                preview = recovery_preview(batch, ROOT / "scripts/benchmark_research.py")
+            except (ValueError, OSError, KeyError) as exc:
+                print("不能续跑：" + terminal_text(str(exc)) + "；旧批次仍可只读，r可新建实验。")
+                continue
+            print(terminal_text({"已保存": len(preview["saved"]), "仅恢复凭据": list(preview["recoverable"]),
+                                 "将启动": preview["pending"], "结果不确定，不重试": preview["uncertain"]}))
+            print("只有全新未启动的试验会执行；这不是Agent状态恢复，已启动但结果不明可能已有费用。")
+            if not preview["pending"] and not preview["recoverable"]:
+                continue
+            if preview["pending"] and preview["mode"] != "fixture":
+                if ask("输入 LIVE 才启动剩余真实模型试验；回车取消：").upper() != "LIVE":
+                    continue
+            elif choice("提交本次续跑？", {"1": "继续（不请求真实模型）", "0": "取消"}, "0") != "1":
+                continue
+            workspace = new_workspace()
+            count = max(1, len(preview["pending"]))
+            code = run_operation(["resume", "--batch", str(batch), "--execute"], workspace,
+                                 count * (preview["context"]["plan"]["timeout"] + 80) + 30)
+            print("续跑操作退出码：" + str(code) + "；保留不确定行，请重新查看本批状态。")
             continue
         if selected == "r":
             tasks = list(context["tasks"].values())
@@ -511,7 +558,7 @@ def view_batch(batch: Path) -> None:
                 "0",
             )
             if value != "0":
-                corpus = Path(context["plan"]["corpus"]) if context["plan"].get("corpus") else None
+                corpus = available_corpus(context["plan"])
                 arguments = configure(batch / "suite.json", tasks[int(value) - 1].id, corpus)
                 perform_evaluation(arguments, new_workspace())
             continue
@@ -541,7 +588,7 @@ def view_batch(batch: Path) -> None:
             else:
                 print("尚无成绩单，请先选s生成。查看和评分不会重新请求模型。")
             continue
-        view_trial(context, context["rows"][int(selected) - 1], batch)
+        view_trial(context, context["rows"][int(selected) - 1], batch, readonly=readonly)
 
 
 def show_pairs(context: dict) -> None:
@@ -682,6 +729,8 @@ def run_evaluation_center() -> int | None:
                     "4": "离线抽取对照（只测选段，不测回答）",
                     "5": "查看已有批次、失败原因 / 复核 / 成绩单",
                     "6": "操作说明",
+                    "7": "查看随源码提供的真实A/B样例（只读、无模型费）",
+                    "8": "同查询对照DuckDuckGo/Tavily（先预览，搜索可能计费）",
                     "0": "返回主页",
                 },
                 "1",
@@ -690,6 +739,26 @@ def run_evaluation_center() -> int | None:
                 return last_code
             if selected == "5":
                 browse_batches()
+            elif selected == "7":
+                view_batch(ROOT / "examples/portfolio/batch", readonly=True)
+            elif selected == "8":
+                workspace = new_workspace()
+                code = run_operation([], workspace, script="compare_search.py")
+                if code:
+                    continue
+                path = max(workspace.glob("operation-*.stdout.txt"), key=lambda p: p.stat().st_mtime)
+                plan = json.loads(path.read_bytes())
+                print("固定对照查询：" + terminal_text([c["query"] for c in plan["suite"]["queries"]]))
+                print(f"最多{plan['logical_searches']}次逻辑搜索，其中{plan['tavily_basic_requests']}次Tavily basic可能消耗积分；无模型、无正文读取、无自动重试。")
+                if ask("输入 SEARCH 才进行真实搜索；回车仅保留计划：").upper() != "SEARCH":
+                    continue
+                output = workspace / "search-comparison"
+                last_code = run_operation(["--execute", "--plan", str(path), "--output", str(output)], workspace,
+                                          timeout=300, script="compare_search.py")
+                if (output / "results.json").is_file():
+                    report = json.loads((output / "results.json").read_bytes())
+                    print(terminal_text(report["providers"]))
+                    print("目标主机命中不等于事实正确；结果仅代表本次网络/时点。报告：" + terminal_text(output / "report.md"))
             elif selected == "6":
                 print("从start.bat主页选4进入本中心。建议顺序1→5→2或3；4专门定位选段。")
                 print("待判定不等于失败；completed不等于事实正确。复核填完后用s更新成绩单，o打开。")

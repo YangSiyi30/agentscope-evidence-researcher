@@ -98,7 +98,7 @@ class TavilyRateLimitTests(unittest.IsolatedAsyncioTestCase):
         remote.search_tool.call.assert_awaited_once()
 
     async def test_other_http_errors_keep_their_original_path(self):
-        for status in (400, 401, 403, 422, 432, 433, 500, 503):
+        for status in (400, 404, 422, 500, 503):
             with self.subTest(status=status):
                 backend, requests = self.backend(status=status)
                 with self.assertRaises(httpx.HTTPStatusError) as caught:

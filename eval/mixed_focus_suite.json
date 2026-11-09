@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "created_on": "2026-11-02",
+  "purpose": "Predeclared developer extraction diagnostic, NOT independent holdout or answer accuracy. Compare baseline balanced-v2 and candidate on identical saved HTML and budgets; one intended variable: mixed-language API definition scope. Preserve ambiguous/no-match fallback, identifiers case and atomic budgets.",
+  "documents": {
+    "python": "https://docs.python.org/3.13/library/asyncio-task.html",
+    "mcp_new": "https://modelcontextprotocol.io/specification/2025-11-25/basic/transports"
+  },
+  "budgets": [
+    800,
+    2400,
+    5000
+  ],
+  "cases": [
+    {
+      "id": "mixed_timeout_waitfor",
+      "document": "python",
+      "source_kind": "official",
+      "focus": "asyncio.timeout 取消谁,asyncio.wait_for 等待取消完成",
+      "targets": [
+        "cancel the current task",
+        "wait until the future is actually cancelled",
+        "outside of the context manager"
+      ]
+    },
+    {
+      "id": "mixed_waitfor_timeout_reverse",
+      "document": "python",
+      "source_kind": "official",
+      "focus": "asyncio.wait_for取消谁，asyncio.timeout取消谁",
+      "targets": [
+        "cancel the current task",
+        "wait until the future is actually cancelled",
+        "outside of the context manager"
+      ]
+    },
+    {
+      "id": "mixed_gather_shield",
+      "document": "python",
+      "source_kind": "official",
+      "focus": "asyncio.gather 异常之后,asyncio.shield 调用者取消",
+      "targets": [
+        "continue to run",
+        "its caller is still cancelled"
+      ]
+    },
+    {
+      "id": "mixed_gather_taskgroup",
+      "document": "python",
+      "source_kind": "official",
+      "focus": "asyncio.gather 与其他任务,asyncio.TaskGroup 异常处理",
+      "targets": [
+        "remaining tasks in the group are cancelled",
+        "continue to run"
+      ]
+    },
+    {
+      "id": "mixed_stdio_streamable",
+      "document": "mcp_new",
+      "source_kind": "official",
+      "focus": "stdio 连接,Streamable HTTP 会话",
+      "targets": [
+        "SHOULD NOT assume",
+        "text/event-stream"
+      ]
+    },
+    {
+      "id": "mixed_single_waitfor",
+      "document": "python",
+      "source_kind": "official",
+      "focus": "asyncio.wait_for",
+      "targets": [
+        "wait until the future is actually cancelled",
+        "total wait time may exceed the timeout"
+      ]
+    },
+    {
+      "id": "mixed_single_stdio",
+      "document": "mcp_new",
+      "source_kind": "official",
+      "focus": "stdio",
+      "targets": [
+        "SHOULD NOT assume",
+        "stderr"
+      ]
+    },
+    {
+      "id": "mixed_missing_facet",
+      "document": "python",
+      "source_kind": "negative_control",
+      "focus": "asyncio.wait_for 取消,teleport_task 未知接口",
+      "targets": [
+        "teleport_task guarantees cross-machine teleportation"
+      ]
+    },
+    {
+      "id": "mixed_extra_1",
+      "document": "python",
+      "source_kind": "official",
+      "focus": "`asyncio.timeout()` 限定条件；`asyncio.wait_for()` 等待完成",
+      "targets": [
+        "cancel the current task",
+        "wait until the future is actually cancelled",
+        "outside of the context manager"
+      ]
+    },
+    {
+      "id": "mixed_extra_2",
+      "document": "python",
+      "source_kind": "official",
+      "focus": "asyncio.wait_for 与 asyncio.timeout 混合比较,普通中文说明",
+      "targets": [
+        "cancel the current task",
+        "wait until the future is actually cancelled",
+        "outside of the context manager"
+      ]
+    }
+  ]
+}

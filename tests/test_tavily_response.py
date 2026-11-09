@@ -113,10 +113,11 @@ class TavilyResponseTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(remote.calls[0]["search_error_code"], "search_invalid_response")
         remote.search_tool.call.assert_awaited_once()
 
-    async def test_non_rate_limit_http_error_is_not_reclassified_as_invalid_json(self):
+    async def test_auth_http_error_is_not_reclassified_as_invalid_json(self):
         backend, requests = self.backend(raw=b"Synthetic HTTP failure", status=401)
-        with self.assertRaises(httpx.HTTPStatusError):
+        with self.assertRaises(SearchBackendError) as caught:
             await backend("fact", 1)
+        self.assertEqual(caught.exception.search_error_code, "search_auth_error")
         self.assertEqual(len(requests), 1)
 
 
