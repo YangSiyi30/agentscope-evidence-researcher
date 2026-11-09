@@ -1,0 +1,32 @@
+Observed validation, 2026-09-26, application 0.6.0 / AgentScope 2.0.8.
+This is a concise record, not a verbatim shell transcript or factual-quality score.
+
+uv run --no-sync ruff check src tests scripts: PASS
+uv run --no-sync ruff format --check src tests scripts: PASS, 36 files
+uv run --no-sync python -m unittest discover -s tests: PASS, 90 tests
+uv run --no-sync python scripts/evaluate_offline.py: PASS, 9/9 control-flow cases
+uv lock --offline: PASS; only application version changed
+uv sync --locked --offline --extra browser: PASS, application 0.6.0
+Offline AgentScope + real stdio MCP tool-chain strict exit: 0
+
+Real MCP pending-call cancellation: PASS, reports/mcp-cancel-20260926T134117-aff5de.json
+Recorded cancelled call about 115 ms; child exited 0; no forced cleanup.
+Real child self-exit remains covered in 90 tests.
+
+Real model + 3 fixed synthetic evidence cases: all completed, correct layer distinctions in assistant inspection.
+Missing-page case has expected warning and a blocked extra search; only 1 backend search.
+First sandbox attempt: APIConnectionError; usage null; preserved, not counted as success.
+Fresh live tasks (DDGS + MCP + Edge): 2 completed, evidence-level availability passed.
+MCP pagination strict exit 3: 828 nonblank chars > 700 budget.
+asyncio.shield strict exit 0: assistant found unsupported ensure_future detail despite mechanical pass.
+SQLite live regression strict exit 0: 541 chars, 800-char page, 3 provider responses.
+SQLite distinguishes length fact in snippet from affinity fact in page in this one run.
+Six successful model tasks: provider input 27784 / output 4640 tokens; no cost claim.
+
+New review packets remain pending/unassigned. No independent human gold, factual accuracy or generalization claim.
+Run scripts/audit_project.py for repeatable report/packet/link/known-key/dependency checks.
+Audit reports/audit-20260926T135446-bbda06.json: PASS.
+270 text files, 100 local doc links, 27 review packets, 22 schema 4/5 report reproductions.
+No configured key value matches, invalid packets, report mismatches or forbidden dependencies.
+25 older reports preserved without forced renderer reproduction.
+Source snapshot: reports/release-v06/source-v06.zip, 64 allowlisted files, no real .env or reports.

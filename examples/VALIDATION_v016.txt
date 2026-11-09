@@ -1,0 +1,29 @@
+AgentScope Deep Researcher interview edition 0.16.0; observed 2026-09-30.
+Summary, not literal shell transcript, network performance benchmark or factual quality score.
+184 tests passed in 9.122s (reports/tests-v016.txt).
+9/9 offline control-flow replays, Ruff check/format 61 files, offline uv lock/sync passed.
+No new dependency. Production src/as_researcher is unchanged from v015 (259c9479...).
+Run schema6, renderer3, trace1, tool observation3, atomic schema2 unchanged.
+
+Diagnostic plan/result schema2; snapshot schema1.
+Isolated MCP wrapper uses unchanged production search and adds read-only observation RPC.
+Each MCP probe: 1 search RPC + 1 observation RPC, not 2 searches.
+Counts are ddgs.HttpClient.request wrapper calls, not wire requests/redirect hops.
+response_bytes measures response.content, not bytes transferred on the network.
+Bounded at16 events, dropped/in_flight explicit; unexpected fields/types/counts rejected.
+No captured body, headers, URL, proxy value or raw exception. No .env/model/page calls.
+
+Same failed v015 English query, DDGS9.16.0, result limit3:
+sandbox local: http_timeout, outer search_no_results_or_unavailable, 10029.58ms total.
+approved external local: HTTP200/30821 content bytes/3 sources, 1045.28ms total.
+sandbox MCP: http_timeout; failed search RPC + successful observation RPC, 10640.11ms total.
+approved external MCP: HTTP200/30821 content bytes/3 sources, 1731.89ms total.
+4 logical searches including sandbox failures; 0 model calls, 0 page reads.
+External source IDs match, but no response-content comparison, causal or stability claim.
+Old v015 failure lacks HTTP observations and remains unexplained.
+No new paid full-chain task or production search fix justified by these samples.
+
+6 offline installed-library experiments: 200 synthetic HTML succeeds; 202/403/429 and
+late success/late timeout may all surface as exact No results found. Not historical root cause.
+Minimal correction fixture: assistant-authored1 pass-expected/4 fail-expected candidates;
+all fit total700 characters. Not model outputs, human gold or a score. Originals preserved.

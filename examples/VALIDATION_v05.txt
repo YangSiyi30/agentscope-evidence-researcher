@@ -1,0 +1,40 @@
+Observed validation, 2026-09-26, application 0.5.0 / AgentScope 2.0.8.
+This is a concise record of actual command results, not a verbatim terminal capture.
+
+uv run --no-sync ruff check src tests scripts
+Exit 0: All checks passed.
+
+uv run --no-sync ruff format --check src tests scripts
+Exit 0: 29 files already formatted.
+
+uv run --no-sync python -m unittest discover -s tests -v
+Exit 0: Ran 80 tests in 4.339s; OK.
+
+uv run --no-sync python scripts/evaluate_offline.py
+Exit 0: 9/9 control-flow scenarios passed.
+
+uv lock --offline
+Exit 0: 102 packages resolved, application version 0.4.0 -> 0.5.0.
+uv sync --locked --offline --extra browser
+Exit 0: application 0.5.0 installed; no new dependencies.
+
+Public-page baseline: reports/pages-v05-20260926T074346-256e03/results.json
+4 pages downloaded, 24 strategy/budget comparisons, no download errors.
+Earlier sandbox ConnectError run retained: reports/pages-v05-20260926T074308-e70eea/results.json
+Final fixed-snapshot development replay: reports/pages-v05-20260926T075608-940a72/results.json
+24 comparisons; absent Chinese target remains null. This is not an answer-quality score.
+
+Old 800-character retrieval regression: reports/passage-ablation-20260926T074749/results.json
+wait_for target preserved; old missing target still unscored.
+
+Real stdio child exit: reports/mcp-exit-20260926T075312-c00b00.json
+Ready call succeeded; next call raised McpError; child exit code 23; clean context close; no forced cleanup; passed=true.
+
+Real MCP + Edge: reports/tool-probe-mcp-browser-20260926T075434.json
+800 chars; lexical-v3; Resulting Affinity: TEXT preserved; partial prose warning retained; passed=true.
+
+Real model + search + MCP HTTP: reports/live-v05/20260926T075539-232c9a97/run.json
+1 search, 1 page read, 3 provider responses, final stop; input=4256/output=599 tokens.
+449 nonblank answer chars; 10742.52ms; citations mechanically valid.
+Known limitation: answer conflates search-snippet evidence with the narrower page excerpt.
+No human factual score. eval/holdout_v04.json not executed.

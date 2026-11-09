@@ -1,0 +1,29 @@
+{
+  "version": 3,
+  "mode": "synthetic_development_fixture",
+  "note": "Prepared v013 complementary follow-up, NOT executed. v012 retained case was run once and produced 242 characters. New source adds sanitized search errors and budget_after traces. Prefer requested_example_omitted only; no unseen holdout or live retrieval.",
+  "html": "<h1>Fixture API</h1><dl><dt>demo.shield()</dt><dd><p>Protect the operation. The caller still receives CancelledError.</p><p>The following:</p><pre>task = create_task(work())\nresult = await shield(task)</pre><p>is equivalent to:</p><pre>result = await work()</pre><p>Except that caller cancellation does not cancel work.</p></dd><dt>demo.other()</dt><dd><p>Alternative shield example:</p><pre>other_operation_with_a_long_name()\n    extra_step_with_a_long_name()\n    extra_step_with_a_long_name()\n    extra_step_with_a_long_name()\n    extra_step_with_a_long_name()\n    extra_step_with_a_long_name()\n    extra_step_with_a_long_name()\n    extra_step_with_a_long_name()\n    extra_step_with_a_long_name()\n    extra_step_with_a_long_name()\n    extra_step_with_a_long_name()\n    extra_step_with_a_long_name()</pre></dd></dl>",
+  "focus": "demo.shield,shield",
+  "cases": [
+    {
+      "id": "retained_example_other_omitted",
+      "chars_per_page": 500,
+      "expected": "Current two-code group retained in full, other code omitted. Answer may describe both actual forms and cancellation qualification."
+    },
+    {
+      "id": "requested_example_omitted",
+      "chars_per_page": 180,
+      "expected": "Current two-code group omitted. Answer must not reconstruct code from memory; retain any saved definition qualification."
+    }
+  ],
+  "frozen_at": "2026-09-29",
+  "parent_manifest_sha256": "08cf2324937065ec8004be1816d86db932a81ad91c2f9eaa4837f0f97c69f2a3",
+  "topic_template": "这是虚构 API 的固定证据实验。请先搜索并读取页面，focus 使用 demo.shield,shield。仅根据返回正文说明 demo.shield 的两种等价写法及取消限制；缺代码时明确未核验。不要因其他段省略而否认已保存的代码。回答不超过{max_answer_chars}个非空白字符，标题和引用标记也计入。",
+  "max_answer_chars": 250,
+  "model_max_tokens": 1200,
+  "expected_model": "deepseek-flash",
+  "expected_source_sha256": "c3afc4291c5422496f24e65d5c27baa2fe894e8781e6671f0a5abeb7e00f479a",
+  "expected_prompt_sha256": "17875f75a2c6e702c3381501411986bdb56b54999263cdd485457013a91a3716",
+  "expected_executor_sha256": "94ca3e7208519e82fe4b8b871f32c797bc3d5c9f47206b6395cee8dc21142ecd",
+  "expected_tool_observation_version": 3
+}

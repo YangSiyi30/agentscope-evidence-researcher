@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "mode": "saved_evidence_revision_replay",
+  "frozen_at": "2026-09-28",
+  "purpose": "Development replay of previously observed real v0.7 failures; no new search, page read or unseen-quality claim. One tool-free model request per selected case.",
+  "max_answer_chars": 700,
+  "revision_max_tokens": 2400,
+  "revision_timeout": 30,
+  "cases": [
+    {
+      "id": "shield_saved_v07",
+      "run_file": "reports/live-eval-20260927T063020-3ea65a/asyncio_shield/20260927T063034-1712935a/run.json",
+      "run_file_sha256": "2cfc3b3ad6d435de01d44bceaeac1a6cf46650de7adb6c3db84901437ff2e49c",
+      "original_answer_sha256": "f6196b9b0589986b94f5bf5ad6fa94242745d29f49d48e631d3c3bfa65349ab0",
+      "review_checklist": [
+        "Caller can still receive CancelledError; protected task is not cancelled by caller cancellation.",
+        "The saved 749-character page already contains create_task and both await forms; the original claim that equivalent code was unverified is erroneous.",
+        "Keep page vs snippet evidence separate, including document version attributed to snippet.",
+        "Do not reconstruct omitted try/except examples or uncancel behavior."
+      ]
+    },
+    {
+      "id": "tool_errors_saved_v07",
+      "run_file": "reports/live-eval-20260927T062554-88f902/mcp_tool_errors/20260927T062630-b9c7d954/run.json",
+      "run_file_sha256": "9a9233dd5cc9f65114fea980ca513af8f724fd0f6595a5a4945831d183111e93",
+      "original_answer_sha256": "32796e247675b7abbe2701ad63e19b66a22d581369dff42fc514ab50ca075e2a",
+      "review_checklist": [
+        "Distinguish JSON-RPC error from tool execution result with isError=true.",
+        "Keep version 2025-11-25 and distinguish request schema errors from tool input validation errors.",
+        "Do not change SHOULD/MAY into MUST or broaden all business failures beyond the saved evidence.",
+        "Keep each snippet/page reference at its original level."
+      ]
+    }
+  ],
+  "followup_to_manifest_sha256": "148ca112405e149bcf57c4a88a76c0bcf14cc6e39273d9250dd7815a9aee9fca",
+  "followup_reason": "The 1200-token shield attempt ended with length and 1200 provider-reported reasoning tokens, no visible answer. Separate bounded follow-up: at most two calls at 2400 tokens. Preserve prior failed plan and artifacts; no automatic retry."
+}

@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "created_on": "2026-11-02",
+  "purpose": "Developer-selected multi-focus diagnostics, new targets declared from saved HTML before execution. Complements, never replaces, the prior extraction suite. Literal coverage is not semantic QA. Budgets/repeats are not independent questions.",
+  "documents": {
+    "python": "https://docs.python.org/3.13/library/asyncio-task.html",
+    "mcp_new": "https://modelcontextprotocol.io/specification/2025-11-25/basic/transports"
+  },
+  "budgets": [
+    800,
+    2400,
+    5000
+  ],
+  "cases": [
+    {
+      "id": "timeout_waitfor",
+      "document": "python",
+      "source_kind": "official",
+      "focus": "asyncio.timeout,asyncio.wait_for",
+      "targets": [
+        "cancel the current task",
+        "wait until the future is actually cancelled",
+        "outside of the context manager"
+      ]
+    },
+    {
+      "id": "waitfor_timeout_reverse",
+      "document": "python",
+      "source_kind": "official",
+      "focus": "asyncio.wait_for,asyncio.timeout",
+      "targets": [
+        "cancel the current task",
+        "wait until the future is actually cancelled",
+        "outside of the context manager"
+      ]
+    },
+    {
+      "id": "gather_shield",
+      "document": "python",
+      "source_kind": "official",
+      "focus": "asyncio.gather,asyncio.shield",
+      "targets": [
+        "continue to run",
+        "its caller is still cancelled"
+      ]
+    },
+    {
+      "id": "gather_taskgroup",
+      "document": "python",
+      "source_kind": "official",
+      "focus": "asyncio.gather,asyncio.TaskGroup",
+      "targets": [
+        "remaining tasks in the group are cancelled",
+        "continue to run"
+      ]
+    },
+    {
+      "id": "stdio_streamable",
+      "document": "mcp_new",
+      "source_kind": "official",
+      "focus": "stdio,Streamable HTTP",
+      "targets": [
+        "SHOULD NOT assume",
+        "text/event-stream"
+      ]
+    },
+    {
+      "id": "single_waitfor",
+      "document": "python",
+      "source_kind": "official",
+      "focus": "asyncio.wait_for",
+      "targets": [
+        "wait until the future is actually cancelled",
+        "total wait time may exceed the timeout"
+      ]
+    },
+    {
+      "id": "single_stdio",
+      "document": "mcp_new",
+      "source_kind": "official",
+      "focus": "stdio",
+      "targets": [
+        "SHOULD NOT assume",
+        "stderr"
+      ]
+    },
+    {
+      "id": "missing_facet",
+      "document": "python",
+      "source_kind": "negative_control",
+      "focus": "asyncio.wait_for,teleport_task",
+      "targets": [
+        "teleport_task guarantees cross-machine teleportation"
+      ]
+    }
+  ]
+}

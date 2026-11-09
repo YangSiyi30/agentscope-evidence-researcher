@@ -1,0 +1,50 @@
+[project]
+name = "agentscope-deep-researcher-interview"
+version = "0.39.0"
+description = "A small evidence-first research workflow built on AgentScope 2.0.8."
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+license = "MIT"
+dependencies = ["agentscope==2.0.8", "httpx>=0.28,<1", "pydantic>=2.11,<3", "python-dotenv>=1.2,<2", "ddgs>=9,<10", "mcp>=1.30,<2"]
+
+[project.optional-dependencies]
+browser = ["playwright>=1.55,<2"]
+
+[project.scripts]
+as-research = "as_researcher.cli:main"
+
+[dependency-groups]
+dev = ["ruff>=0.15,<1"]
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.uv]
+cache-dir = ".uv-cache"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+ignore = ["E501"]
+
+[tool.coverage.run]
+source = ["src/as_researcher"]
+branch = true
+relative_files = true
+
+[tool.coverage.report]
+show_missing = true
+skip_empty = true
+
+[tool.coverage.html]
+directory = "reports/coverage/html"
+
+[tool.coverage.xml]
+output = "reports/coverage/coverage.xml"

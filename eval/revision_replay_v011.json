@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "mode": "saved_evidence_revision_replay",
+  "frozen_at": "2026-09-28",
+  "purpose": "Prepared v0.11 follow-up, not yet executed: explicit evidence-over-original rule plus title metadata boundary. Same saved shield source, same input, bounded single responding request.",
+  "max_answer_chars": 700,
+  "revision_max_tokens": 1200,
+  "revision_timeout": 30,
+  "cases": [
+    {
+      "id": "shield_saved_v07",
+      "run_file": "reports/live-eval-20260927T063020-3ea65a/asyncio_shield/20260927T063034-1712935a/run.json",
+      "run_file_sha256": "2cfc3b3ad6d435de01d44bceaeac1a6cf46650de7adb6c3db84901437ff2e49c",
+      "original_answer_sha256": "f6196b9b0589986b94f5bf5ad6fa94242745d29f49d48e631d3c3bfa65349ab0",
+      "review_checklist": [
+        "Caller can still receive CancelledError; protected task is not cancelled by caller cancellation.",
+        "The saved 749-character page already contains create_task and both await forms; the original claim that equivalent code was unverified is erroneous.",
+        "Keep page vs snippet evidence separate, including document version attributed to snippet.",
+        "Do not reconstruct omitted try/except examples or uncancel behavior."
+      ],
+      "expected_input_sha256": "27132cb1aaaa86dbe8393b980017bd986e077205c8f61a7d58412b0f8ce64c47"
+    }
+  ],
+  "revision_thinking": "disabled",
+  "expected_model": "deepseek-flash",
+  "expected_prompt_sha256": "f67c09a43cc4826d013f7384e57ed637ab76d064e0f04b6ade9273a893582433",
+  "parent_manifest_sha256": "9fec965d17e4fbaf6b8c303fcf5fab0c6f439a188fb61bbd8f32020332c45cd8",
+  "documentation_verified_at": "2026-09-28",
+  "documentation_sources": [
+    "https://api-docs.deepseek.com/guides/thinking_mode/",
+    "https://api-docs.deepseek.com/api/create-chat-completion/"
+  ],
+  "experiment_boundary": "One responding provider request, 1200 output token cap, 30 seconds, zero retries. Preserve failures; no automatic follow-up or cap increase.",
+  "preparation_note": "Prompt changed after the v0.10 title replay returned a complete but rejected candidate. Synthetic review cases defined first; no model claim from offline tests."
+}

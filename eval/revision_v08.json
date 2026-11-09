@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "mode": "synthetic_development_fixture",
+  "frozen_before_implementation": "2026-09-27",
+  "url": "https://example.org/revision-fixture",
+  "evidence": "Fictional Sable protocol v2.1: stdout MUST NOT contain logs when using stdio. Logs MAY be written to stderr. This rule does not prohibit log files. Only applies to stdio in v2.1; other versions and transports are not verified here.",
+  "topic": "依据保存证据说明 Sable v2.1 的 stdio 日志限制。保留版本、条件与禁止范围。",
+  "max_answer_chars": 250,
+  "original_repeat": 6,
+  "original_unit": "Sable v2.1 使用 stdio 时，stdout 不得混入日志，stderr 可写日志；该规则不能推出禁止日志文件。其他版本及传输方式未核验。[{id}@page]",
+  "candidate": "Sable v2.1 使用 stdio 时：stdout 不得写日志，stderr 可写日志；不代表禁止日志文件。其他版本与传输方式未核验。[{id}@page]",
+  "meaning_changed_candidate": "Sable v2.1 禁止所有传输方式写日志文件。[{id}@page]",
+  "expectations": [
+    "Off by default; only completed overlong runs trigger one revision request with no tools, zero retries and independent timeout/input/output budgets.",
+    "Reject incomplete/empty/tool-request/overlong candidates and any removed, added, untyped or changed-level citation. Keep original and candidate on failure.",
+    "Save exact prompt, input, hashes, response metadata and separate usage. No new search or page read.",
+    "Citation equality and length cannot detect a meaning change. Even an applied candidate requires semantic review; strict exit stays nonzero. Never label a mechanically accepted candidate factual or human-reviewed."
+  ]
+}

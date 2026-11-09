@@ -1,0 +1,30 @@
+AgentScope Deep Researcher interview edition 0.14.0; observed 2026-09-29.
+Summary, not a literal shell transcript or quality score.
+174 tests passed in 15.349s (reports/tests-v014.txt).
+9/9 offline control-flow replays passed. Ruff check/format 57 Python files passed.
+uv lock/sync offline passed. AgentScope remains 2.0.8; no new dependencies.
+Run schema6, atomic schema2, comparison schema1, tool observation3 unchanged.
+New reports: report_renderer_version2, execution_trace_version1.
+
+Frozen same Chinese query, DuckDuckGo/DDGS9.16.0, result limit3:
+sandbox local: underlying HTTP timeout, outer search_no_results_or_unavailable.
+approved external local: HTTP200, 3 sources, 916.77ms total.
+sandbox MCP: one failed MCP backend call; HTTP details unavailable.
+approved external MCP: one successful MCP call, 3 sources, 1473.81ms total.
+4 logical searches including sandbox failures; 0 model calls, 0 page reads.
+Two external sequential samples share only 2 of 3 source IDs.
+No performance/stability/relevance/root-cause/full-chain conclusion.
+All raw plan/result files preserved; observations-v014.json indexes them.
+
+Execution table uses program metrics/trace, not model prose.
+New duplicate fixture: 2 recorded requests, 1 backend search, 1 blocked request.
+Old v013 report separately exported; missing trace version means blocked count unknown.
+Original run/answer/report not rewritten; legacy render equality tested.
+
+Correction: v013 search_error logical CLI exit is 2, not the previously documented 3.
+Reason: execution/search_error check precedes strict-warning check. Regression tested.
+Original observations-v013.json retained; corrections-v014.json records correction.
+
+omission_v014 complementary plan prepared and fingerprint-checked, NOT executed.
+No paid model tests this turn, no new holdout, no human quality gold.
+Old semantic revision failure, full live chain and historical search cause remain open.

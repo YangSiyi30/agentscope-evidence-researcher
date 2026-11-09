@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "created_on": "2026-09-27",
+  "purpose": "在修改 lexical-v3 之前冻结目标并下载新快照。shield 已用于 0.6 开发，当前下载不等于 0.6 的 HTML；contextlib 是新页面，但两页基线一经查看就进入开发集。缺失预定目标保持 null，不换词凑命中。",
+  "budgets": [800, 1600, 5000],
+  "metric": "字面目标共同保留与字符预算。另人工检查代码缩进、说明和相邻代码的关联。字面命中不是语义正确或模型质量评分。",
+  "cases": [
+    {
+      "id": "shield_equivalence",
+      "url": "https://docs.python.org/3/library/asyncio-task.html",
+      "features": ["definition", "prose_code_equivalence", "cancellation_qualification"],
+      "focus": "asyncio.shield,CancelledError",
+      "targets": ["create_task(something())", "res = await something()", "Although its caller is still cancelled"]
+    },
+    {
+      "id": "suppress_example",
+      "url": "https://docs.python.org/3/library/contextlib.html",
+      "features": ["definition", "prose_code_equivalence", "indentation"],
+      "focus": "contextlib.suppress,FileNotFoundError",
+      "targets": ["with suppress(FileNotFoundError):", "os.remove('somefile.tmp')", "except FileNotFoundError:"]
+    }
+  ]
+}

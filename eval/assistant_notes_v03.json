@@ -1,0 +1,297 @@
+{
+  "reviewer_kind": "assistant",
+  "gold_standard": false,
+  "batch": "reports/live-eval-20260924T120102",
+  "notes": {
+    "fact_stdio": {
+      "C001": [
+        "supported",
+        "保存的官方片段支持进程、标准流和换行规则；本单元含多个事实，需人工再拆分。",
+        [
+          [
+            "SRC-E4EFCB5B",
+            "page",
+            "subprocess"
+          ],
+          [
+            "SRC-E4EFCB5B",
+            "page",
+            "stdin"
+          ],
+          [
+            "SRC-E4EFCB5B",
+            "page",
+            "stdout"
+          ],
+          [
+            "SRC-E4EFCB5B",
+            "page",
+            "newlines"
+          ]
+        ]
+      ],
+      "C002": [
+        "supported",
+        "保存的片段明确允许 stderr 日志及客户端处理。",
+        [
+          [
+            "SRC-E4EFCB5B",
+            "page",
+            "logging purposes"
+          ],
+          [
+            "SRC-E4EFCB5B",
+            "page",
+            "capture, forward, or ignore"
+          ]
+        ]
+      ],
+      "C003": [
+        "supported",
+        "客户端和服务器的非协议内容约束均在已保存片段中。",
+        [
+          [
+            "SRC-E4EFCB5B",
+            "page",
+            "not a valid MCP message"
+          ]
+        ]
+      ],
+      "C004": [
+        "not_factual",
+        "问题标题，句子切分器将问答拆成两个单元。"
+      ],
+      "C005": [
+        "not_factual",
+        "简短推论结论，须与 C006/C007 合并审阅，不能单独当原子事实。"
+      ],
+      "C006": [
+        "insufficient",
+        "stdout 限制有支持，但只读取片段，不能由此声称整篇规范未提及文件。"
+      ],
+      "C007": [
+        "insufficient",
+        "不能从 stdout 限制推出文件禁止是合理推论；对整个版本既未禁止也未许可的断言范围过大。"
+      ],
+      "C008": [
+        "insufficient",
+        "只看旧版摘要缺少 stderr，不能当作版本内容差异；括号中域名也与真实来源 URL 不一致。"
+      ],
+      "C009": [
+        "not_factual",
+        "运行范围说明与 trace 一致，不计外部事实支持分。"
+      ]
+    },
+    "compare_timeout": {
+      "C001": [
+        "not_factual",
+        "段落标题。"
+      ],
+      "C002": [
+        "insufficient",
+        "转换异常和 3.12 变化有片段依据，但当前任务取消对象未出现在该次已保存页面片段；一个单元混合多个事实。"
+      ],
+      "C003": [
+        "not_factual",
+        "段落标题。"
+      ],
+      "C004": [
+        "supported",
+        "片段包含重设 deadline、expired 示例和 timeout_at 绝对时间说明。",
+        [
+          [
+            "SRC-86481391",
+            "page",
+            "rescheduled"
+          ],
+          [
+            "SRC-86481391",
+            "page",
+            "cm.expired()"
+          ],
+          [
+            "SRC-86481391",
+            "page",
+            "absolute time"
+          ]
+        ]
+      ],
+      "C005": [
+        "supported",
+        "保存片段逐项列出这些版本变更。",
+        [
+          [
+            "SRC-86481391",
+            "page",
+            "version 3.7"
+          ],
+          [
+            "SRC-86481391",
+            "page",
+            "version 3.11"
+          ],
+          [
+            "SRC-86481391",
+            "page",
+            "version 3.12"
+          ]
+        ]
+      ],
+      "C006": [
+        "supported",
+        "所读片段直接对比 wait 与 wait_for 的取消行为。",
+        [
+          [
+            "SRC-86481391",
+            "page",
+            "does not cancel"
+          ]
+        ]
+      ],
+      "C007": [
+        "insufficient",
+        "原文只在确需压制取消的条件下要求 uncancel；回答省略条件，容易理解为普遍要求。"
+      ],
+      "C008": [
+        "supported",
+        "片段表达优先使用两个上下文接口的建议；应保持建议语气，不升级为禁止实例化。",
+        [
+          [
+            "SRC-86481391",
+            "page",
+            "Prefer using"
+          ]
+        ]
+      ],
+      "C009": [
+        "not_factual",
+        "段落标题。"
+      ],
+      "C010": [
+        "not_factual",
+        "覆盖范围和待核验说明，与已保存证据范围一致。"
+      ]
+    },
+    "current_release": {
+      "C001": [
+        "not_factual",
+        "无法确认最新版的保守结论；不将没搜到当成不存在。"
+      ],
+      "C002": [
+        "not_factual",
+        "段落标题。"
+      ],
+      "C003": [
+        "supported",
+        "来源 URL 为 2.0.6，摘要仅介绍版本历史，没有最新标签或日期。",
+        [
+          [
+            "SRC-F3FD5DB4",
+            "snippet",
+            "Version history of AgentScope 2.x"
+          ]
+        ]
+      ],
+      "C004": [
+        "insufficient",
+        "项目名称和版号可以核对，但 b 后缀含义没有该次来源依据，需要官方版本规则支持。"
+      ],
+      "C005": [
+        "supported",
+        "只陈述这条已保存首页摘要没有版本信息，未扩大为全站没有。",
+        [
+          [
+            "SRC-D5BA06F9",
+            "snippet",
+            "AgentScope is an open-source multi-agent platform"
+          ]
+        ]
+      ],
+      "C006": [
+        "not_factual",
+        "工具执行状态，可由 trace 和 MCP 错误核对。"
+      ],
+      "C007": [
+        "not_factual",
+        "段落标题。"
+      ],
+      "C008": [
+        "not_factual",
+        "后续核验建议。"
+      ],
+      "C009": [
+        "uncited",
+        "合理的时效判断原则，但没有独立来源引用，不计已支持事实。"
+      ],
+      "C010": [
+        "not_factual",
+        "本次研究的覆盖限制。"
+      ]
+    },
+    "version_conflict": {
+      "C001": [
+        "uncited",
+        "给出外部规范结论但没有正文引用。"
+      ],
+      "C002": [
+        "insufficient",
+        "答案明显截断；日期是规范版本标识，不能直接推出各版仅在该日期生效。未完成回答也无引用。"
+      ]
+    },
+    "unknown_private": {
+      "C001": [
+        "not_factual",
+        "拒绝给出无法取得的数字。"
+      ],
+      "C002": [
+        "insufficient",
+        "开头仍把本次没有记录概括为公开来源中无记录，后半限定不能完全消除前句过强表述。"
+      ],
+      "C003": [
+        "supported",
+        "三条已保存摘要确实是部署、编排和方法介绍，不是该未具名公司的日调用量。",
+        [
+          [
+            "SRC-F23CF5CE",
+            "snippet",
+            "5 个阶段完整方法论"
+          ],
+          [
+            "SRC-437C4928",
+            "snippet",
+            "可观测体系"
+          ],
+          [
+            "SRC-C235FACB",
+            "snippet",
+            "私有化部署方案"
+          ]
+        ]
+      ],
+      "C004": [
+        "insufficient",
+        "指标名称部分在片段内，但只读节选，不能断言全文未出现客户调用量；表格提取还丢失了部分行列关联。"
+      ],
+      "C005": [
+        "not_factual",
+        "对推断范围的限定，应连同前句复核。"
+      ],
+      "C006": [
+        "insufficient",
+        "包含正确的不可推算意图，但单次成本与 token 的关联及编排/重试论据未在该次保存的片段中充分建立。"
+      ],
+      "C007": [
+        "uncited",
+        "关于私有部署日志通常在哪里的经验性断言没有正文引用。"
+      ],
+      "C008": [
+        "not_factual",
+        "运行范围陈述与 trace 一致。"
+      ],
+      "C009": [
+        "insufficient",
+        "建议方向可用，但企业自愿公开报告未必需要内部或特别授权，均需授权的概括过强。"
+      ]
+    }
+  }
+}

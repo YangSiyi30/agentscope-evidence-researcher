@@ -1,0 +1,43 @@
+AgentScope Deep Researcher interview edition 0.8.0
+Observed validation, 2026-09-27. This is a summary, not a literal shell transcript.
+
+uv lock --offline / uv sync --locked --offline --extra browser: passed; no new dependencies.
+ruff check src tests scripts: passed.
+ruff format --check src tests scripts: 42 files formatted.
+python -m unittest discover -s tests -v: 115 tests passed, final run 12.967s (reports/tests-v08-delivery.txt).
+python scripts/evaluate_offline.py: 9/9 control-flow scenarios passed; not model intelligence scores.
+
+Frozen page regressions: 42 comparison rows across existing two-page and four-page snapshots.
+All selected contents, target-presence/null rules and literal hits unchanged from final v0.7.
+Two complementary synthetic omission budgets frozen before modification: retained vs omitted code group.
+Scoped metadata bounded; oversize backend payload rejected rather than clipping code with a stale complete flag.
+
+Real model + synthetic fixed evidence:
+  Retained example / other omitted: 451 answer characters, program cap 700.
+  Requested example omitted: 465 answer characters, program cap 700.
+  Assistant observations: target distinction achieved; verbosity and remaining-count wording error remain.
+  Topic also said 250 words/characters; these are NOT successes against 250 nonwhitespace characters.
+One real model call + synthetic original/evidence revision:
+  528 -> 88 nonwhitespace characters; cap 250; applied_checks_only, exit 3 (semantic review required).
+  Input/output 678/995 tokens; provider reasoning_tokens=940. No reasoning text saved.
+  Negation/version/conditions retained in assistant inspection of this one synthetic example, not human gold.
+
+Real model/search/MCP/browser end-to-end attempts:
+  Two runs returned DDGSException from MCP search backend; child exits 2.
+  No pages fetched and no revision triggered. Not a successful end-to-end revision validation.
+Direct MCP + Edge browser component probe:
+  Public Python page succeeded. 749/800 characters, equivalent code and cancellation condition retained.
+  One retained group and three scoped omitted groups. No search or model involved.
+
+Known aggregate usage for five responding experiments: input 15477 / output 2872, 11 responses.
+Earlier sandbox model connection failure has unknown usage, not zero-cost evidence.
+Initial sandbox public page ConnectError and all failed search records preserved.
+No independent human review labels or quality accuracy score; no unseen holdout cases consumed.
+
+Revision remains opt-in. Empty, truncated, tool-request, overlong and changed-citation candidates keep original.
+Reference equality cannot detect changed semantics; explicit mutant test retains mandatory review warning.
+Run schema 6, atomic review schema 2. Final report audit reproduces old schema >=4 reports without rewriting them.
+See root 省略范围与一次缩稿验证.md and docs/SESSION_2026-09-27_v08.md for artifact paths.
+
+Final review also makes partial provider usage unknown instead of summing incomplete counts.
+A short-timeout test initially assumed HTTP had started; final test correctly allows timeout during SDK formatting while requiring one attempt, no retries, and preserved original.

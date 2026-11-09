@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "created_on": "2026-09-26",
+  "purpose": "开发用固定合成反例；在修改提示词与引用协议前保存。不是公开网页或独立质量基准。",
+  "cases": [
+    {
+      "id": "complementary",
+      "topic": "检索并读取 Aperture 演示服务的说明，回答日志保留天数与单次记录数上限。逐项说明依据来自搜索摘要还是正文片段，不把摘要说成正文已核验。",
+      "snippet": "Aperture 演示服务日志保留 7 天。",
+      "page": "Aperture 演示服务单次最多读取 4096 条记录。本片段未涉及日志保留期限。",
+      "expected_behavior": "7 天只能引用 snippet，4096 条只能引用 page；正文未涉及期限不代表没有期限。"
+    },
+    {
+      "id": "conflicting",
+      "topic": "检索并读取 Aperture 演示服务的日志保留政策。已有证据能否确认现在的保留天数？说明证据层次、冲突和未知条件。",
+      "snippet": "Aperture 演示服务日志保留 7 天。摘要未标明生效日期。",
+      "page": "Aperture 演示服务日志保留 30 天。本片段未标明生效日期。",
+      "expected_behavior": "并列 7 天 snippet 与 30 天 page；不能凭层次更高就断言 30 天是最新生效政策。"
+    },
+    {
+      "id": "page_missing",
+      "topic": "检索并尝试读取 Aperture 演示服务的保留政策。说明保留天数及正文是否实际核验；不得把读取失败说成政策不存在。",
+      "snippet": "Aperture 演示服务日志保留 7 天。",
+      "page_error": "fixture_page_unavailable",
+      "expected_behavior": "保留摘要依据、明确正文读取失败；不生成 page 引用，不声称正文已核验。"
+    }
+  ]
+}

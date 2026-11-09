@@ -1,0 +1,503 @@
+{
+  "mode": "synthetic_control_flow_only",
+  "results": [
+    {
+      "case": "normal",
+      "control_check": "PASS",
+      "status": "completed",
+      "answer_chars": 144,
+      "answer_within_limit": true,
+      "stop_reason": "agent_completed",
+      "search_stop_reason": null,
+      "agent_finished_reason": "completed",
+      "provider_finish_reasons": [],
+      "completion_check": "unobserved",
+      "error_type": null,
+      "search_attempts": 2,
+      "page_read_attempts": 0,
+      "pages_read": 0,
+      "tool_invocations": 2,
+      "unique_sources": 2,
+      "queries": [
+        "agent memory design",
+        "agent memory evaluation"
+      ],
+      "duration_ms": 11.32,
+      "citations": {
+        "used_ids": [
+          "SRC-91D20607",
+          "SRC-A65ED23F"
+        ],
+        "valid_ids": [
+          "SRC-91D20607",
+          "SRC-A65ED23F"
+        ],
+        "invalid_ids": [],
+        "id_validity_rate": 1.0,
+        "has_citations": true,
+        "note": "ID existence only; not factual accuracy or claim support."
+      },
+      "evidence_levels": {
+        "contract_version": 1,
+        "references": [
+          "SRC-91D20607@snippet",
+          "SRC-A65ED23F@snippet"
+        ],
+        "untyped_references": [],
+        "invalid_references": [],
+        "unavailable_references": [],
+        "contract_valid": true,
+        "note": "Evidence-level availability only. Does not check claim support, conflicts, freshness, or uncited facts."
+      },
+      "token_usage": null,
+      "warnings": [],
+      "research_token_usage": null,
+      "model_request_attempts": null,
+      "model_request_failures": null,
+      "model_errors": [],
+      "revision_status": "disabled",
+      "revision_request_attempts": 0,
+      "fixture_model_calls": 3
+    },
+    {
+      "case": "budget_1",
+      "control_check": "PASS",
+      "status": "completed",
+      "answer_chars": 103,
+      "answer_within_limit": true,
+      "stop_reason": "search_budget",
+      "search_stop_reason": "search_budget",
+      "agent_finished_reason": "completed",
+      "provider_finish_reasons": [],
+      "completion_check": "unobserved",
+      "error_type": null,
+      "search_attempts": 1,
+      "page_read_attempts": 0,
+      "pages_read": 0,
+      "tool_invocations": 1,
+      "unique_sources": 1,
+      "queries": [
+        "agent memory design"
+      ],
+      "duration_ms": 1.54,
+      "citations": {
+        "used_ids": [
+          "SRC-A65ED23F"
+        ],
+        "valid_ids": [
+          "SRC-A65ED23F"
+        ],
+        "invalid_ids": [],
+        "id_validity_rate": 1.0,
+        "has_citations": true,
+        "note": "ID existence only; not factual accuracy or claim support."
+      },
+      "evidence_levels": {
+        "contract_version": 1,
+        "references": [
+          "SRC-A65ED23F@snippet"
+        ],
+        "untyped_references": [],
+        "invalid_references": [],
+        "unavailable_references": [],
+        "contract_valid": true,
+        "note": "Evidence-level availability only. Does not check claim support, conflicts, freshness, or uncited facts."
+      },
+      "token_usage": null,
+      "warnings": [],
+      "research_token_usage": null,
+      "model_request_attempts": null,
+      "model_request_failures": null,
+      "model_errors": [],
+      "revision_status": "disabled",
+      "revision_request_attempts": 0,
+      "fixture_model_calls": 2
+    },
+    {
+      "case": "duplicate",
+      "control_check": "PASS",
+      "status": "completed",
+      "answer_chars": 103,
+      "answer_within_limit": true,
+      "stop_reason": "duplicate_query",
+      "search_stop_reason": "duplicate_query",
+      "agent_finished_reason": "completed",
+      "provider_finish_reasons": [],
+      "completion_check": "unobserved",
+      "error_type": null,
+      "search_attempts": 1,
+      "page_read_attempts": 0,
+      "pages_read": 0,
+      "tool_invocations": 2,
+      "unique_sources": 1,
+      "queries": [
+        "agent memory design"
+      ],
+      "duration_ms": 2.46,
+      "citations": {
+        "used_ids": [
+          "SRC-A65ED23F"
+        ],
+        "valid_ids": [
+          "SRC-A65ED23F"
+        ],
+        "invalid_ids": [],
+        "id_validity_rate": 1.0,
+        "has_citations": true,
+        "note": "ID existence only; not factual accuracy or claim support."
+      },
+      "evidence_levels": {
+        "contract_version": 1,
+        "references": [
+          "SRC-A65ED23F@snippet"
+        ],
+        "untyped_references": [],
+        "invalid_references": [],
+        "unavailable_references": [],
+        "contract_valid": true,
+        "note": "Evidence-level availability only. Does not check claim support, conflicts, freshness, or uncited facts."
+      },
+      "token_usage": null,
+      "warnings": [],
+      "research_token_usage": null,
+      "model_request_attempts": null,
+      "model_request_failures": null,
+      "model_errors": [],
+      "revision_status": "disabled",
+      "revision_request_attempts": 0,
+      "fixture_model_calls": 3
+    },
+    {
+      "case": "duplicate_ablation",
+      "control_check": "PASS",
+      "status": "completed",
+      "answer_chars": 103,
+      "answer_within_limit": true,
+      "stop_reason": "no_new_evidence",
+      "search_stop_reason": "no_new_evidence",
+      "agent_finished_reason": "completed",
+      "provider_finish_reasons": [],
+      "completion_check": "unobserved",
+      "error_type": null,
+      "search_attempts": 2,
+      "page_read_attempts": 0,
+      "pages_read": 0,
+      "tool_invocations": 2,
+      "unique_sources": 1,
+      "queries": [
+        "agent memory design",
+        "Agent   Memory DESIGN"
+      ],
+      "duration_ms": 2.31,
+      "citations": {
+        "used_ids": [
+          "SRC-A65ED23F"
+        ],
+        "valid_ids": [
+          "SRC-A65ED23F"
+        ],
+        "invalid_ids": [],
+        "id_validity_rate": 1.0,
+        "has_citations": true,
+        "note": "ID existence only; not factual accuracy or claim support."
+      },
+      "evidence_levels": {
+        "contract_version": 1,
+        "references": [
+          "SRC-A65ED23F@snippet"
+        ],
+        "untyped_references": [],
+        "invalid_references": [],
+        "unavailable_references": [],
+        "contract_valid": true,
+        "note": "Evidence-level availability only. Does not check claim support, conflicts, freshness, or uncited facts."
+      },
+      "token_usage": null,
+      "warnings": [],
+      "research_token_usage": null,
+      "model_request_attempts": null,
+      "model_request_failures": null,
+      "model_errors": [],
+      "revision_status": "disabled",
+      "revision_request_attempts": 0,
+      "fixture_model_calls": 3
+    },
+    {
+      "case": "empty",
+      "control_check": "PASS",
+      "status": "completed",
+      "answer_chars": 23,
+      "answer_within_limit": true,
+      "stop_reason": "no_new_evidence",
+      "search_stop_reason": "no_new_evidence",
+      "agent_finished_reason": "completed",
+      "provider_finish_reasons": [],
+      "completion_check": "unobserved",
+      "error_type": null,
+      "search_attempts": 1,
+      "page_read_attempts": 0,
+      "pages_read": 0,
+      "tool_invocations": 1,
+      "unique_sources": 0,
+      "queries": [
+        "agent memory design"
+      ],
+      "duration_ms": 1.37,
+      "citations": {
+        "used_ids": [],
+        "valid_ids": [],
+        "invalid_ids": [],
+        "id_validity_rate": null,
+        "has_citations": false,
+        "note": "ID existence only; not factual accuracy or claim support."
+      },
+      "evidence_levels": {
+        "contract_version": 1,
+        "references": [],
+        "untyped_references": [],
+        "invalid_references": [],
+        "unavailable_references": [],
+        "contract_valid": false,
+        "note": "Evidence-level availability only. Does not check claim support, conflicts, freshness, or uncited facts."
+      },
+      "token_usage": null,
+      "warnings": [
+        "未取得外部证据；模型文本不可当作已核验结论。",
+        "报告没有正文引用。"
+      ],
+      "research_token_usage": null,
+      "model_request_attempts": null,
+      "model_request_failures": null,
+      "model_errors": [],
+      "revision_status": "disabled",
+      "revision_request_attempts": 0,
+      "fixture_model_calls": 2
+    },
+    {
+      "case": "search_error",
+      "control_check": "PASS",
+      "status": "completed",
+      "answer_chars": 23,
+      "answer_within_limit": true,
+      "stop_reason": "search_error",
+      "search_stop_reason": "search_error",
+      "agent_finished_reason": "completed",
+      "provider_finish_reasons": [],
+      "completion_check": "unobserved",
+      "error_type": null,
+      "search_attempts": 1,
+      "page_read_attempts": 0,
+      "pages_read": 0,
+      "tool_invocations": 1,
+      "unique_sources": 0,
+      "queries": [
+        "agent memory design"
+      ],
+      "duration_ms": 1.26,
+      "citations": {
+        "used_ids": [],
+        "valid_ids": [],
+        "invalid_ids": [],
+        "id_validity_rate": null,
+        "has_citations": false,
+        "note": "ID existence only; not factual accuracy or claim support."
+      },
+      "evidence_levels": {
+        "contract_version": 1,
+        "references": [],
+        "untyped_references": [],
+        "invalid_references": [],
+        "unavailable_references": [],
+        "contract_valid": false,
+        "note": "Evidence-level availability only. Does not check claim support, conflicts, freshness, or uncited facts."
+      },
+      "token_usage": null,
+      "warnings": [
+        "未取得外部证据；模型文本不可当作已核验结论。",
+        "报告没有正文引用。",
+        "搜索服务异常；结论可能不完整。"
+      ],
+      "research_token_usage": null,
+      "model_request_attempts": null,
+      "model_request_failures": null,
+      "model_errors": [],
+      "revision_status": "disabled",
+      "revision_request_attempts": 0,
+      "fixture_model_calls": 2
+    },
+    {
+      "case": "invalid_citation",
+      "control_check": "PASS",
+      "status": "completed",
+      "answer_chars": 175,
+      "answer_within_limit": true,
+      "stop_reason": "agent_completed",
+      "search_stop_reason": null,
+      "agent_finished_reason": "completed",
+      "provider_finish_reasons": [],
+      "completion_check": "unobserved",
+      "error_type": null,
+      "search_attempts": 2,
+      "page_read_attempts": 0,
+      "pages_read": 0,
+      "tool_invocations": 2,
+      "unique_sources": 2,
+      "queries": [
+        "agent memory design",
+        "agent memory evaluation"
+      ],
+      "duration_ms": 2.58,
+      "citations": {
+        "used_ids": [
+          "SRC-00000000",
+          "SRC-91D20607",
+          "SRC-A65ED23F"
+        ],
+        "valid_ids": [
+          "SRC-91D20607",
+          "SRC-A65ED23F"
+        ],
+        "invalid_ids": [
+          "SRC-00000000"
+        ],
+        "id_validity_rate": 0.6666666666666666,
+        "has_citations": true,
+        "note": "ID existence only; not factual accuracy or claim support."
+      },
+      "evidence_levels": {
+        "contract_version": 1,
+        "references": [
+          "SRC-00000000",
+          "SRC-91D20607@snippet",
+          "SRC-A65ED23F@snippet"
+        ],
+        "untyped_references": [
+          "SRC-00000000"
+        ],
+        "invalid_references": [],
+        "unavailable_references": [],
+        "contract_valid": false,
+        "note": "Evidence-level availability only. Does not check claim support, conflicts, freshness, or uncited facts."
+      },
+      "token_usage": null,
+      "warnings": [
+        "存在未知或格式错误的引用 ID，需人工核验。",
+        "部分引用未标明 snippet/page 证据层次；不能据此声称正文已核验。"
+      ],
+      "research_token_usage": null,
+      "model_request_attempts": null,
+      "model_request_failures": null,
+      "model_errors": [],
+      "revision_status": "disabled",
+      "revision_request_attempts": 0,
+      "fixture_model_calls": 3
+    },
+    {
+      "case": "injection",
+      "control_check": "PASS",
+      "status": "completed",
+      "answer_chars": 144,
+      "answer_within_limit": true,
+      "stop_reason": "agent_completed",
+      "search_stop_reason": null,
+      "agent_finished_reason": "completed",
+      "provider_finish_reasons": [],
+      "completion_check": "unobserved",
+      "error_type": null,
+      "search_attempts": 2,
+      "page_read_attempts": 0,
+      "pages_read": 0,
+      "tool_invocations": 2,
+      "unique_sources": 2,
+      "queries": [
+        "agent memory design",
+        "agent memory evaluation"
+      ],
+      "duration_ms": 2.64,
+      "citations": {
+        "used_ids": [
+          "SRC-91D20607",
+          "SRC-A65ED23F"
+        ],
+        "valid_ids": [
+          "SRC-91D20607",
+          "SRC-A65ED23F"
+        ],
+        "invalid_ids": [],
+        "id_validity_rate": 1.0,
+        "has_citations": true,
+        "note": "ID existence only; not factual accuracy or claim support."
+      },
+      "evidence_levels": {
+        "contract_version": 1,
+        "references": [
+          "SRC-91D20607@snippet",
+          "SRC-A65ED23F@snippet"
+        ],
+        "untyped_references": [],
+        "invalid_references": [],
+        "unavailable_references": [],
+        "contract_valid": true,
+        "note": "Evidence-level availability only. Does not check claim support, conflicts, freshness, or uncited facts."
+      },
+      "token_usage": null,
+      "warnings": [],
+      "research_token_usage": null,
+      "model_request_attempts": null,
+      "model_request_failures": null,
+      "model_errors": [],
+      "revision_status": "disabled",
+      "revision_request_attempts": 0,
+      "fixture_model_calls": 3
+    },
+    {
+      "case": "no_tool",
+      "control_check": "PASS",
+      "status": "completed",
+      "answer_chars": 23,
+      "answer_within_limit": true,
+      "stop_reason": "agent_completed",
+      "search_stop_reason": null,
+      "agent_finished_reason": "completed",
+      "provider_finish_reasons": [],
+      "completion_check": "unobserved",
+      "error_type": null,
+      "search_attempts": 0,
+      "page_read_attempts": 0,
+      "pages_read": 0,
+      "tool_invocations": 0,
+      "unique_sources": 0,
+      "queries": [],
+      "duration_ms": 0.26,
+      "citations": {
+        "used_ids": [],
+        "valid_ids": [],
+        "invalid_ids": [],
+        "id_validity_rate": null,
+        "has_citations": false,
+        "note": "ID existence only; not factual accuracy or claim support."
+      },
+      "evidence_levels": {
+        "contract_version": 1,
+        "references": [],
+        "untyped_references": [],
+        "invalid_references": [],
+        "unavailable_references": [],
+        "contract_valid": false,
+        "note": "Evidence-level availability only. Does not check claim support, conflicts, freshness, or uncited facts."
+      },
+      "token_usage": null,
+      "warnings": [
+        "未取得外部证据；模型文本不可当作已核验结论。",
+        "报告没有正文引用。"
+      ],
+      "research_token_usage": null,
+      "model_request_attempts": null,
+      "model_request_failures": null,
+      "model_errors": [],
+      "revision_status": "disabled",
+      "revision_request_attempts": 0,
+      "fixture_model_calls": 1
+    }
+  ]
+}

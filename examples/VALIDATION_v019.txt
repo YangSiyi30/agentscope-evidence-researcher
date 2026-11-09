@@ -1,0 +1,13 @@
+Application 0.19.0 validation, 2026-10-02
+222 unit tests passed in 24.815 seconds; 12 new provenance/unit/format tests.
+9/9 offline control scenarios passed. Ruff check/format: 67 Python files.
+Offline uv lock/sync passed; only local application version changed.
+No real model/public search/network page requests; offline replays still exercise tools/MCP.
+One historical response preserved; eight assistant handwritten draft rows.
+Two review units stay independent and semantic fields unassigned/null.
+Qualified free/fields render identical 133-char replacements and 695-char answers.
+Compact payload JSON 137 vs 240 Unicode characters; no token/cost inference.
+Complete fields can contradict evidence or add unsupported versions and still pass structure.
+Missing/extra fields not rendered; wrong citation layer rejected mechanically.
+Production src/Prompt, old .env/plans/responses and historical artifacts unchanged.
+No human gold, semantic score, paid plan, or new production output schema.

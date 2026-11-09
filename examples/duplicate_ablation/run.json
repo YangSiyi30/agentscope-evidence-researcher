@@ -1,0 +1,150 @@
+{
+  "schema_version": 8,
+  "report_renderer_version": 6,
+  "execution_trace_version": 1,
+  "provenance": {
+    "tool_observation_version": 3,
+    "prompt_sha256": "17875f75a2c6e702c3381501411986bdb56b54999263cdd485457013a91a3716",
+    "source_sha256": "c63479806f74c622a7def850b7570f0c16bbeeef95e133e4fe5523ccc2f51647"
+  },
+  "mode": "offline_fixture",
+  "started_at": "2026-11-09T08:16:00.178461+00:00",
+  "topic": "如何评测 Agent 的记忆能力？",
+  "framework": "agentscope==2.0.8",
+  "model": "offline-scripted-fixture",
+  "config": {
+    "max_searches": 3,
+    "results_per_search": 3,
+    "chars_per_source": 1500,
+    "max_agent_iters": 10,
+    "search_timeout": 20,
+    "total_timeout": 120,
+    "early_stop_duplicates": false,
+    "max_page_reads": 2,
+    "chars_per_page": 5000,
+    "page_timeout": 30,
+    "max_answer_chars": null,
+    "answer_style": "standard",
+    "revise_answer": false,
+    "revision_timeout": 30,
+    "revision_max_tokens": 1200,
+    "revision_thinking": "provider-default"
+  },
+  "answer": "## 结论\n这是使用预置证据的离线流程演示。\n\n## 证据与比较\n- Agent 可以从记忆中检索相关记录。[SRC-A65ED23F@snippet]\n\n## 局限与待验证问题\n证据来自预置样例，不能用于证明真实模型的回答质量。",
+  "revision": {
+    "status": "disabled",
+    "attempts": 0,
+    "applied": false
+  },
+  "metrics": {
+    "status": "completed",
+    "answer_chars": 103,
+    "answer_within_limit": true,
+    "stop_reason": "no_new_evidence",
+    "search_stop_reason": "no_new_evidence",
+    "agent_finished_reason": "completed",
+    "provider_finish_reasons": [],
+    "completion_check": "unobserved",
+    "error_type": null,
+    "search_attempts": 2,
+    "page_read_attempts": 0,
+    "pages_read": 0,
+    "tool_invocations": 2,
+    "unique_sources": 1,
+    "queries": [
+      "agent memory design",
+      "Agent   Memory DESIGN"
+    ],
+    "duration_ms": 2.31,
+    "citations": {
+      "used_ids": [
+        "SRC-A65ED23F"
+      ],
+      "valid_ids": [
+        "SRC-A65ED23F"
+      ],
+      "invalid_ids": [],
+      "id_validity_rate": 1.0,
+      "has_citations": true,
+      "note": "ID existence only; not factual accuracy or claim support."
+    },
+    "evidence_levels": {
+      "contract_version": 1,
+      "references": [
+        "SRC-A65ED23F@snippet"
+      ],
+      "untyped_references": [],
+      "invalid_references": [],
+      "unavailable_references": [],
+      "contract_valid": true,
+      "note": "Evidence-level availability only. Does not check claim support, conflicts, freshness, or uncited facts."
+    },
+    "token_usage": null,
+    "warnings": [],
+    "research_token_usage": null,
+    "model_request_attempts": null,
+    "model_request_failures": null,
+    "model_errors": [],
+    "revision_status": "disabled",
+    "revision_request_attempts": 0,
+    "fixture_model_calls": 3
+  },
+  "sources": [
+    {
+      "id": "SRC-A65ED23F",
+      "title": "Synthetic memory evidence",
+      "url": "https://example.org/memory",
+      "content": "[Synthetic fixture] An agent can retrieve relevant records from memory.",
+      "evidence_kind": "search_snippet",
+      "citation": "[SRC-A65ED23F@snippet]"
+    }
+  ],
+  "page_evidence": [],
+  "trace": [
+    {
+      "tool": "search_web",
+      "query": "agent memory design",
+      "knowledge_gap": "找到初始证据",
+      "backend_attempted": true,
+      "result_count": 1,
+      "new_sources": 1,
+      "status": "ok",
+      "duration_ms": 0.07,
+      "budget_after": {
+        "tool_observation_version": 3,
+        "search_attempts": 1,
+        "page_read_attempts": 0,
+        "pages_read": 0,
+        "remaining_searches": 2,
+        "remaining_page_reads": 2,
+        "search_stopped": false,
+        "page_reader_enabled": false,
+        "count_semantics": "attempts=started backend attempts including failures; pages_read=saved excerpts; remaining=unused quota, not completed calls or permission to continue"
+      }
+    },
+    {
+      "tool": "search_web",
+      "query": "  Agent   Memory DESIGN  ",
+      "knowledge_gap": "补充评测方法的证据",
+      "backend_attempted": true,
+      "result_count": 1,
+      "new_sources": 0,
+      "status": "ok",
+      "duration_ms": 0.06,
+      "budget_after": {
+        "tool_observation_version": 3,
+        "search_attempts": 2,
+        "page_read_attempts": 0,
+        "pages_read": 0,
+        "remaining_searches": 1,
+        "remaining_page_reads": 2,
+        "search_stopped": true,
+        "page_reader_enabled": false,
+        "count_semantics": "attempts=started backend attempts including failures; pages_read=saved excerpts; remaining=unused quota, not completed calls or permission to continue"
+      }
+    }
+  ],
+  "provider_responses": [],
+  "model_requests": [],
+  "fixture_scenario": "duplicate"
+}

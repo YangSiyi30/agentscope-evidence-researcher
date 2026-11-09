@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "one_call_saved_evidence_local_edit",
+  "frozen_at": "2026-10-02",
+  "application_version": "0.18.0",
+  "fixture_file": "eval/minimal_correction_v016.json",
+  "fixture_sha256": "4d15376d50f2397660023ceab16713c998bf589c2034ff099c829ca2dcb29f75",
+  "bound_files_sha256": {
+    "reports/revision-replay-20260929T064329-b9e8a2/shield_saved_v07/revision.json": "99f991e61fdb87a12871666df2705bba78faf1334acb401511f696937bfefe16",
+    "reports/revision-replay-20260929T064329-b9e8a2/shield_saved_v07/answer.candidate.md": "95d77f7e488b7ae7a10731d80e4d53f77ffff864a63c58def8b2994efb4f4c2c",
+    "reports/revision-replay-20260929T064329-b9e8a2/shield_saved_v07/source-run.json": "2cfc3b3ad6d435de01d44bceaeac1a6cf46650de7adb6c3db84901437ff2e49c",
+    "reports/live-eval-20260927T063020-3ea65a/asyncio_shield/20260927T063034-1712935a/run.json": "2cfc3b3ad6d435de01d44bceaeac1a6cf46650de7adb6c3db84901437ff2e49c"
+  },
+  "source_sha256": "259c94795905d1ba98dc2d50e33e2e8a79687b4e28828652c72b989c2aa05375",
+  "executor_files_sha256": {
+    "scripts/execute_minimal_edit.py": "4324e18c69ea7db157e72affd61db307af233e86494f7f09ed42298a75d3f765",
+    "scripts/check_minimal_correction.py": "14edadefc0b7c9cf785feedf5b76fc0a52acb9922f2ec7d1ceaa332b581c99d5",
+    "src/as_researcher/models.py": "88f0b55d4cf917345e7b5f109f49c7f86ad2bfe4391ed478db523d5573995251",
+    "src/as_researcher/evidence.py": "48278a2ec11aef33e1004cc072f24c5e6e1d5e74e99c9dbce0df18667a90606c"
+  },
+  "dependencies": {
+    "agentscope": "2.0.8",
+    "openai": "3.16.2",
+    "httpx": "0.28.1"
+  },
+  "expected_model": "deepseek-flash",
+  "thinking_mode": "disabled",
+  "budget": {
+    "model_calls": 1,
+    "retries": 0,
+    "timeout_seconds": 45,
+    "output_tokens": 1200,
+    "input_characters": 8000,
+    "replacement_characters": 138,
+    "answer_characters": 700
+  },
+  "system_sha256": "29dbc6552d8d29a77f1ba9070da4541e913f3979e02db5ff6cbfd9c9361a7296",
+  "input_sha256": "00a95e3446c72eae163cea340d5e8ccf69a72fe09f74baf37d4cd7b62ae2da20",
+  "note": "One tool-free request per explicit invocation; zero retries/search/pages. This is a used development case, not a holdout or full-answer rewrite. Preserve connection failures with unknown usage; do not automatically repeat or expand budgets. Semantic review is separate; original artifacts/production Prompt stay unchanged."
+}

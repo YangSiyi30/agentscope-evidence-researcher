@@ -1,0 +1,35 @@
+Observed validation, 2026-09-27, application 0.7.0 / AgentScope 2.0.8.
+Concise record, not verbatim shell output or factual-quality certification.
+
+uv run --no-sync ruff check src tests scripts: PASS
+uv run --no-sync ruff format --check src tests scripts: PASS, 38 files
+uv run --no-sync python -m unittest discover -s tests: PASS, 102 tests
+uv run --no-sync python scripts/evaluate_offline.py: PASS, 9/9 control-flow cases
+uv lock --offline + uv sync --locked --offline --extra browser: PASS, application 0.7.0
+No added dependency or production tool. Native MCP lifecycle/completion/citation tests remain covered.
+
+Frozen new snapshots: reports/pages-20260927T061823-55cde0 (v3 baseline)
+Final replay: reports/pages-20260927T062915-f3834b (v4)
+shield targets: baseline missing at 800/1600/5000; final present at all three budgets.
+suppress targets: baseline present only at 5000; final present at 1600/5000.
+suppress 800 intentionally omits the code group to protect the primary definition.
+Earlier wait_for 800 condition regressed in the intermediate implementation and was restored.
+Old four-page targets preserved; absent Chinese target remains null.
+reports/page-integrity-v07.json: PASS, 78 rows checked, including intermediate records.
+
+Real DDGS + MCP + Edge + model: four completed runs, all provider stop and valid evidence-level availability.
+All four failed 700 nonblank-character budget: 919, 1069, 818, 914; each child strict exit 3.
+First three runs use intermediate source; final shield run uses final source with 800-char page budget.
+Final shield page: 749 chars, actual code and cancellation condition retained.
+Final model incorrectly inferred current example incompleteness from other omitted code candidates.
+Conciseness prompt has NOT solved answer length. No automatic paid rewrite or text truncation.
+Provider usage for four completed tasks: input 22733 / output 3525; no cost claim.
+Raw run/index artifacts and assistant observations preserved; all new review drafts remain pending.
+
+Only robots_permission and private_tool_latency remain unexecuted in holdout_v04.
+Use --case to select exact cases. CLI and batch exit checks are not answer-quality scores.
+
+Delivery audit reports/audit-20260927T063951-7c781f.json: PASS.
+344 text files, 115 local documentation links, 35 review packets, 26 schema 4/5 report reproductions.
+No known configured API-key matches, invalid packets, bad links or forbidden dependencies.
+Source snapshot reports/release-v07/source-v07.zip: 69 allowlisted files, no real .env or reports.

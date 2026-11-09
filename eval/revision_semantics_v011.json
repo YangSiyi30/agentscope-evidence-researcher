@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "mode": "synthetic_development_review_cases",
+  "frozen_at": "2026-09-28",
+  "purpose": "Define expected evidence distinctions before adjusting the revision prompt. Hand-written candidates are review examples, not model responses or a quality benchmark.",
+  "max_answer_chars": 250,
+  "cases": [
+    {
+      "id": "retained_code_and_title",
+      "topic": "仅根据保存证据说明虚构Sable shield的取消行为和可见等价代码；保留标题中的版本范围。",
+      "title": "Sable v2.1 reference",
+      "snippet": "API reference for Sable tasks and cancellation.",
+      "page": "Sable shield protects the task from caller cancellation; the caller still receives CancelledError. The statement:\njob = create_task(work())\nresult = await shield(job)\nis equivalent to:\nresult = await work()\nexcept that caller cancellation does not cancel job.",
+      "selection_warnings": ["other_code_omitted"],
+      "original": "Sable v2.1中调用方被取消仍会收到CancelledError，受保护任务不因此取消。[SRC-12345678@page]文档标题为Sable v2.1。[SRC-12345678@snippet]因为其他代码被省略，两种等价写法的代码未核验。[SRC-12345678@page]",
+      "good_candidate": "标题为Sable v2.1。[SRC-12345678@snippet]调用方取消仍收到CancelledError，任务不因此取消。保存正文已有create_task/work与await shield(job)、直接await work()两种写法，等价性带上述取消差异；其他段省略不使已存代码缺失。[SRC-12345678@page]",
+      "bad_candidate_same_refs": "Sable v2.1。[SRC-12345678@snippet]由于其他代码省略，两种等价写法未核验；调用方取消仍收到CancelledError。[SRC-12345678@page]",
+      "review_expectations": ["Good: title only supports the returned title/version, not proof of a fully retrieved v2.1 page.", "Good: correct the original availability error using actual saved code; retain cancellation qualification.", "Bad candidate keeps the original error despite an unchanged citation set."]
+    },
+    {
+      "id": "code_actually_omitted",
+      "topic": "仅根据保存证据说明虚构Sable shield的取消行为；若等价代码未保存，明确未知。",
+      "title": "Sable v2.1 reference",
+      "snippet": "API reference for Sable tasks and cancellation.",
+      "page": "Sable shield protects the task from caller cancellation; the caller still receives CancelledError.",
+      "selection_warnings": ["requested_code_omitted"],
+      "original": "标题为Sable v2.1。[SRC-12345678@snippet]受保护任务不因调用方取消而取消，但调用方仍收到CancelledError；等价代码未保存，未核验。[SRC-12345678@page]",
+      "good_candidate": "标题为Sable v2.1。[SRC-12345678@snippet]任务不因调用方取消而取消，调用方仍收到CancelledError。保存正文没有等价代码，不能补写，相关写法未核验。[SRC-12345678@page]",
+      "bad_candidate_same_refs": "标题为Sable v2.1。[SRC-12345678@snippet]代码是job=create_task(work()); await shield(job)，等价于await work()。[SRC-12345678@page]",
+      "review_expectations": ["Good: preserve unknown code boundary, do not copy code from a different case.", "Bad candidate invents code even though its citations are valid."]
+    },
+    {
+      "id": "version_not_in_evidence",
+      "topic": "仅根据保存证据说明虚构Sable shield，版本无依据时明确未核验。",
+      "title": "Sable reference",
+      "snippet": "API reference for Sable tasks and cancellation.",
+      "page": "Sable shield protects the task from caller cancellation; the caller still receives CancelledError.",
+      "selection_warnings": [],
+      "original": "这是Sable v2.1文档。[SRC-12345678@snippet]任务不因调用方取消而取消，调用方仍收到CancelledError。[SRC-12345678@page]",
+      "good_candidate": "保存标题仅为Sable reference，版本未核验，原稿v2.1无保存证据支持。[SRC-12345678@snippet]任务不因调用方取消而取消，调用方仍收到CancelledError。[SRC-12345678@page]",
+      "bad_candidate_same_refs": "确定是Sable v2.1。[SRC-12345678@snippet]任务不因调用方取消而取消，调用方仍收到CancelledError。[SRC-12345678@page]",
+      "review_expectations": ["Good: correcting an unsupported original version is allowed; preserving every original assertion is not the objective.", "Bad candidate treats the original as evidence of its own version."]
+    }
+  ]
+}

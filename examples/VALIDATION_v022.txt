@@ -1,0 +1,14 @@
+Application 0.22.0, final interview packaging review, 2026-10-02
+Before-change offline port reproduction: local port_blocked vs MCPBackendError, no DNS/HTTP.
+5 new tests passed in 2.903 seconds after fix; 3 actual stdio policy comparisons, 2 mocked errors.
+Full 255 tests passed in 21.225 seconds. Ruff check/format: 72 Python files.
+Offline lock/sync updated only local application metadata, no new dependency/framework.
+4 fixed local delivery steps passed; 9 control replays and a separate AgentScope/MCP fixture chain.
+MCP fixture chain: 2 business requests, 1 search, 1 page read, 0 blocked, 1 page, 3 scripted-model turns.
+Saved summaries v020/v021/v022 read back without step/model/network rerun.
+Known page reasons preserved over MCP; arbitrary backend error payloads normalized in RPC trace.
+Production changes limited to pages.py and mcp_bridge.py; no Prompt/policy/tool/server/retry changes.
+No new real model calls, public searches, network page reads or browser launches.
+Interview packaging stops here with live-search/semantic/production limitations recorded.
+Tests are program contracts, not factual accuracy, human gold or current live-chain recovery.
+Final archive/audit appendices: docs/SESSION_2026-10-02_v022.md.

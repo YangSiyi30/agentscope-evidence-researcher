@@ -1,0 +1,36 @@
+AgentScope Deep Researcher interview edition 0.11.0
+Observed validation, 2026-09-28. Summary, not a literal shell transcript.
+
+145 unittest tests passed, 14.311s (reports/tests-v011.txt).
+9/9 offline control-flow scenarios passed, not a model-quality score.
+Ruff check/format passed, 49 Python files. uv offline lock/sync passed, no new dependencies.
+
+One responding paid-model replay of saved shield report using pre-frozen v010_title plan:
+  source 914 -> candidate 520 nonwhitespace characters, stop; output cap 1200, answer cap 700.
+  rejected: revision_citation_set_changed; missing SRC-86481391@snippet.
+  Input 1311 / output 293 tokens; reasoning_tokens null, NOT zero. Duration 1537.02ms.
+  Earlier sandbox APIConnectionError usage unknown. No further responding calls.
+  Same system as prior v010 call; user difference only titles. Title version actually included.
+  No new search, page/MCP call, unseen holdout or full live research chain.
+
+Assistant observations: version still omitted; existing equivalent-code error retained.
+  17 original drafts, 12 candidate drafts, 16 mappings, pending claims remain.
+  Title statement supported by explicit snippet.title quote, not page-version proof.
+  atomicity_checked=false, review_complete=false, fidelity_score=null; no human gold.
+
+Review enhancement: optional evidence.field, default content for old schemas.
+  Shared resolver used by schema 1 and 2. Only snippet supports title.
+  Invalid fields, title-as-page support, cross-source/field fallback, snippet segments rejected.
+  Existing page segment behavior and old packets remain compatible.
+
+Three hand-written synthetic semantic cases frozen before prompt update.
+  Good and bad candidates satisfy mechanical budgets/citation contracts alike.
+  These are not model outputs, semantic test accuracy or automatically certified ground truth.
+  New prompt clarifies original vs saved evidence, title scope, retained vs absent code.
+  Frozen follow-up eval/revision_replay_v011.json NOT executed; real prompt effects unverified.
+
+HTML checked in headless Edge at 1440/390 widths, no overflow/scripts/remote media.
+Actual title-evidence screenshot visually inspected. Historical artifacts not rewritten.
+Run schema 6 / atomic schema 2 / comparison schema 1 unchanged; optional evidence.field added.
+Actual replay used prior 0.10 code before current prompt/review changes.
+See 标题证据复核与缩稿反例.md and docs/SESSION_2026-09-28_v011.md.

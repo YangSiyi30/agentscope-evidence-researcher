@@ -1,0 +1,2 @@
+# Evidence fixtures are byte-bound; prevent checkout line-ending conversion.
+* -text

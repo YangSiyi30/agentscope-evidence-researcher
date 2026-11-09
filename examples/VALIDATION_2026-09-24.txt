@@ -1,0 +1,47 @@
+Validation summary, observed 2026-09-24. Application 0.2.0 / AgentScope 2.0.8.
+This is a concise execution record, not a model-quality benchmark.
+
+uv run --no-sync python -m unittest discover -s tests -v
+  Ran 36 tests in 5.382s. OK. Process exit 0.
+  Includes real local stdio MCP subprocess integration, with fixture model/evidence.
+
+uv run --no-sync ruff check src tests scripts
+  All checks passed!
+
+uv run --no-sync ruff format --check src tests scripts
+  15 files already formatted.
+
+uv run --no-sync python scripts/evaluate_offline.py
+  9/9 control-flow scenarios passed.
+  Synthetic model/evidence; no factual-accuracy claim.
+
+uv sync --locked --offline --extra browser
+  Resolved 102 packages. Checked 100 packages. Exit 0.
+
+uv run --no-sync as-research --scenario tool_chain --transport mcp --searches 1 --strict
+  Exit 0. Completed, 1 search, 1 successful page read, 3 fixture model calls.
+  reports/20260924T081336-a4f2b344/run.json
+
+uv run --no-sync python scripts/probe_tools.py --reader browser --transport local --browser-fixture
+  passed: true. Real installed headless Edge, fixed HTML input. Exit 0.
+  reports/tool-probe-local-browser-fixture.json
+
+uv run --no-sync python scripts/evaluate_live.py
+  Plan only. No model API call without --execute.
+
+Latest paid-model regression:
+  DeepSeek + DuckDuckGo + MCP, browser reader enabled, 1 search and 1 page budget.
+  Search failed with DDGSException; zero sources, no page request, evidence-insufficient response.
+  reports/20260924T081041-2c6e906a/run.json
+  Not counted as a passing research task. Earlier successes/failures are in the root test record.
+
+The prior examples/VALIDATION.txt describes the 2026-09-21 version only.
+This summary does not automatically remain valid after future source changes.
+
+Additional artifact audit:
+  No LangChain/LangGraph package installed in this project environment.
+  No LangChain/LangGraph references in src, pyproject.toml or uv.lock.
+  No configured secret value found in 96 scanned source/document/report artifacts.
+  Audit output contains counts and package versions only, never secret values.
+  reports/final-audit-20260924.json
+  Checked 31 existing local documentation links; zero broken links.

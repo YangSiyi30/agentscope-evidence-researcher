@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "kind": "offline_minimal_correction_development_fixture",
+  "defined_at": "2026-09-30",
+  "status": "definition_only",
+  "author": {"kind": "assistant", "name": "Codex"},
+  "boundary": "以下任务、候选与预期均由助手为开发手工定义；不是新模型输出、人工金标准、独立测试集或新评测分数。只读历史材料，不联网、不读.env、不调用模型、不修改生产提示词或历史文件。",
+  "source_binding": {
+    "revision_file": "reports/revision-replay-20260929T064329-b9e8a2/shield_saved_v07/revision.json",
+    "revision_file_sha256": "99f991e61fdb87a12871666df2705bba78faf1334acb401511f696937bfefe16",
+    "answer_field": "candidate_answer",
+    "answer_text_sha256": "9b424f6e84e36375e9d3d685289b763a37a032262249b64c299ad96d91a95d14",
+    "answer_nonwhitespace_characters": 608,
+    "answer_file": "reports/revision-replay-20260929T064329-b9e8a2/shield_saved_v07/answer.candidate.md",
+    "answer_file_sha256": "95d77f7e488b7ae7a10731d80e4d53f77ffff864a63c58def8b2994efb4f4c2c",
+    "source_run_file": "reports/revision-replay-20260929T064329-b9e8a2/shield_saved_v07/source-run.json",
+    "source_run_file_sha256": "2cfc3b3ad6d435de01d44bceaeac1a6cf46650de7adb6c3db84901437ff2e49c",
+    "historical_run_file": "reports/live-eval-20260927T063020-3ea65a/asyncio_shield/20260927T063034-1712935a/run.json",
+    "historical_run_file_sha256": "2cfc3b3ad6d435de01d44bceaeac1a6cf46650de7adb6c3db84901437ff2e49c",
+    "original_before_revision_answer_sha256": "f6196b9b0589986b94f5bf5ad6fa94242745d29f49d48e631d3c3bfa65349ab0",
+    "hash_basis": "File hashes use raw file bytes. Text hashes use exact UTF-8 strings without trimming. The Markdown file has its own trailing-newline bytes; do not equate its file hash with candidate_answer text hash."
+  },
+  "edit_task": {
+    "id": "correct_retained_equivalent_code_claim",
+    "instruction": "仅用下面固定保存的正文与范围元数据，替换608字符候选中的指定短句。承认两种代码已保存，并保留其取消差异：包含await的协程被取消时，受保护任务不因此取消，但调用方仍被取消且await抛出CancelledError。保留仅核验片段的范围；不得补写版本、其他省略代码或组合场景。只交付替换小段，其余原稿保持原样。",
+    "target": {
+      "offset_basis": "candidate_answer_unicode_codepoints_end_exclusive",
+      "start": 572,
+      "end": 619,
+      "text": "片段省略了代码块及部分上下文，等价写法完整代码未核验 [SRC-86481391@page]；",
+      "text_sha256": "a60b985d662acb016d2e6edf7678f14f218b9b6a574367d23ac2c0b34bfd2d82",
+      "occurrences": 1
+    },
+    "allowed_citation_refs": ["SRC-86481391@page"],
+    "replacement_max_nonwhitespace_characters": 138,
+    "reconstructed_answer_max_nonwhitespace_characters": 700,
+    "length_basis": "608 - 46 + replacement_chars <= 700; whitespace ignored, punctuation and citation markers counted. This is a local-edit exercise, not a new full-answer evaluation.",
+    "immutable_context": "所有目标span外字符保持原样；这只是编辑范围约束，不表示其余原稿语义正确或已完成人工复核。"
+  },
+  "fixed_evidence": {
+    "page_quote": {
+      "source_id": "SRC-86481391",
+      "kind": "page",
+      "field": "content",
+      "segment_id": "SEG-16625bd27137",
+      "location": "page_evidence[0].segments[1].text",
+      "text": "The statement:\n\ntask = asyncio.create_task(something())\nres = await shield(task)\n\nis equivalent to:\n\nres = await something()\n\nexcept that if the coroutine containing it is cancelled, the Task running in something() is not cancelled. From the point of view of something(), the cancellation did not happen. Although its caller is still cancelled, so the “await” expression still raises a CancelledError.",
+      "text_sha256": "d4fcae1ae5bb4e7e6553f7a5af54d208f571406d758315bf0dea16faa7291bc7",
+      "saved_page_content_sha256": "6c5d56079dd978aae1a4f36358354718c35975a7188855a5515bffe8f97040b2"
+    },
+    "scope_metadata": {
+      "location": "page_evidence[0]",
+      "is_full_document": false,
+      "segment_is_truncated": false,
+      "segment_code_block_count": 2,
+      "omitted_code_blocks": 3,
+      "omitted_code_contexts": 3,
+      "note": "这些字段是旧lexical-v4抽取器的范围元数据，不是正文quote，也不是新code_selection结构。全局省略计数不否认上面实际保存的两个代码块；不据此重建其他代码。"
+    }
+  },
+  "success_conditions": [
+    "修正旧短句中‘等价写法完整代码未核验’的可见性错误，不能复制错误或只换措辞。",
+    "只按固定保存正文说明两种写法，不将带except限定的等价改成取消行为完全相同。",
+    "保留触发条件、被保护任务不因此取消、调用方仍被取消、await仍抛出CancelledError。",
+    "保留片段范围，不宣称整页或其他版本已核验，不补写省略代码、API或场景。",
+    "该局部段落使用SRC-86481391@page，不移到snippet层；原文其他引用留在目标外不变。",
+    "替换段不超过138个非空白字符，代回后不超过700；目标外Unicode字符串不变。"
+  ],
+  "handwritten_candidates": [
+    {
+      "id": "correct_with_cancellation_qualification",
+      "text": "片段已含创建 Task 后 await shield(task) 与直接 await something() 两种等价写法；但包含 await 的协程被取消时，受保护任务不因此取消，调用方仍被取消且 await 抛出 CancelledError。仅核验片段 [SRC-86481391@page]；",
+      "expected_development_assessment": "pass",
+      "failure_types": [],
+      "reason": "助手设计的通过例：承认代码存在，保留except限定和调用方/被保护任务区别；这是待人工讨论的期望，不是模型实测成功。"
+    },
+    {
+      "id": "copy_original_error",
+      "text": "片段省略了代码块及部分上下文，等价写法完整代码未核验 [SRC-86481391@page]；",
+      "expected_development_assessment": "fail",
+      "failure_types": ["original_error_copied", "retained_code_misclassified_as_missing"],
+      "reason": "长度和page引用可以合格，但完整复制了与已保存代码冲突的旧判断。原稿不是事实标准。"
+    },
+    {
+      "id": "drop_cancellation_qualification",
+      "text": "片段已有创建 Task 后 await shield(task) 与直接 await something() 两种写法，两者完全等价，取消时的行为也相同。仅核验片段 [SRC-86481391@page]；",
+      "expected_development_assessment": "fail",
+      "failure_types": ["cancellation_qualification_lost", "equivalence_overgeneralized"],
+      "reason": "虽然修正代码存在性，却把except限定去掉并声称取消行为相同；正确引用不能弥补语义冲突。"
+    },
+    {
+      "id": "add_unverified_version_range",
+      "text": "Python 3.8–3.13 均适用：片段已含两种等价代码；但包含 await 的协程被取消时，被保护任务不因此取消，调用方仍被取消，await 仍抛出 CancelledError。仅核验片段 [SRC-86481391@page]；",
+      "expected_development_assessment": "fail",
+      "failure_types": ["unsupported_version_added"],
+      "reason": "固定正文没有版本范围；不能从记忆补Python 3.8–3.13。完整原稿的搜索标题也不能证明这些版本行为。"
+    },
+    {
+      "id": "move_body_claim_to_snippet",
+      "text": "保存片段已含两种等价代码；但包含 await 的协程被取消时，被保护任务不因此取消，调用方仍被取消，await 仍抛出 CancelledError。仅核验片段 [SRC-86481391@snippet]；",
+      "expected_development_assessment": "fail",
+      "failure_types": ["evidence_level_changed"],
+      "reason": "这些代码与取消条件来自保存正文，不是搜索摘要；SRC相同不允许换层。"
+    }
+  ],
+  "validation_boundary": {
+    "mechanical_checks_can_confirm": ["文件与文本SHA256", "target跨度与唯一性", "正文摘录逐字相同", "原稿字符数与局部预算", "引用字符串及层次", "目标外文本未改"],
+    "mechanical_checks_cannot_confirm": ["代码是否被正确解释", "条件是否语义保留", "声明支持关系", "人工标注真实性", "事实准确率或模型稳定改善"],
+    "human_review_complete": false,
+    "human_gold": false,
+    "model_execution_performed": false,
+    "new_evaluation_score": null,
+    "production_executor": null,
+    "paid_execution_plan": null
+  }
+}

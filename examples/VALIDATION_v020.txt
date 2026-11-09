@@ -1,0 +1,13 @@
+Application 0.20.0 validation, 2026-10-02
+236 unit tests passed in 21.964 seconds; 14 new offline-delivery boundary tests.
+Ruff check/format: 69 Python files. Offline uv lock/sync passed.
+Unified local checks: all four passed, logical exit 0.
+9/9 local-function control replays; separately one actual stdio MCP fixture chain.
+MCP: 2 tool requests, 1 backend search, 1 page read, 1 saved excerpt, 0 blocked.
+Scripted model calls: 3; no live model/public search/network page/browser invocation.
+Saved-edit inspection: 8 bound artifacts, 9 rows, semantic score null.
+Inner audit: 811 files, 466 local links, 40 reproduced reports; passed.
+Plan-only default; explicit --run-offline, fixed argv/cwd, filtered child environment.
+Fail-fast states preserve not_run/null; raw child output/error bodies excluded from summary.
+Timeout kills/reaps direct child only; no absolute process-tree deadline or rollback promise.
+Production src/Prompt, dependencies, .env, old responses/plans and MIT unchanged.

@@ -1,0 +1,12 @@
+Application 0.18.0 validation, 2026-10-02
+210 unit tests passed in 21.356 seconds; 16 new execution-boundary tests.
+9/9 offline control scenarios passed. Ruff check/format: 65 Python files.
+Offline uv lock/sync passed; only local application version changed.
+One approved external model invocation, no sandbox failure/retry/follow-up.
+deepseek-flash; stop; 1252 input / 26 output tokens; 1008.82 ms.
+43/138 replacement characters; 605/700 reconstructed; structural checks pass.
+0 searches/page reads/tools executed. Production src/Prompt unchanged.
+Assistant local review: partially corrected, explicit local details incomplete.
+Whole-answer cancellation explanations outside target remain unchanged.
+No human gold, quality score, general semantic repair or cost-reduction claim.
+Frozen plan, exact adapter text and source artifacts preserved.

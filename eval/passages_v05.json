@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "created_on": "2026-09-26",
+  "purpose": "下载前固定四个此前未用于定位开发的官方页面、查询和目标；第一次结果为基线，之后同页改进结果只能称开发回归。目标不存在时记 null，不更换目标。",
+  "budgets": [800, 5000],
+  "metric": "全部预设字面目标是否出现在有界输出中；另记目标是否在输出内 500 字符窗口中共同出现。两者都不是语义支持度或模型准确率。",
+  "cases": [
+    {"id": "semaphore_definition", "url": "https://docs.python.org/3/library/asyncio-sync.html", "features": ["nested_definitions", "code"], "focus": "asyncio.Semaphore,acquire", "targets": ["internal counter", "decremented"]},
+    {"id": "condition_chinese", "url": "https://docs.python.org/zh-cn/3/library/asyncio-sync.html", "features": ["Chinese", "nested_definitions"], "focus": "asyncio.Condition,wait_for", "targets": ["predicate", "谓词"]},
+    {"id": "csv_version", "url": "https://docs.python.org/3/library/csv.html", "features": ["version_conditions", "long_code"], "focus": "csv.QUOTE_NOTNULL", "targets": ["3.12", "None"]},
+    {"id": "sqlite_table", "url": "https://www.sqlite.org/datatype3.html", "features": ["table_column_relationships"], "focus": "VARCHAR(255)", "targets": ["VARCHAR(255)", "TEXT"]}
+  ]
+}

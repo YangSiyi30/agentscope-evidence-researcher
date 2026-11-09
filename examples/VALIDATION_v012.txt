@@ -1,0 +1,27 @@
+AgentScope Deep Researcher interview edition 0.12.0
+Observed validation 2026-09-29; summary, not a literal shell transcript.
+154 unittest tests passed in 16.612s (reports/tests-v012.txt).
+9/9 offline control-flow scenarios passed; not model quality scores.
+Ruff check/format passed, 51 Python files. uv offline lock/sync passed.
+No new dependencies, agent, framework or retrieval provider.
+
+Frozen revision_replay_v011: one responding real model request.
+914 -> 608 nonwhitespace characters, stop, applied_checks_only, logical exit 3.
+Input 1413/output 328 tokens, reasoning_tokens null, duration 1588.08ms.
+Earlier sandbox APIConnectionError usage unknown; no further model calls.
+Same user as prior title replay, changed system; runtime source then v0.11.
+All refs/title/full-page-unverified scope retained; equivalent-code error persists.
+No new search/page/MCP/live-chain evaluation or unseen holdout used.
+
+Assistant review: 17 original drafts, 15 candidate drafts, 16 mappings.
+atomicity_checked=false, review_complete=false, fidelity_score=null.
+Not human gold or a causal model-improvement result.
+Edge1440/390 no overflow/scripts/remote media; code-conflict screenshot inspected.
+
+Offline changes: one budget generates omission question and ResearchConfig;
+case selection, frozen code/prompt/observation/token checks and model-name guard.
+Actual executor tested with real AgentScope plus deterministic model/backends.
+Tool observation v2 reports session attempts/remaining/saved excerpts.
+Failure/cancellation consumes an attempt; blocked requests do not call backend.
+omission_v012 prepared, NOT executed with a real model.
+Historical omission_v08 and previous outputs unchanged.

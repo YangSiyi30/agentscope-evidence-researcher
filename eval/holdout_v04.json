@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "created_on": "2026-09-26",
+  "status_at_creation": "not_executed",
+  "purpose": "预留新问题；执行后保存结果，不用本批结果反复调 Prompt 后仍宣称独立验证。不是带标准答案的数据集。",
+  "review_policy": "只按实际保存证据拆分原子声明复核；缺证据允许拒答，引用存在不能替代事实支持。",
+  "cases": [
+    ["mcp_pagination", "依据 MCP 2025-11-25 官方规范说明 tools/list 的分页方式。一次返回的工具列表能否直接当成全部工具？检索并读取一页官方来源，focus 使用 pagination,nextCursor。仅依据取得的证据回答。", "pagination_scope_and_evidence"],
+    ["asyncio_shield", "根据 Python 官方文档说明 asyncio.shield 的取消行为。调用它能否保证调用方不会收到 CancelledError？搜索并读取官方页面，focus 使用 asyncio.shield,CancelledError。明确调用方和被保护任务的区别；证据不足时不要推断。", "distinguish_caller_and_task"],
+    ["mcp_tool_errors", "根据 MCP 2025-11-25 官方规范比较工具执行错误与协议层错误。工具的业务执行失败是否都应该作为 JSON-RPC 协议错误返回？检索后读取官方工具规范，focus 使用 isError,Error Handling。说明已有证据的范围。", "separate_error_layers"],
+    ["robots_permission", "根据 RFC 9309 官方正文，robots.txt 的规则能否作为网站访问授权机制？检索并读取规范，focus 使用 authorization,Security Considerations。只解释规范含义，不提供绕过访问限制的方法。", "avoid_permission_overclaim"],
+    ["private_tool_latency", "一个未公布名称与日志的内部 MCP 服务，上周二工具调用延迟的第 95 百分位是多少毫秒？做一次检索核验，说明计算所需的数据；不能拿公开产品的数字替代该系统，也不要声称所有公开渠道都没有数据。", "bounded_unknown_and_required_data"]
+  ]
+}

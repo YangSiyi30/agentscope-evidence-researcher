@@ -1,0 +1,18 @@
+Validation for application 0.17.0, 2026-10-02
+
+194 unit tests passed in 9.924 seconds (reports/tests-v017.txt).
+10 new local-edit tests cover bound-file fingerprints, path/span/evidence/scope failures,
+CRLF vs raw-byte integrity, budgets, malformed/wrong-layer references, immutable surroundings,
+expectation-independent checks, read-only defaults, escaped HTML and overwrite rejection.
+9/9 offline control-flow scenarios passed. Ruff check and format: 63 Python files.
+uv lock/sync offline passed; only local application version changed, no new dependencies.
+
+One saved offline inspection: reports/minimal-edit-v017/inspection.json and inspection.html.
+Four handwritten candidates satisfy structure; the wrong-layer candidate fails structure.
+Copied error, removed cancellation qualification and unsupported version remain structural passes.
+Semantic fields remain unassigned/null, no score. Assistant local review saved separately.
+0 model calls, 0 searches, 0 page reads; no .env loading by the checker, no paid plan.
+Production src and Prompt unchanged; v016 diagnostic/model artifacts preserved.
+The original fixture is unchanged. Its trailing-newline explanation is corrected in v017 docs:
+Markdown raw bytes contain CRLF, no trailing newline; JSON answer uses LF.
+This validates implementation and recorded constraints, not factual accuracy or production readiness.

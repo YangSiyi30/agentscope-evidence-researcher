@@ -1,0 +1,34 @@
+AgentScope Deep Researcher interview edition 0.13.0; observed 2026-09-29.
+Summary, not a literal shell transcript or quality score.
+v014 correction: search_error logical CLI exit is 2, not the originally written 3.
+See reports/corrections-v014.json; original run/report/observations/archive unchanged.
+161 tests passed in 16.192s (reports/tests-v013.txt).
+After fixture reference update, all 4 experiment-budget tests passed again.
+9/9 offline control-flow scenarios, Ruff check/format 52 files, offline uv lock/sync passed.
+No new dependencies or Agent. Run schema6, atomic schema2, comparison schema1 unchanged.
+
+Frozen v012 retained synthetic case: real model, fixture search/page.
+242/250 characters, 3 provider responses, completed, no warnings, logical exit0.
+Input5332/output954 tokens, duration4548.09ms, no revision.
+Both code forms and cancellation qualifier retained; omitted other group scoped.
+No count statement; cannot claim the model understands tool counters.
+Assistant review: 3 drafts, 1 supported/2 pending, atomicity=false, not human gold.
+
+DDGS9.16.0 English-query probes, zero model calls:
+sandbox underlying timeout but outer No results found; outside HTTP200/3 sources.
+No saved body/headers/raw errors. Not proof of historical failures' causes.
+
+Frozen live_v013 used shield case with MCP+browser configured:
+503/700 characters, 2 provider responses, completed but search_error, logical exit2 (corrected v014).
+Input3146/output541 tokens, duration4703.58ms.
+2 tool requests, 1 backend/MCP search, 1 blocked_after_stop, 0 pages.
+Model incorrectly called both backend failures. Trace budget_after shows actual counts.
+Browser reader never called; full chain NOT completed, no semantic success claim.
+Different query/context than local probe; failure cause remains ambiguous.
+
+Total known model usage input8478/output1495 across 5 responses in 2 tasks.
+Two earlier sandbox APIConnectionError attempts have unknown usage, not zero cost.
+No further model calls, no fallback provider, no unseen holdout.
+New safe search categories/real MCP propagation and trace snapshots tested.
+New omission_v013 complementary case prepared, NOT executed.
+Original source, answers, plans and prior failures preserved.

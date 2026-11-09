@@ -1,0 +1,184 @@
+Checked at 2026-09-21T08:00:38.444696+00:00
+3.13.5 | packaged by Anaconda, Inc. | (main, Jun 12 2025, 16:37:03) [MSC v.1929 64 bit (AMD64)]
+AgentScope 2.0.8
+
+$ uv sync --locked --offline
+
+Resolved 96 packages in 1ms
+   Building agentscope-deep-researcher-interview @ file:///C:/Users/ysy/Desktop/%E5%A4%87%E9%80%89%E9%A1%B9%E7%9B%AE/agentscope-deep-researcher
+      Built agentscope-deep-researcher-interview @ file:///C:/Users/ysy/Desktop/%E5%A4%87%E9%80%89%E9%A1%B9%E7%9B%AE/agentscope-deep-researcher
+Prepared 1 package in 3.45s
+Uninstalled 1 package in 14ms
+Installed 1 package in 45ms
+ ~ agentscope-deep-researcher-interview==0.1.0 (from file:///C:/Users/ysy/Desktop/%E5%A4%87%E9%80%89%E9%A1%B9%E7%9B%AE/agentscope-deep-researcher)
+
+PASS: exit 0, expected 0
+
+$ uv run --no-sync ruff check src tests scripts
+All checks passed!
+
+
+PASS: exit 0, expected 0
+
+$ uv run --no-sync ruff format --check src tests scripts
+8 files already formatted
+
+
+PASS: exit 0, expected 0
+
+$ uv run --no-sync python -m unittest discover -s tests -v
+
+test_citation_metric_handles_missing_and_malformed_ids (test_researcher.CoreTests.test_citation_metric_handles_missing_and_malformed_ids) ... ok
+test_configuration_rejects_unbounded_budgets (test_researcher.CoreTests.test_configuration_rejects_unbounded_budgets) ... ok
+test_invalid_source_links_are_rejected (test_researcher.CoreTests.test_invalid_source_links_are_rejected) ... ok
+test_url_canonicalization_preserves_meaningful_parameters (test_researcher.CoreTests.test_url_canonicalization_preserves_meaningful_parameters) ... ok
+test_real_adapters_with_mock_http_tool_call_roundtrip (test_researcher.HTTPContractTests.test_real_adapters_with_mock_http_tool_call_roundtrip)
+Exercise real formatting, SDK deserialization, Agent and HTTP adapters. ... Executing <Task pending name='Task-2' coro=<HTTPContractTests.test_real_adapters_with_mock_http_tool_call_roundtrip() running at C:\Users\ysy\Desktop\备选项目\agentscope-deep-researcher\tests\test_researcher.py:297> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at C:\Users\ysy\miniconda3\Lib\asyncio\futures.py:384, Task.task_wakeup()] created at C:\Users\ysy\miniconda3\Lib\asyncio\base_events.py:459> cb=[_run_until_complete_cb() at C:\Users\ysy\miniconda3\Lib\asyncio\base_events.py:181] created at C:\Users\ysy\miniconda3\Lib\asyncio\runners.py:100> took 1.912 seconds
+ok
+test_deadline_is_reported_when_model_adapter_consumes_cancellation (test_researcher.NativeLoopTests.test_deadline_is_reported_when_model_adapter_consumes_cancellation) ... ok
+test_duplicate_ablation_still_has_no_new_evidence_guard (test_researcher.NativeLoopTests.test_duplicate_ablation_still_has_no_new_evidence_guard) ... ok
+test_duplicate_query_does_not_reach_backend (test_researcher.NativeLoopTests.test_duplicate_query_does_not_reach_backend) ... ok
+test_empty_and_unsearched_answers_are_flagged (test_researcher.NativeLoopTests.test_empty_and_unsearched_answers_are_flagged) ... ok
+test_final_budget_needs_only_one_final_answer_call (test_researcher.NativeLoopTests.test_final_budget_needs_only_one_final_answer_call) ... Executing <Task finished name='Task-27' coro=<NativeLoopTests.test_final_budget_needs_only_one_final_answer_call() done, defined at C:\Users\ysy\Desktop\备选项目\agentscope-deep-researcher\tests\test_researcher.py:88> result=None created at C:\Users\ysy\miniconda3\Lib\asyncio\runners.py:100> took 0.164 seconds
+ok
+test_iteration_limit_marks_forced_final_answer_incomplete (test_researcher.NativeLoopTests.test_iteration_limit_marks_forced_final_answer_incomplete) ... ok
+test_native_agent_calls_tool_and_returns_cited_report (test_researcher.NativeLoopTests.test_native_agent_calls_tool_and_returns_cited_report) ... ok
+test_saved_runs_are_distinct_and_json_reproduces_report (test_researcher.NativeLoopTests.test_saved_runs_are_distinct_and_json_reproduces_report) ... ok
+test_search_error_is_auditable_without_exception_body (test_researcher.NativeLoopTests.test_search_error_is_auditable_without_exception_body) ... ok
+test_session_state_does_not_leak_between_questions (test_researcher.NativeLoopTests.test_session_state_does_not_leak_between_questions) ... ok
+test_total_deadline_during_search_preserves_partial_evidence (test_researcher.NativeLoopTests.test_total_deadline_during_search_preserves_partial_evidence) ... ok
+test_unknown_citations_are_not_hidden_by_bibliography (test_researcher.NativeLoopTests.test_unknown_citations_are_not_hidden_by_bibliography) ... ok
+test_blank_query_never_calls_search_provider (test_researcher.ToolPolicyTests.test_blank_query_never_calls_search_provider) ... ok
+test_parallel_calls_cannot_overspend_budget (test_researcher.ToolPolicyTests.test_parallel_calls_cannot_overspend_budget) ... ok
+test_search_timeout_consumes_one_attempt_and_stops (test_researcher.ToolPolicyTests.test_search_timeout_consumes_one_attempt_and_stops) ... ok
+test_truncation_url_deduplication_and_invalid_source_filter (test_researcher.ToolPolicyTests.test_truncation_url_deduplication_and_invalid_source_filter) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 3.156s
+
+OK
+
+PASS: exit 0, expected 0
+
+$ uv run --no-sync python scripts/evaluate_offline.py
+9/9 control-flow scenarios passed. See C:\Users\ysy\Desktop\备选项目\agentscope-deep-researcher\examples
+
+
+PASS: exit 0, expected 0
+
+$ uv run --no-sync as-research --strict
+{
+  "output": "C:\\Users\\ysy\\Desktop\\备选项目\\agentscope-deep-researcher\\reports\\20260921T080049-c44d4521",
+  "status": "completed",
+  "stop_reason": "agent_completed",
+  "search_stop_reason": null,
+  "agent_finished_reason": "completed",
+  "error_type": null,
+  "search_attempts": 2,
+  "tool_invocations": 2,
+  "unique_sources": 2,
+  "queries": [
+    "agent memory design",
+    "agent memory evaluation"
+  ],
+  "duration_ms": 10.93,
+  "citations": {
+    "used_ids": [
+      "SRC-91D20607",
+      "SRC-A65ED23F"
+    ],
+    "valid_ids": [
+      "SRC-91D20607",
+      "SRC-A65ED23F"
+    ],
+    "invalid_ids": [],
+    "id_validity_rate": 1.0,
+    "has_citations": true,
+    "note": "ID existence only; not factual accuracy or claim support."
+  },
+  "token_usage": null,
+  "warnings": [],
+  "fixture_model_calls": 3
+}
+
+
+PASS: exit 0, expected 0
+
+$ uv run --no-sync as-research --scenario invalid_citation --strict
+{
+  "output": "C:\\Users\\ysy\\Desktop\\备选项目\\agentscope-deep-researcher\\reports\\20260921T080050-35afad68",
+  "status": "completed",
+  "stop_reason": "agent_completed",
+  "search_stop_reason": null,
+  "agent_finished_reason": "completed",
+  "error_type": null,
+  "search_attempts": 2,
+  "tool_invocations": 2,
+  "unique_sources": 2,
+  "queries": [
+    "agent memory design",
+    "agent memory evaluation"
+  ],
+  "duration_ms": 11.26,
+  "citations": {
+    "used_ids": [
+      "SRC-00000000",
+      "SRC-91D20607",
+      "SRC-A65ED23F"
+    ],
+    "valid_ids": [
+      "SRC-91D20607",
+      "SRC-A65ED23F"
+    ],
+    "invalid_ids": [
+      "SRC-00000000"
+    ],
+    "id_validity_rate": 0.6666666666666666,
+    "has_citations": true,
+    "note": "ID existence only; not factual accuracy or claim support."
+  },
+  "token_usage": null,
+  "warnings": [
+    "存在未知或格式错误的引用 ID，需人工核验。"
+  ],
+  "fixture_model_calls": 3
+}
+
+
+PASS: exit 3, expected 3
+
+$ uv run --no-sync as-research --scenario search_error
+{
+  "output": "C:\\Users\\ysy\\Desktop\\备选项目\\agentscope-deep-researcher\\reports\\20260921T080051-4b73e338",
+  "status": "completed",
+  "stop_reason": "search_error",
+  "search_stop_reason": "search_error",
+  "agent_finished_reason": "completed",
+  "error_type": null,
+  "search_attempts": 1,
+  "tool_invocations": 1,
+  "unique_sources": 0,
+  "queries": [
+    "agent memory design"
+  ],
+  "duration_ms": 9.15,
+  "citations": {
+    "used_ids": [],
+    "valid_ids": [],
+    "invalid_ids": [],
+    "id_validity_rate": null,
+    "has_citations": false,
+    "note": "ID existence only; not factual accuracy or claim support."
+  },
+  "token_usage": null,
+  "warnings": [
+    "未取得外部证据；模型文本不可当作已核验结论。",
+    "报告没有正文引用。",
+    "搜索服务异常；结论可能不完整。"
+  ],
+  "fixture_model_calls": 2
+}
+
+
+PASS: exit 2, expected 2
+PASS: no LangChain/LangGraph in installed distributions, source imports/text, manifest or lock.

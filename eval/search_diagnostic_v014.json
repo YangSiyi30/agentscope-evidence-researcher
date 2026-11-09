@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "kind": "search_transport_diagnostic",
+  "frozen_at": "2026-09-29",
+  "provider": "duckduckgo",
+  "transports": [
+    "local",
+    "mcp"
+  ],
+  "query": "Python 官方文档 asyncio.shield CancelledError 取消行为",
+  "result_limit": 3,
+  "search_timeout": 20,
+  "source_sha256": "030bab7cb25c964e432e4204c21e560a01ff379249fb942eb870791acddffdb0",
+  "probe_sha256": "895735c1b22ed9c87ecc495b7d2f533cc7cd4d846ecfd6ee7fbaafb14e8380f7",
+  "ddgs_version": "9.16.0",
+  "note": "Same failed v013 Chinese query. Explicit one transport per invocation; one logical search, no model/.env/page/provider switch. Plan only by default. At most one authorized external-network attempt per transport after a sandbox failure. Local HTTP observation is unavailable for the MCP subprocess. Sequential samples do not establish a causal transport comparison."
+}

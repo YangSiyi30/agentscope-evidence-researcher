@@ -1,0 +1,14 @@
+Application 0.21.0 validation, 2026-10-02
+250 unit tests passed in 9.566 seconds; 14 new saved-summary readback tests.
+Ruff check/format: 71 Python files. Offline uv lock/sync passed.
+Unified local checks: all four passed, logical exit 0; new summary schema2.
+9/9 local-function control replays; separately one actual stdio MCP fixture chain.
+MCP: 2 business requests, 1 fixture search, 1 fixture page read, 0 blocked, 1 saved page;
+2 successful protocol calls and 3 scripted-model turns. No real model/public network/browser.
+Summary binds four generated-file hashes, including an immutable local replay snapshot.
+Both saved schema1 v020 and schema2 v021 read back successfully without step rerun/.env.
+v020 uses its original external observations and frozen source, with no bound local snapshot.
+Allowlist material ZIP: 23 payload files plus 1 manifest; byte/path readback and known-key scan passed.
+Production src, Prompt, dependencies and previous artifacts unchanged; semantic_score=null.
+Portable archive verification and final audit are recorded in docs/SESSION_2026-10-02_v021.md.
+Not a human quality score, signed execution proof or complete dependency/history/test backup.

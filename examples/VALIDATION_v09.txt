@@ -1,0 +1,51 @@
+AgentScope Deep Researcher interview edition 0.9.0
+Observed validation, 2026-09-28. Summary, not a literal shell transcript.
+
+uv lock --offline / uv sync --locked --offline --extra browser: passed; no new dependencies.
+ruff check src tests scripts: passed.
+ruff format --check src tests scripts: 47 files already formatted.
+python -m unittest discover -s tests -v: 130 passed, 7.182s (reports/tests-v09-final.txt).
+python scripts/evaluate_offline.py: 9/9 control-flow scenarios passed, not quality scores.
+
+Frozen historical-run revision replay:
+  Source byte hash and original answer hash verified before API calls.
+  Plan-only has no model calls, .env loading or experiment-directory mutations.
+  One tool-free call per case, no retries, stops batch on model error/timeout/incomplete response.
+  No new search, page read, MCP request, or live end-to-end research run.
+  Exact source copy and separate replay metadata; historical trace not presented as new activity.
+
+Real provider responses against saved v0.7 evidence:
+  shield / 1200 output cap: length; input 1304 / output 1200, reasoning_tokens 1200.
+  shield / separate 2400 plan: length; input 1304 / output 2399, reasoning_tokens 2399.
+  tool_errors / 2400 cap: length; input 1622 / output 2400, reasoning_tokens 2400.
+  All rejected, originals retained; no usable completed candidate.
+  Recorded 22-character candidate is an adapter failure placeholder, NOT compressed model prose.
+  Known sum: input 4230 / output 5999 tokens. Earlier sandbox connection failure usage unknown.
+  No reasoning text stored, no cost estimate, no additional model requests after these results.
+
+Comparison review:
+  Separate original/candidate atomic packets, independent offsets and many-to-many mappings.
+  Fingerprints, reference levels, quote support, mapping IDs and pending coverage checked.
+  Incomplete response placeholders excluded from candidate claim drafts.
+  No automatic semantic preservation score or human-review labels.
+  Static HTML escaped, read-only, no JavaScript or remote assets; export refuses overwrite.
+
+Demonstration reuses v0.8 real-model synthetic evidence example; NO new model request.
+  Original repeats the exact candidate six times: 24 original drafts -> 4 candidate drafts.
+  Four many-to-one mappings, reviewed by assistant only.
+  atomicity_checked=false, fidelity_score=null, review_complete=false.
+  Not a real-world compression success or human gold standard.
+  Edge 1440/390 width checks: no horizontal overflow; scripts=0, remote_media=0.
+  Screenshot and render-check.json saved under reports/comparison-demo-v09/.
+
+Delivery audit reports/audit-20260928T071001-017eb9.json:
+  Passed: 479 files, 155 local links, 42 review packets, 31 reports (25 historical not reproduced),
+  20 revision records, 6 comparison packets/HTML pairs, 4 replay source fingerprints.
+  No known configured-key matches; this is not exhaustive secret detection.
+  Later documentation/snapshot additions receive another audit, saved separately.
+
+AgentScope 2.0.8, run schema 6, atomic review schema 2 unchanged; comparison schema 1.
+No LangChain/LangGraph, new dependencies, human quality score, or unseen holdout use.
+Comparison display/placeholder handling changed after real calls; final source hash therefore differs.
+Real-call revision.py and its prompt were not changed after the recorded requests.
+See root 真实证据回放与缩稿对照.md and docs/SESSION_2026-09-28_v09.md.

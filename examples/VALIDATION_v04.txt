@@ -1,0 +1,153 @@
+Validation at 2026-09-26T07:37:36.332877+00:00
+No paid API calls in this validation script. Live observations are linked in the v0.4 report.
+
+$ uv run --no-sync ruff check src tests scripts
+exit_code=0
+All checks passed!
+
+$ uv run --no-sync ruff format --check src tests scripts
+exit_code=0
+23 files already formatted
+
+$ uv run --no-sync python -m unittest discover -s tests -v
+exit_code=0
+test_draft_keeps_heading_unicode_and_full_answer_without_score (test_atomic_review.AtomicReviewTests.test_draft_keeps_heading_unicode_and_full_answer_without_score) ... ok
+test_dropped_claim_or_uncovered_suffix_fails (test_atomic_review.AtomicReviewTests.test_dropped_claim_or_uncovered_suffix_fails) ... ok
+test_duplicate_ids_and_overlapping_spans_within_claim_fail (test_atomic_review.AtomicReviewTests.test_duplicate_ids_and_overlapping_spans_within_claim_fail) ... ok
+test_human_rate_requires_atomicity_coverage_no_pending_and_valid_packet (test_atomic_review.AtomicReviewTests.test_human_rate_requires_atomicity_coverage_no_pending_and_valid_packet) ... ok
+test_malformed_packet_is_rejected_without_crash (test_atomic_review.AtomicReviewTests.test_malformed_packet_is_rejected_without_crash) ... ok
+test_not_factual_still_needs_reason (test_atomic_review.AtomicReviewTests.test_not_factual_still_needs_reason) ... ok
+test_saved_page_segment_quote_and_citation_are_required (test_atomic_review.AtomicReviewTests.test_saved_page_segment_quote_and_citation_are_required) ... ok
+test_shared_context_allows_two_claims_only_with_explicit_reasons (test_atomic_review.AtomicReviewTests.test_shared_context_allows_two_claims_only_with_explicit_reasons) ... ok
+test_text_offset_and_source_tampering_fail (test_atomic_review.AtomicReviewTests.test_text_offset_and_source_tampering_fail) ... ok
+test_content_filter_unknown_and_inconsistent_finish_are_incomplete (test_completion.CompletionTests.test_content_filter_unknown_and_inconsistent_finish_are_incomplete) ... Executing <Task pending name='Task-2' coro=<CompletionTests.test_content_filter_unknown_and_inconsistent_finish_are_incomplete() running at C:\Users\ysy\Desktop\备选项目\agentscope-deep-researcher\tests\test_completion.py:100> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at C:\Users\ysy\miniconda3\Lib\asyncio\futures.py:384, Task.task_wakeup()] created at C:\Users\ysy\miniconda3\Lib\asyncio\base_events.py:459> cb=[_run_until_complete_cb() at C:\Users\ysy\miniconda3\Lib\asyncio\base_events.py:181] created at C:\Users\ysy\miniconda3\Lib\asyncio\runners.py:100> took 0.441 seconds
+ok
+test_length_preserves_partial_text_but_marks_incomplete (test_completion.CompletionTests.test_length_preserves_partial_text_but_marks_incomplete) ... ok
+test_no_choices_is_not_a_completed_report (test_completion.CompletionTests.test_no_choices_is_not_a_completed_report) ... ok
+test_reused_model_records_only_current_run_responses (test_completion.CompletionTests.test_reused_model_records_only_current_run_responses) ... ok
+test_stop_is_only_transport_completion_not_quality (test_completion.CompletionTests.test_stop_is_only_transport_completion_not_quality) ... ok
+test_token_budget_validation_before_client_creation (test_completion.CompletionTests.test_token_budget_validation_before_client_creation) ... ok
+test_truncated_tool_arguments_never_execute_or_retry (test_completion.CompletionTests.test_truncated_tool_arguments_never_execute_or_retry) ... ok
+test_answer_limit_flags_without_truncating_and_fingerprints_prompt (test_evidence.EvidenceFlowTests.test_answer_limit_flags_without_truncating_and_fingerprints_prompt) ... ok
+test_mcp_errors_and_cancellation_are_logged_without_messages (test_evidence.EvidenceFlowTests.test_mcp_errors_and_cancellation_are_logged_without_messages) ... ok
+test_page_metadata_survives_session_without_duplicate_model_text (test_evidence.EvidenceFlowTests.test_page_metadata_survives_session_without_duplicate_model_text) ... ok
+test_definition_beats_repeated_link_index_and_offsets_roundtrip (test_evidence.PassageTests.test_definition_beats_repeated_link_index_and_offsets_roundtrip) ... ok
+test_empty_focus_falls_back_in_document_order (test_evidence.PassageTests.test_empty_focus_falls_back_in_document_order) ... ok
+test_long_blocks_and_unicode_budget (test_evidence.PassageTests.test_long_blocks_and_unicode_budget) ... ok
+test_navigation_hidden_and_inline_identifiers (test_evidence.PassageTests.test_navigation_hidden_and_inline_identifiers) ... ok
+test_nested_heading_markup_does_not_lose_heading_context (test_evidence.PassageTests.test_nested_heading_markup_does_not_lose_heading_context) ... ok
+test_toc_backref_heading_and_definition_scope_are_preserved (test_evidence.PassageTests.test_toc_backref_heading_and_definition_scope_are_preserved) ... ok
+test_assistant_judgments_never_produce_human_score (test_evidence.ReviewTests.test_assistant_judgments_never_produce_human_score) ... ok
+test_dropped_unit_and_unlinked_support_fail (test_evidence.ReviewTests.test_dropped_unit_and_unlinked_support_fail) ... ok
+test_human_score_requires_complete_coverage_declaration (test_evidence.ReviewTests.test_human_score_requires_complete_coverage_declaration) ... ok
+test_pending_is_valid_draft_not_complete_score (test_evidence.ReviewTests.test_pending_is_valid_draft_not_complete_score) ... ok
+test_tampered_evidence_or_run_fails (test_evidence.ReviewTests.test_tampered_evidence_or_run_fails) ... ok
+test_citation_metric_handles_missing_and_malformed_ids (test_researcher.CoreTests.test_citation_metric_handles_missing_and_malformed_ids) ... ok
+test_configuration_rejects_unbounded_budgets (test_researcher.CoreTests.test_configuration_rejects_unbounded_budgets) ... ok
+test_invalid_source_links_are_rejected (test_researcher.CoreTests.test_invalid_source_links_are_rejected) ... ok
+test_url_canonicalization_preserves_meaningful_parameters (test_researcher.CoreTests.test_url_canonicalization_preserves_meaningful_parameters) ... ok
+test_real_adapters_with_mock_http_tool_call_roundtrip (test_researcher.HTTPContractTests.test_real_adapters_with_mock_http_tool_call_roundtrip)
+Exercise real formatting, SDK deserialization, Agent and HTTP adapters. ... ok
+test_deadline_is_reported_when_model_adapter_consumes_cancellation (test_researcher.NativeLoopTests.test_deadline_is_reported_when_model_adapter_consumes_cancellation) ... ok
+test_duplicate_ablation_still_has_no_new_evidence_guard (test_researcher.NativeLoopTests.test_duplicate_ablation_still_has_no_new_evidence_guard) ... ok
+test_duplicate_query_does_not_reach_backend (test_researcher.NativeLoopTests.test_duplicate_query_does_not_reach_backend) ... ok
+test_empty_and_unsearched_answers_are_flagged (test_researcher.NativeLoopTests.test_empty_and_unsearched_answers_are_flagged) ... ok
+test_final_budget_needs_only_one_final_answer_call (test_researcher.NativeLoopTests.test_final_budget_needs_only_one_final_answer_call) ... ok
+test_iteration_limit_marks_forced_final_answer_incomplete (test_researcher.NativeLoopTests.test_iteration_limit_marks_forced_final_answer_incomplete) ... ok
+test_native_agent_calls_tool_and_returns_cited_report (test_researcher.NativeLoopTests.test_native_agent_calls_tool_and_returns_cited_report) ... ok
+test_saved_runs_are_distinct_and_json_reproduces_report (test_researcher.NativeLoopTests.test_saved_runs_are_distinct_and_json_reproduces_report) ... ok
+test_search_error_is_auditable_without_exception_body (test_researcher.NativeLoopTests.test_search_error_is_auditable_without_exception_body) ... ok
+test_session_state_does_not_leak_between_questions (test_researcher.NativeLoopTests.test_session_state_does_not_leak_between_questions) ... ok
+test_total_deadline_during_search_preserves_partial_evidence (test_researcher.NativeLoopTests.test_total_deadline_during_search_preserves_partial_evidence) ... ok
+test_unknown_citations_are_not_hidden_by_bibliography (test_researcher.NativeLoopTests.test_unknown_citations_are_not_hidden_by_bibliography) ... ok
+test_blank_query_never_calls_search_provider (test_researcher.ToolPolicyTests.test_blank_query_never_calls_search_provider) ... ok
+test_parallel_calls_cannot_overspend_budget (test_researcher.ToolPolicyTests.test_parallel_calls_cannot_overspend_budget) ... ok
+test_search_timeout_consumes_one_attempt_and_stops (test_researcher.ToolPolicyTests.test_search_timeout_consumes_one_attempt_and_stops) ... ok
+test_truncation_url_deduplication_and_invalid_source_filter (test_researcher.ToolPolicyTests.test_truncation_url_deduplication_and_invalid_source_filter) ... ok
+test_llm_aliases_work_and_explicit_model_values_take_precedence (test_tools.ConfigTests.test_llm_aliases_work_and_explicit_model_values_take_precedence) ... Executing <Task finished name='Task-148' coro=<ConfigTests.test_llm_aliases_work_and_explicit_model_values_take_precedence() done, defined at C:\Users\ysy\Desktop\备选项目\agentscope-deep-researcher\tests\test_tools.py:28> result=None created at C:\Users\ysy\miniconda3\Lib\asyncio\runners.py:100> took 0.553 seconds
+ok
+test_server_honors_fixture_scenario_and_disabled_reader (test_tools.MCPIntegrationTests.test_server_honors_fixture_scenario_and_disabled_reader) ... ok
+test_server_validates_arguments_and_parent_omits_model_key (test_tools.MCPIntegrationTests.test_server_validates_arguments_and_parent_omits_model_key) ... ok
+test_stdio_tools_are_discovered_and_chain_matches_local_policy (test_tools.MCPIntegrationTests.test_stdio_tools_are_discovered_and_chain_matches_local_policy) ... ok
+test_focused_excerpt_keeps_late_keywords_and_length_bound (test_tools.PagePolicyTests.test_focused_excerpt_keeps_late_keywords_and_length_bound) ... ok
+test_html_parser_removes_script_and_navigation (test_tools.PagePolicyTests.test_html_parser_removes_script_and_navigation) ... ok
+test_inline_html_keeps_technical_identifier_intact (test_tools.PagePolicyTests.test_inline_html_keeps_technical_identifier_intact) ... ok
+test_nonstandard_port_and_local_urls_blocked (test_tools.PagePolicyTests.test_nonstandard_port_and_local_urls_blocked) ... ok
+test_page_budget_is_independent_from_search_budget (test_tools.PagePolicyTests.test_page_budget_is_independent_from_search_budget) ... ok
+test_page_timeout_does_not_lose_search_evidence (test_tools.PagePolicyTests.test_page_timeout_does_not_lose_search_evidence) ... ok
+test_parallel_page_calls_and_failure_consume_only_budget (test_tools.PagePolicyTests.test_parallel_page_calls_and_failure_consume_only_budget) ... ok
+test_private_dns_and_mixed_dns_answers_blocked (test_tools.PagePolicyTests.test_private_dns_and_mixed_dns_answers_blocked) ... ok
+test_redirect_type_and_byte_limit (test_tools.PagePolicyTests.test_redirect_type_and_byte_limit) ... ok
+test_small_excerpt_keeps_keyword_and_unicode_offsets (test_tools.PagePolicyTests.test_small_excerpt_keeps_keyword_and_unicode_offsets) ... ok
+test_unknown_source_cannot_trigger_fetch (test_tools.PagePolicyTests.test_unknown_source_cannot_trigger_fetch) ... ok
+
+----------------------------------------------------------------------
+Ran 66 tests in 3.555s
+
+OK
+
+$ uv run --no-sync python scripts/evaluate_offline.py
+exit_code=0
+9/9 control-flow scenarios passed. See C:\Users\ysy\Desktop\备选项目\agentscope-deep-researcher\examples
+
+$ uv run --no-sync python scripts/evaluate_live.py --suite holdout --limit 5
+exit_code=0
+Plan only. --execute runs the selected suite (at most 5 paid-model tasks), each with one search and at most two page reads.
+{
+  "suite": "holdout",
+  "cases": [
+    [
+      "mcp_pagination",
+      "依据 MCP 2025-11-25 官方规范说明 tools/list 的分页方式。一次返回的工具列表能否直接当成全部工具？检索并读取一页官方来源，focus 使用 pagination,nextCursor。仅依据取得的证据回答。",
+      "pagination_scope_and_evidence"
+    ],
+    [
+      "asyncio_shield",
+      "根据 Python 官方文档说明 asyncio.shield 的取消行为。调用它能否保证调用方不会收到 CancelledError？搜索并读取官方页面，focus 使用 asyncio.shield,CancelledError。明确调用方和被保护任务的区别；证据不足时不要推断。",
+      "distinguish_caller_and_task"
+    ],
+    [
+      "mcp_tool_errors",
+      "根据 MCP 2025-11-25 官方规范比较工具执行错误与协议层错误。工具的业务执行失败是否都应该作为 JSON-RPC 协议错误返回？检索后读取官方工具规范，focus 使用 isError,Error Handling。说明已有证据的范围。",
+      "separate_error_layers"
+    ],
+    [
+      "robots_permission",
+      "根据 RFC 9309 官方正文，robots.txt 的规则能否作为网站访问授权机制？检索并读取规范，focus 使用 authorization,Security Considerations。只解释规范含义，不提供绕过访问限制的方法。",
+      "avoid_permission_overclaim"
+    ],
+    [
+      "private_tool_latency",
+      "一个未公布名称与日志的内部 MCP 服务，上周二工具调用延迟的第 95 百分位是多少毫秒？做一次检索核验，说明计算所需的数据；不能拿公开产品的数字替代该系统，也不要声称所有公开渠道都没有数据。",
+      "bounded_unknown_and_required_data"
+    ]
+  ],
+  "model_max_tokens": 1800
+}
+
+$ uv run --no-sync python scripts/review_run.py check reports/regression-v04/20260926T072438-211be856/run.json reports/atomic-review-v04/version_regression.assistant.partial.json
+exit_code=0
+{
+  "valid": true,
+  "errors": [],
+  "reviewer_kind": "assistant",
+  "counts": {
+    "pending": 8,
+    "insufficient": 3,
+    "uncited": 3
+  },
+  "total_claims": 14,
+  "reviewed_claims": 6,
+  "covered_nonblank_chars": 662,
+  "total_nonblank_chars": 662,
+  "uncovered_offsets": [],
+  "shared_span_pairs": [
+    [
+      "C002.A04",
+      "C002.A05"
+    ]
+  ],
+  "review_complete": false,
+  "human_support_label_rate": null,
+  "note": "Coverage is mechanical, not semantic atomicity or entailment. Statement fidelity, citation scope, reviewer identity and atomicity are human declarations. Assistant judgments are not gold."
+}

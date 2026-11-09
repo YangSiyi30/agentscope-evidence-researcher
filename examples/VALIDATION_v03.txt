@@ -1,0 +1,30 @@
+Observed 2026-09-24, application 0.3.0, AgentScope 2.0.8.
+
+python -m unittest discover -s tests -v: 50 tests, 3.168s, OK.
+ruff check src tests scripts: All checks passed.
+ruff format --check src tests scripts: 20 files already formatted.
+python scripts/evaluate_offline.py: 9/9 control-flow scenarios passed.
+uv sync --locked --offline --extra browser: 102 resolved, 100 checked, exit 0.
+
+Real MCP + fixture Agent: completed, 1 search, 1 page, no warning.
+  reports/20260924T121126-7657bd69/run.json
+Real MCP + installed Edge + public Python page: passed, 5000 chars, 29 segments.
+  reports/tool-probe-mcp-browser-20260924T121100.json
+
+Five live paid-model cases: CLI exits 0, 0, 3, 3, 0.
+  reports/live-eval-20260924T120102/index.json
+Failures/warnings retained: page fetch failure; truncated answer with no citation.
+Forty candidate units have assistant reviews; all packet consistency checks passed.
+No human gold labels or factual accuracy score.
+  reports/live-eval-20260924T120102/review_summary.json
+
+Fixed-HTML selector comparison, no model:
+  800 chars: reports/passage-ablation-20260924T121044/results.json
+  5000 chars: reports/passage-ablation-20260924T121045/results.json
+Two real pages / four queries, plus two synthetic cases; 18 rows per budget.
+One predeclared target absent from current page: null, not counted as success.
+Development examples, not unseen test data. Not a model-quality benchmark.
+
+Live five-case runs preceded final parser fixes and metadata trimming.
+Final code validated with tests, saved-HTML replay and real browser/MCP probe,
+not with another full paid-model batch. No claimed accuracy or billing improvement.

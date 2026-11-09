@@ -1,0 +1,36 @@
+AgentScope Deep Researcher interview edition 0.10.0
+Observed validation, 2026-09-28. Summary, not a literal shell transcript.
+
+uv lock --offline / uv sync --locked --offline --extra browser: passed, no new dependencies.
+ruff check / format: passed, 48 Python files.
+python -m unittest discover -s tests -v: 138 passed, 5.971s (reports/tests-v010-delivery.txt).
+python scripts/evaluate_offline.py: 9/9 control-flow scenarios, not intelligence scores.
+
+Explicit revision-only thinking control:
+  Default omits provider-specific thinking parameters, preserving prior behavior.
+  disabled allowed only on verified DeepSeek official endpoint/models, rejected before client otherwise.
+  Real SDK + mock HTTP verifies thinking.type=disabled survives per-call extra_body replacement.
+  Token cap, tool_choice=none, no tools/retries; length still rejected; mismatched config skips HTTP.
+  Replay guards expected model, prompt hash, and optional per-case actual input hash.
+
+One responding real-model replay, saved v0.7 shield evidence, no new retrieval:
+  1200 output cap, 30 seconds; stop, mechanically applied, 914 -> 660 nonwhitespace characters.
+  Input 1279 / output 352; reasoning_tokens null, NOT zero. Duration 2114.37ms.
+  Saved system/user payload and hashes identical to old 1200-cap length failure.
+  Earlier sandbox APIConnectionError has unknown usage; no zero-cost assumption.
+  No additional responding calls, no new search/browser/MCP chain, no unseen holdout consumed.
+
+Assistant semantic review: original 17 drafts, candidate 12, 14 explicit mappings.
+  Core cancellation distinction retained; existing equivalent-code error retained.
+  Version-title text omitted and a snippet citation remains insufficient for section location.
+  Both sides have pending claims and one contradicted claim; candidate has one insufficient claim.
+  atomicity_checked=false, review_complete=false, fidelity_score=null; no human gold.
+  Read-only HTML checked with Edge at 1440/390 widths: no overflow/scripts/remote media.
+
+After the real response: source.title restored in revision input separately from content.
+  HTTP-tested, NOT real-model verified. Frozen follow-up eval/revision_replay_v010_title.json not executed.
+  Final source differs from real-call source; prompt text unchanged. Original artifacts retained.
+
+Run schema 6, atomic schema 2, comparison schema 1. AgentScope 2.0.8 remains pinned.
+No LangChain/LangGraph, new services or dependency expansion.
+See 推理模式控制与真实缩稿复核.md and docs/SESSION_2026-09-28_v010.md.

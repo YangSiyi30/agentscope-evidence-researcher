@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "mode": "synthetic_development_fixture",
+  "note": "Prepared, not executed with a real model. Synthetic development cases; topic and ResearchConfig use the same nonwhitespace character budget. New count observation changes model input. Old v08 files/results remain immutable; no direct quality attribution from cross-version comparisons.",
+  "html": "<h1>Fixture API</h1><dl><dt>demo.shield()</dt><dd><p>Protect the operation. The caller still receives CancelledError.</p><p>The following:</p><pre>task = create_task(work())\nresult = await shield(task)</pre><p>is equivalent to:</p><pre>result = await work()</pre><p>Except that caller cancellation does not cancel work.</p></dd><dt>demo.other()</dt><dd><p>Alternative shield example:</p><pre>other_operation_with_a_long_name()\n    extra_step_with_a_long_name()\n    extra_step_with_a_long_name()\n    extra_step_with_a_long_name()\n    extra_step_with_a_long_name()\n    extra_step_with_a_long_name()\n    extra_step_with_a_long_name()\n    extra_step_with_a_long_name()\n    extra_step_with_a_long_name()\n    extra_step_with_a_long_name()\n    extra_step_with_a_long_name()\n    extra_step_with_a_long_name()</pre></dd></dl>",
+  "focus": "demo.shield,shield",
+  "cases": [
+    {
+      "id": "retained_example_other_omitted",
+      "chars_per_page": 500,
+      "expected": "Current two-code group retained in full, other code omitted. Answer may describe both actual forms and cancellation qualification."
+    },
+    {
+      "id": "requested_example_omitted",
+      "chars_per_page": 180,
+      "expected": "Current two-code group omitted. Answer must not reconstruct code from memory; retain any saved definition qualification."
+    }
+  ],
+  "frozen_at": "2026-09-29",
+  "parent_manifest_sha256": "bbb96378dfc4fd30d4974f18ceb1ac0921ca4369381f8aafb79ed557a5e449f2",
+  "topic_template": "这是虚构 API 的固定证据实验。请先搜索并读取页面，focus 使用 demo.shield,shield。仅根据返回正文说明 demo.shield 的两种等价写法及取消限制；缺代码时明确未核验。不要因其他段省略而否认已保存的代码。回答不超过{max_answer_chars}个非空白字符，标题和引用标记也计入。",
+  "max_answer_chars": 250,
+  "model_max_tokens": 1200,
+  "expected_model": "deepseek-flash",
+  "expected_source_sha256": "6ef8a1dc00a8ac28cd0237c078733dee3aea586edef07a133dfa027d0be1a6a6",
+  "expected_prompt_sha256": "17875f75a2c6e702c3381501411986bdb56b54999263cdd485457013a91a3716",
+  "expected_executor_sha256": "9e7d81d4475d61df604f8555aa1e092bd47f2d2ec49978f6ee38be5ef1c265d7",
+  "expected_tool_observation_version": 2
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "mode": "saved_evidence_revision_replay",
+  "frozen_at": "2026-09-28",
+  "purpose": "One development replay of saved shield evidence with explicit thinking disabled; no new retrieval or unseen-quality claim.",
+  "max_answer_chars": 700,
+  "revision_max_tokens": 1200,
+  "revision_timeout": 30,
+  "cases": [
+    {
+      "id": "shield_saved_v07",
+      "run_file": "reports/live-eval-20260927T063020-3ea65a/asyncio_shield/20260927T063034-1712935a/run.json",
+      "run_file_sha256": "2cfc3b3ad6d435de01d44bceaeac1a6cf46650de7adb6c3db84901437ff2e49c",
+      "original_answer_sha256": "f6196b9b0589986b94f5bf5ad6fa94242745d29f49d48e631d3c3bfa65349ab0",
+      "review_checklist": [
+        "Caller can still receive CancelledError; protected task is not cancelled by caller cancellation.",
+        "The saved 749-character page already contains create_task and both await forms; the original claim that equivalent code was unverified is erroneous.",
+        "Keep page vs snippet evidence separate, including document version attributed to snippet.",
+        "Do not reconstruct omitted try/except examples or uncancel behavior."
+      ]
+    }
+  ],
+  "revision_thinking": "disabled",
+  "expected_model": "deepseek-flash",
+  "expected_prompt_sha256": "6f1e6c4592fbc3fd8497a55fe347df2d78005981bfcca1fad9b3904ba7d24405",
+  "parent_manifest_sha256": "148ca112405e149bcf57c4a88a76c0bcf14cc6e39273d9250dd7815a9aee9fca",
+  "documentation_verified_at": "2026-09-28",
+  "documentation_sources": [
+    "https://api-docs.deepseek.com/guides/thinking_mode/",
+    "https://api-docs.deepseek.com/api/create-chat-completion/"
+  ],
+  "experiment_boundary": "One responding provider request, 1200 output token cap, 30 seconds, zero retries. Preserve failures; no automatic follow-up or cap increase."
+}

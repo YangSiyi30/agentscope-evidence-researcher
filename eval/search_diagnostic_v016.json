@@ -1,0 +1,24 @@
+{
+  "schema_version": 2,
+  "kind": "search_transport_diagnostic",
+  "frozen_at": "2026-09-30",
+  "application_version": "0.16.0",
+  "query_source_run": "reports/live-v015/20260929T122433-841f70cb/run.json",
+  "query_source_run_sha256": "0877da7519b053a179b3aec46f0fd31d7831f303d2a2870bd7244ae7d906bdd9",
+  "provider": "duckduckgo",
+  "transports": [
+    "local",
+    "mcp"
+  ],
+  "query": "asyncio.shield official documentation CancelledError not cancelled",
+  "result_limit": 3,
+  "search_timeout": 20,
+  "source_sha256": "259c94795905d1ba98dc2d50e33e2e8a79687b4e28828652c72b989c2aa05375",
+  "probe_sha256": "e49d4416f60c22d99919c04007223cb146e40bd878e0d4b1fb7e833b871d8717",
+  "diagnostic_files_sha256": {
+    "scripts/search_diagnostics.py": "8bda25fcbb68f4b6a7182ab6a56eb4cc5c35ee9c6ff1a3e14be829a9991685ba",
+    "scripts/search_diagnostic_server.py": "cb104a65dceedd54b546e2ce3b0bad5725d41c61f6e26f9ace9aa7ca54f2b3fa"
+  },
+  "ddgs_version": "9.16.0",
+  "note": "One explicit transport per invocation, one logical search each, no model/.env/page/provider switch. Schema2 adds a diagnostic-only stdio wrapper around unchanged production MCP search. Its separate observation RPC reads bounded HttpClient.request snapshots; it does not search. Preserve sandbox failures then at most one approved external attempt per transport. Query/version/limit are fixed, not every network condition or client fingerprint. Single sequential samples are not causal/performance/stability comparisons."
+}
