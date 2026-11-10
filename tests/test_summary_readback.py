@@ -80,6 +80,24 @@ def rebind(root, data, role):
 
 
 class SummaryReadbackTests(unittest.TestCase):
+    def test_equivalent_workspace_spelling_keeps_relative_artifact_bindings(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "alias").mkdir()
+            alias = root / "alias" / ".."
+            path, _ = fixture_tree(root, True)
+            self.assertTrue(check.check_summary(path, alias)["verified"])
+            data = {"output": str(root / "reports/new/summary.json"), "artifacts": {}}
+            (root / "reports/new").mkdir()
+            (root / "examples").mkdir()
+            raw = b'{"original":"fixed"}'
+            (root / "examples/offline_evaluation.json").write_bytes(raw)
+            with patch.object(verify, "ROOT", alias):
+                verify.capture_artifacts(data, "local_replay", {})
+            item = data["artifacts"]["local_replay_snapshot"]
+            self.assertEqual(item["file"], "reports/new/summary-local-replay.json")
+            self.assertEqual(item["sha256"], check.sha(raw))
+
     def test_legacy_uses_external_hashes_and_frozen_source_without_retroactive_claims(self):
         result = check.check_summary(check.ROOT / "reports/offline-delivery-v020/summary.json")
         self.assertTrue(result["verified"])

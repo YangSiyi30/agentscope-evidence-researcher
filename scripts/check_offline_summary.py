@@ -50,6 +50,7 @@ def digest(value):
 
 def report_path(value, root=ROOT, recorded_root=None):
     require(isinstance(value, (str, Path)), "invalid_report_path")
+    root = Path(root).resolve()
     path = Path(value)
     if path.is_absolute() and recorded_root is not None:
         try:
@@ -57,8 +58,9 @@ def report_path(value, root=ROOT, recorded_root=None):
         except ValueError:
             raise ValueError("report_path_outside_recorded_root") from None
     elif path.is_absolute():
+        require(".." not in path.parts, "report_path_traversal")
         try:
-            path = path.relative_to(root)
+            path = path.resolve().relative_to(root)
         except ValueError:
             raise ValueError("report_path_outside_workspace") from None
     require(".." not in path.parts, "report_path_traversal")
@@ -109,6 +111,7 @@ def implementation_proof(summary, root):
 
 
 def check_summary(path, root=ROOT):
+    root = Path(root).resolve()
     path = report_path(path, root)
     raw = path.read_bytes()
     summary = json.loads(raw)

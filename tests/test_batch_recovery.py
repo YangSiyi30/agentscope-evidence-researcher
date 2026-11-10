@@ -85,6 +85,19 @@ def receipt_fixture(batch, plan, row, status="running", reserve=True):
 
 
 class RecoveryTests(unittest.TestCase):
+    def test_receipt_accepts_equivalent_root_spelling_but_rejects_escape(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "alias").mkdir()
+            batch = root / "alias" / ".." / "batch"
+            plan, rows = batch_fixture(batch, 1)
+            _, receipt = receipt_fixture(batch, plan, rows[0])
+            self.assertEqual(runtime.validate_receipt(batch, rows[0], plan), receipt)
+            receipt["run_file"] = "../outside"
+            command.write_json(batch / (rows[0]["id"] + ".result.json"), receipt)
+            with self.assertRaisesRegex(ValueError, "outside trial"):
+                runtime.validate_receipt(batch, rows[0], plan)
+
     def test_running_and_interrupted_are_unassessed_not_premature_failures(self):
         with tempfile.TemporaryDirectory() as tmp:
             batch = Path(tmp) / "batch"

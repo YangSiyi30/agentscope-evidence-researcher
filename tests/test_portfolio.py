@@ -73,7 +73,7 @@ class PortfolioTests(unittest.TestCase):
             (corpus / "manifest.json").write_bytes(raw)
             plan = {"corpus": "C:/old/now-missing", "corpus_manifest_sha256": digest(raw)}
             with patch.object(ui, "ROOT", root), patch.object(ui, "CORPUS", corpus):
-                self.assertEqual(ui.available_corpus(plan), corpus)
+                self.assertEqual(ui.available_corpus(plan), corpus.resolve())
                 plan["corpus_manifest_sha256"] = "wrong"
                 self.assertIsNone(ui.available_corpus(plan))
 

@@ -94,6 +94,9 @@ def infrastructure_failure(run: dict) -> bool:
 
 
 def validate_receipt(batch: Path, row: dict, plan: dict) -> dict | None:
+    # Windows may spell the same temporary directory with 8.3 or long names.
+    # Compare resolved children against a resolved root, without dropping bounds.
+    batch = batch.resolve()
     path = batch / (row["id"] + ".result.json")
     if not path.exists():
         return None
