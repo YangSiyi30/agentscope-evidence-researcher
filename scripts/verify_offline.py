@@ -93,7 +93,7 @@ def plan(output=None):
         "schema_version": 2,
         "kind": "offline_delivery_check",
         "status": "planned",
-        "application_version": importlib.metadata.version("agentscope-deep-researcher-interview"),
+        "application_version": importlib.metadata.version("agentscope-evidence-researcher"),
         "entry_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         "source_sha256": hashlib.sha256(
             b"".join(

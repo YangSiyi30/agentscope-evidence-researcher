@@ -47,8 +47,8 @@ wheels = [
 ]
 
 [[package]]
-name = "agentscope-deep-researcher-interview"
-version = "0.40.0"
+name = "agentscope-evidence-researcher"
+version = "0.41.0"
 source = { editable = "." }
 dependencies = [
     { name = "agentscope" },

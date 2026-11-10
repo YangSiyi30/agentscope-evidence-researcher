@@ -4,8 +4,13 @@ permissions:
   contents: read
 jobs:
   test:
+    name: Windows / Python ${{ matrix.python-version }}
     runs-on: windows-latest
     timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.11', '3.13']
     env:
       PYTHONUTF8: '1'
       PYTHONIOENCODING: utf-8
@@ -13,7 +18,7 @@ jobs:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.13'
+          python-version: ${{ matrix.python-version }}
       - name: Install locked project and coverage tool
         run: |
           python -m pip install uv==0.12.13
@@ -36,7 +41,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: offline-checks
+          name: offline-checks-python-${{ matrix.python-version }}
           path: |
             reports/coverage/
             reports/source-check-*/

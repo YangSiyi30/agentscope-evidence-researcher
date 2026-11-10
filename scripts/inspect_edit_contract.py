@@ -218,7 +218,7 @@ def inspect(loaded):
     return {
         "schema_version": 1,
         "kind": "offline_edit_contract_inspection",
-        "application_version": importlib.metadata.version("agentscope-deep-researcher-interview"),
+        "application_version": importlib.metadata.version("agentscope-evidence-researcher"),
         "fixture_sha256": loaded["fixture_sha256"],
         "inspector_sha256": check.sha(Path(__file__).read_bytes()),
         "checker_sha256": check.sha((ROOT / "scripts/check_minimal_correction.py").read_bytes()),

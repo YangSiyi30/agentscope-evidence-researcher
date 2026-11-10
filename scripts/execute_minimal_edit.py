@@ -75,7 +75,7 @@ def make_plan(context, model="deepseek-flash", timeout=45, tokens=1200):
         "schema_version": 1,
         "kind": "one_call_saved_evidence_local_edit",
         "frozen_at": "2026-10-02",
-        "application_version": importlib.metadata.version("agentscope-deep-researcher-interview"),
+        "application_version": importlib.metadata.version("agentscope-evidence-researcher"),
         "fixture_file": "eval/minimal_correction_v016.json",
         "fixture_sha256": context["fixture_sha256"],
         "bound_files_sha256": context["bound_files_sha256"],

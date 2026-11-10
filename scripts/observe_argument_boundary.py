@@ -178,7 +178,7 @@ async def observe(case):
     observation = {
         "kind": "native_argument_boundary_observation",
         "case": case,
-        "application_version": importlib.metadata.version("agentscope-deep-researcher-interview"),
+        "application_version": importlib.metadata.version("agentscope-evidence-researcher"),
         "agentscope_version": importlib.metadata.version("agentscope"),
         "observer_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         "production_source_sha256": run["provenance"]["source_sha256"],

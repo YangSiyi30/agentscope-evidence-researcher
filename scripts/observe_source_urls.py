@@ -129,7 +129,7 @@ async def observe_source_flow(*, baseline=False, reader=None):
     run["metrics"]["fixture_model_calls"] = model.calls
     observation = {
         "kind": "supplied_source_native_observation",
-        "application_version": importlib.metadata.version("agentscope-deep-researcher-interview"),
+        "application_version": importlib.metadata.version("agentscope-evidence-researcher"),
         "baseline": baseline,
         "observer_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         "production_source_sha256": run["provenance"]["source_sha256"],

@@ -15,6 +15,20 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class PortfolioTests(unittest.TestCase):
+    def test_public_checkout_help_uses_readme_without_local_tutorials(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "README.md").write_text("public entry", encoding="utf8")
+            output = io.StringIO()
+            with (
+                patch.object(ui, "ROOT", root),
+                patch("builtins.input", side_effect=["6", "0"]),
+                redirect_stdout(output),
+            ):
+                ui.run_evaluation_center()
+            self.assertIn(str(root / "README.md"), output.getvalue())
+            self.assertNotIn("INTERVIEW_GUIDE_ZH", output.getvalue())
+
     def test_portable_batch_hashes_and_original_outcomes_are_preserved(self):
         base = ROOT / "examples/portfolio"
         manifest = json.loads((base / "manifest.json").read_bytes())

@@ -143,7 +143,7 @@ def make_plan(args, suite):
         "schema_version": 1,
         "kind": "research_benchmark_plan",
         "execution_protocol": 2,
-        "application_version": importlib.metadata.version("agentscope-deep-researcher-interview"),
+        "application_version": importlib.metadata.version("agentscope-evidence-researcher"),
         "created_at": datetime.now(UTC).isoformat(),
         "suite_sha256": digest(args.suite.read_bytes()),
         "source_sha256": source_digest(),

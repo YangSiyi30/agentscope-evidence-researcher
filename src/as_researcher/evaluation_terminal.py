@@ -762,9 +762,11 @@ def run_evaluation_center() -> int | None:
             elif selected == "6":
                 print("从start.bat主页选4进入本中心。建议顺序1→5→2或3；4专门定位选段。")
                 print("待判定不等于失败；completed不等于事实正确。复核填完后用s更新成绩单，o打开。")
-                print(
-                    "完整操作与具体例子：" + str(ROOT / "docs/INTERVIEW_GUIDE_ZH.md") + " 第16节。"
-                )
+                guide = ROOT / "docs/INTERVIEW_GUIDE_ZH.md"
+                if guide.is_file():
+                    print("完整操作与具体例子：" + str(guide) + " 第16节。")
+                else:
+                    print("操作、评测与结果说明：" + str(ROOT / "README.md"))
             elif selected == "4":
                 workspace = new_workspace()
                 code = run_operation(

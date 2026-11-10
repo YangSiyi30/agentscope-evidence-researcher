@@ -325,7 +325,7 @@ def check_summary(path, root=ROOT):
         "summary_sha256": sha(raw),
         "recorded_application_version": summary["application_version"],
         "current_application_version": importlib.metadata.version(
-            "agentscope-deep-researcher-interview"
+            "agentscope-evidence-researcher"
         ),
         "entry_proof": proof,
         "local_replay_binding": local_binding,

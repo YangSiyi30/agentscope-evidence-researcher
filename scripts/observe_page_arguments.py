@@ -100,7 +100,7 @@ async def observe_direct():
     }
     return {
         "kind": "direct_page_argument_observation",
-        "application_version": importlib.metadata.version("agentscope-deep-researcher-interview"),
+        "application_version": importlib.metadata.version("agentscope-evidence-researcher"),
         "researcher_file_sha256": hashlib.sha256(
             (ROOT / "src/as_researcher/researcher.py").read_bytes()
         ).hexdigest(),
@@ -241,7 +241,7 @@ async def observe_native(case):
     observation = {
         "kind": "native_page_argument_observation",
         "case": case,
-        "application_version": importlib.metadata.version("agentscope-deep-researcher-interview"),
+        "application_version": importlib.metadata.version("agentscope-evidence-researcher"),
         "observer_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         "production_source_sha256": run["provenance"]["source_sha256"],
         **inspect_native(run, model.turns, reader.calls, case),

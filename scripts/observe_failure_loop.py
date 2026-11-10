@@ -111,7 +111,7 @@ async def observe():
     }
     observation = {
         "kind": "scripted_model_native_failure_loop",
-        "application_version": importlib.metadata.version("agentscope-deep-researcher-interview"),
+        "application_version": importlib.metadata.version("agentscope-evidence-researcher"),
         "observer_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         "production_source_sha256": result["provenance"]["source_sha256"],
         "passed": all(checks.values()),

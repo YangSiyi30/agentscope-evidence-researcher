@@ -13,3 +13,8 @@ reports/
 coverage.xml
 htmlcov/
 .idea/
+# Learning notes, interview material and maintenance records stay on this machine.
+/docs/
+/*.md
+!/README.md
+/eval/README.md

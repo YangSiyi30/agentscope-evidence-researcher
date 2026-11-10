@@ -225,7 +225,7 @@ async def observe(case):
     observation = {
         "kind": "native_stop_guard_observation",
         "case": case,
-        "application_version": importlib.metadata.version("agentscope-deep-researcher-interview"),
+        "application_version": importlib.metadata.version("agentscope-evidence-researcher"),
         "observer_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         "production_source_sha256": run["provenance"]["source_sha256"],
         **inspect(run, model.turns, len(requests), reader.calls if reader else 0, case),
